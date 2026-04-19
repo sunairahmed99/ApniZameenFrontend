@@ -79,7 +79,7 @@ const EditProperty = lazy(() => import('./Pages/Backend/Seller/EditProperty'));
 
 import ProtectedRoute from './Components/Auth/ProtectedRoute';
 import { trackSessionVisit } from './utils/analytics';
-import NetworkStatus from './components/NetworkStatus';
+import NetworkStatus from './Components/NetworkStatus';
 
 const LoadingFallback = () => (
   <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-start', paddingTop: '140px', height: '100vh', fontSize: '1.2rem', color: '#3b82f6' }}>
