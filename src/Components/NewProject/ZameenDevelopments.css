@@ -1,0 +1,47 @@
+.zameen-developments {
+    background-color: #eaf6fc;
+    padding: 40px 0;
+    margin-top: 40px;
+}
+
+.zameen-dev-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.dev-card {
+    min-width: 280px;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.dev-image {
+    height: 160px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.dev-info {
+    padding: 15px;
+}
+
+.dev-price {
+    font-size: 14px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.dev-name {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.dev-location {
+    font-size: 12px;
+    color: #666;
+}

@@ -1,0 +1,81 @@
+.city-agency-card {
+  border: 1px solid #eee;
+  transition: all 0.3s ease;
+  background-color: white;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.city-agency-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: var(--city-bg);
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.city-agency-card:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  border-color: transparent;
+  color: white;
+}
+
+.city-agency-card:hover::before {
+  opacity: 1;
+}
+
+/* Ensure text remains visible on hover with a dark overlay */
+.city-agency-card:hover::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  /* Dark overlay */
+  z-index: -1;
+}
+
+.city-agency-card:hover .text-muted {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.city-agency-card:hover .view-trend-link {
+  color: white !important;
+}
+
+.view-trend-link {
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+}
+
+.view-trend-link:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .browse-agencies-section h3 {
+    text-align: center;
+  }
+
+  .city-agency-card {
+    text-align: center;
+    align-items: center;
+    padding: 25px !important;
+  }
+
+  .view-trend-link {
+    justify-content: center;
+  }
+}

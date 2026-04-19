@@ -1,0 +1,50 @@
+.browse-by-category {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.section-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.category-card {
+    min-width: 250px;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+    border: 1px solid #eee;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.category-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.category-icon {
+    font-size: 32px;
+    color: #28a745;
+    margin-bottom: 10px;
+}
+
+.category-name {
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.project-count {
+    color: #666;
+    font-size: 14px;
+}

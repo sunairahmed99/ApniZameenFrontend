@@ -1,0 +1,207 @@
+/* Seller Advertisement Dedicated Premium Styles */
+
+/* Premium Header Bar (Blue Gradient) */
+.campaign-header-bar {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    padding: 24px;
+    border-radius: 16px 16px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    flex-wrap: nowrap;
+    gap: 20px;
+}
+
+.campaign-header-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    white-space: nowrap;
+}
+
+.premium-page-subtitle {
+    color: #64748b;
+    font-size: 0.9rem;
+    margin: 15px 0 25px 5px;
+}
+
+/* Seller Table Container */
+.seller-table-container {
+    background: white;
+    border-radius: 0 0 16px 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    margin-bottom: 30px;
+    border: 1px solid #f1f5f9;
+}
+
+/* Premium Table Styling */
+.campaign-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0;
+}
+
+.campaign-table thead th {
+    background-color: #f8fafc;
+    color: #64748b;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 1px;
+    padding: 16px 20px;
+    border-bottom: 2px solid #f1f5f9;
+    text-align: left;
+}
+
+.campaign-table tbody td {
+    padding: 16px 20px;
+    border-bottom: 1px solid #f1f5f9;
+    color: #1e293b;
+    vertical-align: middle;
+    font-size: 14px;
+}
+
+.campaign-table tbody tr {
+    transition: all 0.2s ease;
+}
+
+.campaign-table tbody tr:hover {
+    background-color: #f8fafc;
+}
+
+/* Badge Styling */
+.badge-ad-status {
+    padding: 6px 14px;
+    border-radius: 30px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.status-pending {
+    background-color: #fef9c3;
+    color: #854d0e;
+}
+
+.status-approved,
+.status-active {
+    background-color: #dcfce7;
+    color: #166534;
+}
+
+.status-rejected {
+    background-color: #fee2e2;
+    color: #991b1b;
+}
+
+/* Specific Column Styling */
+.ad-title-cell {
+    min-width: 200px;
+}
+
+.ad-deal-badge {
+    background: #eff6ff;
+    color: #3b82f6;
+    font-weight: 700;
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    display: inline-block;
+}
+
+.ad-price {
+    font-weight: 700;
+    color: #1e293b;
+    margin-top: 4px;
+}
+
+.ad-date-row {
+    font-size: 13px;
+    color: #64748b;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 2px;
+}
+
+.date-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+}
+
+.dot-start {
+    background-color: #3b82f6;
+}
+
+.dot-end {
+    background-color: #94a3b8;
+}
+
+/* Action Buttons */
+.btn-ad-view {
+    padding: 6px 15px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-ad-image {
+    background: #f1f5f9;
+    color: #475569;
+    border: 1px solid #e2e8f0;
+}
+
+.btn-ad-image:hover {
+    background: #e2e8f0;
+    color: #1e293b;
+}
+
+.btn-ad-receipt {
+    background: #eff6ff;
+    color: #3b82f6;
+    border: 1px solid #dbeafe;
+}
+
+.btn-ad-receipt:hover {
+    background: #dbeafe;
+    color: #2563eb;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+    .campaign-header-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        border-radius: 16px;
+        margin-bottom: 20px;
+    }
+
+    .campaign-header-bar .btn {
+        width: 100%;
+        margin-top: 15px;
+    }
+
+    .table-responsive {
+        overflow-x: auto !important;
+        display: block !important;
+        -webkit-overflow-scrolling: touch;
+        border-radius: 0 0 16px 16px;
+    }
+
+    .campaign-table {
+        min-width: 900px;
+    }
+}

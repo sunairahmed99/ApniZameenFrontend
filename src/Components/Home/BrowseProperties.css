@@ -1,0 +1,382 @@
+/* Zameen.com Style Browse Properties CSS */
+
+.browse-section {
+    background-color: #f5f7fa;
+    /* Slightly darker/cooler background if needed, or keep white */
+}
+
+/* Main Card Container */
+.category-card {
+    background: #fff;
+    border: 1px solid #e1e1e1;
+    border-radius: 8px;
+    padding: 24px;
+    height: 100%;
+    position: relative;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+    min-height: 380px;
+    /* Ensure consistency */
+}
+
+/* Header Section */
+.cat-icon-wrapper {
+    width: 32px;
+    /* Smaller icon wrapper */
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* background-color: #e8f5e9; Removed bg to match zameen cleaner look if needed, or keep */
+    margin-right: 12px;
+}
+
+.cat-icon {
+    color: #2cbc6f;
+    /* Zameen Green */
+    font-size: 28px;
+    /* Slightly larger icon */
+}
+
+h5.fw-bold {
+    color: #333;
+    font-size: 18px;
+    margin-bottom: 0;
+}
+
+/* Tabs */
+.card-tabs {
+    display: flex;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+
+.card-tab {
+    font-size: 14px;
+    color: #888;
+    font-weight: 600;
+    position: relative;
+    transition: all 0.2s;
+    border-bottom: 2px solid transparent;
+    padding-bottom: 12px;
+    margin-right: 24px;
+    cursor: pointer;
+}
+
+.card-tab:hover {
+    color: #2cbc6f;
+}
+
+.card-tab.active {
+    color: #2cbc6f;
+    border-bottom: 2px solid #2cbc6f;
+}
+
+/* Grid Wrapper */
+.cat-grid-wrapper {
+    position: relative;
+    padding: 0 4px;
+    margin: 0 -4px;
+    overflow: visible;
+    /* Allow arrows to show outside */
+    width: 100%;
+}
+
+/* Grid Layout */
+.cat-grid {
+    display: grid;
+    grid-template-rows: repeat(2, 80px);
+    /* Strictly 2 Rows */
+    grid-auto-flow: column;
+    /* Flow horizontally */
+    grid-auto-columns: calc((100% - 24px) / 3);
+    /* 3 items width */
+    gap: 12px;
+    width: 100%;
+    /* Ensure no flex expansion */
+    min-width: 0;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    scroll-snap-type: x mandatory;
+}
+
+.cat-grid::-webkit-scrollbar {
+    display: none;
+}
+
+/* Item box styling */
+.cat-item {
+    scroll-snap-align: start;
+    background-color: #fff;
+    border: 1px solid #eaeaea;
+    border-radius: 6px;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    /* Ensure padding/border included in width */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+    position: relative;
+}
+
+.cat-item:hover {
+    border-color: #2cbc6f;
+    background-color: #fff;
+    transform: none;
+}
+
+.cat-item-title {
+    font-size: 13px; /* Slightly smaller for better fit */
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 4px;
+    line-height: 1.25;
+    max-width: 100%;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0 4px;
+    word-break: break-word;
+}
+
+.cat-item-subtitle {
+    font-size: 11px;
+    /* Slightly smaller for better fit */
+    color: #666;
+    line-height: 1.2;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Navigation - Arrows */
+.grid-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 32px;
+    background: #2cbc6f;
+    /* Green Bg */
+    box-shadow: 0 4px 10px rgba(44, 188, 111, 0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    /* White Icon */
+    font-size: 14px;
+    cursor: pointer;
+    z-index: 10;
+    border: none;
+    /* No border */
+    transition: all 0.2s;
+}
+
+.grid-arrow:hover {
+    background-color: #26a661;
+    /* Darker green hover */
+    transform: translateY(-50%) scale(1.1);
+}
+
+.left-arrow {
+    left: -16px;
+    /* Align outside */
+}
+
+.right-arrow {
+    right: -16px;
+}
+
+/* Pagination Dots */
+.pagination-dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 16px;
+    gap: 6px;
+    height: 12px;
+}
+
+.dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #ddd;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.dot.active {
+    background-color: #2cbc6f;
+    transform: scale(1.2);
+}
+
+/* Responsive - Tablet */
+@media (max-width: 992px) {
+    .browse-section {
+        background-color: #f5f7fa;
+        margin-top: -40px;
+    }
+
+    .category-card {
+        padding: 20px;
+        min-height: auto;
+    }
+
+    .cat-grid {
+        grid-template-rows: repeat(2, 75px);
+        grid-auto-columns: calc((100% - 12px) / 2.5);
+        gap: 10px;
+    }
+
+    .cat-item-title {
+        font-size: 13px;
+    }
+
+    .cat-item-subtitle {
+        font-size: 11px;
+    }
+}
+
+/* Mobile Responsiveness - Exact Match to Uploaded Design */
+@media (max-width: 576px) {
+    .browse-section {
+        background-color: #f5f7fa;
+        padding: 10px 0 30px 0;
+        margin-top: -40px;
+    }
+
+    .browse-section .section-title {
+        display: none;
+    }
+
+    .row.g-4 {
+        gap: 0 !important;
+    }
+
+    .col-lg-4.col-md-6 {
+        width: 100%;
+        margin-bottom: 0;
+    }
+
+    .category-card {
+        padding: 16px;
+        min-height: auto;
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
+        margin-bottom: 0;
+        background: #fff;
+    }
+
+    .cat-icon-wrapper {
+        width: 24px;
+        height: 24px;
+        margin-right: 8px;
+    }
+
+    .cat-icon {
+        font-size: 20px;
+        color: #2cbc6f;
+    }
+
+    h5.fw-bold {
+        font-size: 16px;
+    }
+
+    .card-tabs {
+        display: flex;
+        margin-bottom: 16px;
+        margin-top: 12px;
+        border-bottom: none;
+        gap: 8px;
+    }
+
+    .card-tab {
+        font-size: 13px;
+        color: #666;
+        font-weight: 600;
+        background-color: #fff;
+        border: 1px solid #e1e1e1;
+        border-radius: 20px;
+        padding: 6px 14px;
+        margin-right: 0;
+        cursor: pointer;
+        transition: all 0.2s;
+        white-space: nowrap;
+    }
+
+    .card-tab:hover {
+        color: #2cbc6f;
+        border-color: #2cbc6f;
+    }
+
+    .card-tab.active {
+        color: white;
+        background-color: #2cbc6f;
+        border: 1px solid #2cbc6f;
+    }
+
+    .cat-grid-wrapper {
+        padding: 0;
+        margin: 0;
+    }
+
+    .cat-grid {
+        grid-template-rows: repeat(2, 65px);
+        grid-auto-columns: calc((100% - 16px) / 2);
+        /* Fit 2 items perfectly */
+        gap: 8px;
+        padding-bottom: 8px;
+        scroll-snap-type: x mandatory;
+    }
+
+    .cat-item {
+        border-radius: 6px;
+        border: 1px solid #e8e8e8;
+        background-color: #fff;
+    }
+
+    .cat-item:hover {
+        border-color: #2cbc6f;
+        transform: none;
+    }
+
+    .cat-item-title {
+        font-size: 13px;
+        font-weight: 700;
+        color: #333;
+    }
+
+    .cat-item-subtitle {
+        font-size: 11px;
+        color: #666;
+    }
+
+    /* Hide arrows on mobile, use touch scroll */
+    .grid-arrow {
+        display: none;
+    }
+
+    .pagination-dots {
+        margin-top: 12px;
+        gap: 5px;
+    }
+
+    .dot {
+        width: 6px;
+        height: 6px;
+    }
+}

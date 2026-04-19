@@ -1,0 +1,107 @@
+/* Global reset for this component to ensure padding doesn't break width */
+.banner-requests-container * {
+    box-sizing: border-box;
+}
+
+.banner-requests-container {
+    padding: 20px;
+    color: #fff;
+    width: 100%;
+    min-width: 0;
+    /* Flexbox fix */
+}
+
+.banner-requests-container h2 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.table-responsive {
+    background-color: white;
+    padding: 0;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border: none;
+    overflow-x: auto;
+    /* Scroll ONLY this element */
+    width: 100%;
+    max-width: 100%;
+    /* Strict containment */
+    display: block;
+    /* Ensure it behaves as a block */
+}
+
+table.table {
+    width: 100%;
+    min-width: 1000px;
+    /* Force min width to trigger scroll on smaller screens */
+    margin-bottom: 0;
+    color: #212529;
+    vertical-align: top;
+    border-color: #dee2e6;
+    background-color: white;
+}
+
+table.table thead {
+    background-color: #f8f9fa;
+}
+
+table.table th {
+    padding: 12px 15px;
+    font-weight: 600;
+    color: #000;
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #ecf0f1;
+    border-top: none;
+}
+
+table.table td {
+    padding: 12px 15px;
+    vertical-align: middle;
+    border-bottom: 1px solid #ecf0f1;
+    color: #333;
+}
+
+table.table tbody tr:hover {
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+.banner-thumb {
+    width: 80px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 4px;
+    border: none;
+}
+
+/* Badge styles */
+.badge {
+    padding: 6px 10px;
+    border-radius: 12px;
+    font-weight: 500;
+    font-size: 12px;
+}
+
+.bg-success {
+    background-color: #e8f8f5 !important;
+    color: #27ae60 !important;
+}
+
+.bg-danger {
+    background-color: #fadbd8 !important;
+    color: #c0392b !important;
+}
+
+.bg-warning {
+    background-color: #fef9e7 !important;
+    color: #f39c12 !important;
+}
+
+/* Button override */
+.btn-sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    border-radius: 0.2rem;
+}

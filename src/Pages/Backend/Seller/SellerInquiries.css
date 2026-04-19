@@ -1,0 +1,143 @@
+/* SellerInquiries.css */
+
+.premium-requests-card {
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
+}
+
+@media (max-width: 768px) {
+    .premium-requests-card {
+        background: transparent !important;
+        box-shadow: none !important;
+        overflow: visible !important;
+    }
+}
+
+/* Blue gradient card header */
+.campaign-card-header {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    padding: 24px;
+    border-radius: 16px 16px 0 0;
+}
+
+@media (max-width: 768px) {
+    .campaign-card-header {
+        border-radius: 16px !important;
+        margin-bottom: 16px !important;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    }
+}
+
+.campaign-card-header h5 {
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.25rem;
+}
+
+/* Filter grid */
+.filter-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+    align-items: center;
+}
+
+/* Premium Filter Boxes (Glassmorphism) */
+.premium-filter-box {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    padding: 2px 8px;
+    display: flex;
+    align-items: center;
+}
+
+.premium-filter-box input,
+.premium-filter-box select {
+    background: transparent !important;
+    border: none !important;
+    color: #fff !important;
+    box-shadow: none !important;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 8px 12px;
+    outline: none;
+    width: 100%;
+}
+
+.premium-filter-box input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.premium-filter-box select option {
+    background: #fff;
+    color: #333;
+}
+
+/* White table area below the blue header */
+.premium-table-container {
+    background: #fff;
+    border-radius: 0 0 16px 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+@media (max-width: 768px) {
+    .premium-table-container {
+        border-radius: 16px !important;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    }
+}
+
+.premium-table-container .table thead th {
+    background: #f8fafc !important;
+    color: #64748b !important;
+    font-weight: 700;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 16px 20px !important;
+    border-bottom: 2px solid #f1f5f9;
+}
+
+.premium-table-container .table tbody td {
+    padding: 16px 20px !important;
+    border-bottom: 1px solid #f1f5f9;
+    font-size: 14px;
+    vertical-align: middle;
+}
+
+.property-title-link {
+    color: #1e293b;
+    font-weight: 700;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.property-title-link:hover {
+    color: #2563eb;
+}
+
+.client-name {
+    font-weight: 700;
+    color: #1e293b;
+}
+
+.contact-info {
+    font-size: 13px;
+    color: #64748b;
+}
+
+.message-preview {
+    font-size: 13px;
+    color: #475569;
+    line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+    .table {
+        min-width: 800px;
+    }
+}

@@ -1,0 +1,346 @@
+.banner-request-container {
+    padding: 20px;
+    color: #333;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+/* Premium Form Styling */
+.banner-request-form-card {
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 16px;
+    padding: 40px;
+    color: #333;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    max-width: 900px;
+    margin: 20px auto;
+}
+
+.banner-request-form-card h4 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    color: #1a1a1a;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.form-section-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #0d6efd;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.form-section-title::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #e0e0e0;
+}
+
+.banner-request-form-card label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.banner-request-form-card .form-control,
+.banner-request-form-card .form-select {
+    background-color: #fbfbfc;
+    border: 1.5px solid #e2e8f0;
+    color: #1a202c;
+    padding: 12px 16px;
+    border-radius: 10px;
+    font-size: 14px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.banner-request-form-card .form-control:focus,
+.banner-request-form-card .form-select:focus {
+    border-color: #3b82f6;
+    background-color: #fff;
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+}
+
+.custom-file-upload {
+    background: #f8fafc;
+    border: 2px dashed #cbd5e1;
+    border-radius: 12px;
+    padding: 24px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.custom-file-upload:hover {
+    border-color: #3b82f6;
+    background: #eff6ff;
+    color: #3b82f6;
+}
+
+/* Updated Premium Buttons */
+.btn-premium-save {
+    background: linear-gradient(135deg, #0d6efd 0%, #0b5ed7 100%);
+    border: none;
+    color: #fff;
+    font-weight: 600;
+    padding: 14px 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(13, 110, 253, 0.3);
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-premium-save:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(13, 110, 253, 0.4);
+    background: linear-gradient(135deg, #0b5ed7 0%, #0a58ca 100%);
+}
+
+.btn-premium-cancel {
+    background: #f8fafc;
+    border: 1.5px solid #e2e8f0;
+    color: #64748b;
+    font-weight: 600;
+    padding: 14px 40px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.btn-premium-cancel:hover {
+    background: #f1f5f9;
+    color: #1e293b;
+    border-color: #cbd5e1;
+}
+
+/* Modern Card Layout for Table Header */
+.campaign-card-header {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    padding: 24px;
+    border-radius: 16px 16px 0 0;
+}
+
+.campaign-card-header h5 {
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.25rem;
+    margin-bottom: 20px !important;
+}
+
+@media (max-width: 768px) {
+    .premium-requests-card {
+        background: transparent !important;
+        box-shadow: none !important;
+        overflow: visible !important;
+    }
+}
+
+.filter-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+    align-items: center;
+}
+
+.premium-filter-box {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    padding: 2px 8px;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.premium-filter-box:focus-within {
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.1);
+}
+
+.premium-filter-box .form-control,
+.premium-filter-box .form-select {
+    background: transparent !important;
+    border: none !important;
+    color: #fff !important;
+    box-shadow: none !important;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.premium-filter-box .form-control::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.premium-filter-box option {
+    background: #fff;
+    color: #333;
+}
+
+/* Responsive Table Design */
+.premium-table-container {
+    background: #fff;
+    border-radius: 0 0 16px 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.table {
+    margin-bottom: 0;
+}
+
+.table thead th {
+    background: #f8fafc !important;
+    color: #64748b !important;
+    font-weight: 700;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 16px 20px !important;
+    border-bottom: 2px solid #f1f5f9;
+}
+
+.table tbody tr {
+    transition: all 0.2s ease;
+}
+
+.table tbody tr:hover {
+    background-color: #f8fafc;
+}
+
+.table tbody td {
+    padding: 16px 20px !important;
+    border-bottom: 1px solid #f1f5f9;
+    font-size: 14px;
+}
+
+/* Premium Badges */
+.status-badge {
+    padding: 6px 14px;
+    border-radius: 30px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    display: inline-block;
+}
+
+.status-approved {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.status-pending {
+    background: #fef9c3;
+    color: #854d0e;
+}
+
+.status-rejected {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+@media (max-width: 991px) {
+    .filter-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* campaign-header-bar styles (consistent with other pages but with mobile row override) */
+.campaign-header-bar {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    padding: 20px 24px;
+    border-radius: 16px 16px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    gap: 15px;
+}
+
+.campaign-header-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+    .campaign-header-bar {
+        padding: 15px;
+        flex-direction: row !important;
+        /* Force same line */
+        justify-content: space-between !important;
+        align-items: center !important;
+    }
+
+    .campaign-header-title {
+        font-size: 1.1rem;
+    }
+
+    .campaign-header-bar .btn {
+        width: auto !important;
+        /* Don't force full width */
+        margin-top: 0 !important;
+        padding: 6px 12px !important;
+        font-size: 12px !important;
+    }
+
+    .campaign-card-header {
+        border-radius: 16px !important;
+        margin-bottom: 16px !important;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .premium-table-container {
+        border-radius: 16px !important;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .filter-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .banner-request-form-card {
+        padding: 25px 20px;
+        border-radius: 16px;
+    }
+
+    .d-flex.gap-3 {
+        flex-direction: column;
+    }
+
+    .btn-premium-save,
+    .btn-premium-cancel {
+        width: 100%;
+        padding: 12px;
+    }
+
+    /* Force horizontal scroll on mobile */
+    .table-responsive {
+        overflow-x: auto !important;
+        display: block !important;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .table {
+        min-width: 800px;
+    }
+}

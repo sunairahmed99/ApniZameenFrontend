@@ -1,0 +1,289 @@
+/* About.css */
+.about-page {
+    font-family: 'Open Sans', sans-serif;
+    color: #333;
+    overflow-x: hidden;
+}
+
+/* Header Section */
+.about-header {
+    background-color: #f7f7f7;
+    padding: 60px 0;
+    text-align: center;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.about-header h1 {
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: #2f3640;
+    margin-bottom: 10px;
+}
+
+.about-header p {
+    font-size: 1.1rem;
+    color: #7f8c8d;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Intro Section */
+.about-intro-section {
+    padding: 80px 0;
+    background-color: #fff;
+}
+
+.intro-content h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #2f3640;
+    margin-bottom: 20px;
+}
+
+.intro-content p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+/* Stats Circle Animation (Simplified) */
+.stats-circle-container {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.center-circle {
+    width: 100px;
+    height: 100px;
+    background-color: #eafaea;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.center-icon {
+    font-size: 2rem;
+    color: #00a651;
+}
+
+.center-text {
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: #333;
+    margin-top: 5px;
+}
+
+.orbit-item {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.orbit-item i {
+    font-size: 1.5rem;
+    color: #00a651;
+    margin-bottom: 5px;
+}
+
+.orbit-item span {
+    font-size: 0.7rem;
+    color: #555;
+    text-align: center;
+}
+
+/* Positioning orbit items manually for simplicity */
+.orbit-1 {
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.orbit-2 {
+    bottom: 20px;
+    left: 0;
+}
+
+.orbit-3 {
+    bottom: 20px;
+    right: 0;
+}
+
+
+/* Cards Section */
+.about-cards-section {
+    padding: 60px 0;
+    background-color: #fff;
+}
+
+.about-card {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+    height: 100%;
+    border: 1px solid #eee;
+}
+
+.about-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.card-content {
+    padding: 30px;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.card-text {
+    flex: 1;
+}
+
+.card-text h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.card-text p {
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.card-link {
+    color: #00a651;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.card-link:hover {
+    text-decoration: underline;
+}
+
+.card-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-left: 20px;
+    flex-shrink: 0;
+    border: 4px solid #f0f0f0;
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Explore Section */
+.explore-section {
+    padding: 60px 0;
+    background-color: #f9f9f9;
+}
+
+.section-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.explore-card {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 20px;
+}
+
+.explore-overlay {
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    width: 100%;
+    padding: 20px;
+    color: #fff;
+}
+
+.explore-overlay h4 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.explore-overlay p {
+    margin: 5px 0 0;
+    font-size: 0.85rem;
+    opacity: 0.9;
+}
+
+/* App Download Section */
+.app-download-section {
+    padding: 60px 0;
+    background-color: #fff;
+    border-top: 1px solid #eee;
+}
+
+.app-content h3 {
+    font-size: 1.8rem;
+    color: #00a651;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.store-buttons img {
+    height: 40px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .about-header h1 {
+        font-size: 2rem;
+    }
+
+    .card-content {
+        flex-direction: column-reverse;
+        text-align: center;
+    }
+
+    .card-image {
+        margin-left: 0;
+        margin-bottom: 20px;
+    }
+
+    .stats-circle-container {
+        margin-top: 40px;
+    }
+}

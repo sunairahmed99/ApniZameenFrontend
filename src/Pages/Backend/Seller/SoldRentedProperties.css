@@ -1,0 +1,182 @@
+/* SoldRentedProperties.css */
+
+.premium-requests-card {
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
+}
+
+@media (max-width: 768px) {
+    .premium-requests-card {
+        background: transparent !important;
+        box-shadow: none !important;
+        overflow: visible !important;
+    }
+}
+
+/* Blue gradient card header */
+.campaign-card-header {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    padding: 24px;
+    border-radius: 16px 16px 0 0;
+}
+
+@media (max-width: 768px) {
+    .campaign-card-header {
+        border-radius: 16px !important;
+        margin-bottom: 16px !important;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    }
+}
+
+.campaign-card-header h5 {
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.25rem;
+    margin-bottom: 20px !important;
+}
+
+/* Filter grid */
+.filter-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+    align-items: center;
+}
+
+/* Premium Filter Boxes (Glassmorphism) */
+.premium-filter-box {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    padding: 2px 8px;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.premium-filter-box:focus-within {
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.1);
+}
+
+.premium-filter-box input,
+.premium-filter-box select {
+    background: transparent !important;
+    border: none !important;
+    color: #fff !important;
+    box-shadow: none !important;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 8px 12px;
+    outline: none;
+    width: 100%;
+}
+
+.premium-filter-box input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.premium-filter-box select option {
+    background: #fff;
+    color: #333;
+}
+
+/* White table area below the blue header */
+.premium-table-container {
+    background: #fff;
+    border-radius: 0 0 16px 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+@media (max-width: 768px) {
+    .premium-table-container {
+        border-radius: 16px !important;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    }
+}
+
+.premium-table-container .table {
+    margin-bottom: 0;
+}
+
+.premium-table-container .table thead th {
+    background: #f8fafc !important;
+    color: #64748b !important;
+    font-weight: 700;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 16px 20px !important;
+    border-bottom: 2px solid #f1f5f9;
+}
+
+.premium-table-container .table tbody tr {
+    transition: all 0.2s ease;
+}
+
+.premium-table-container .table tbody tr:hover {
+    background-color: #f8fafc;
+}
+
+.premium-table-container .table tbody td {
+    padding: 16px 20px !important;
+    border-bottom: 1px solid #f1f5f9;
+    font-size: 14px;
+    vertical-align: middle;
+}
+
+/* Property Thumb */
+.property-thumb {
+    width: 80px;
+    height: 55px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+    opacity: 0.9;
+}
+
+/* Status badges */
+.status-badge {
+    padding: 6px 14px;
+    border-radius: 30px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    display: inline-block;
+    text-transform: uppercase;
+}
+
+.status-sold {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.status-rented {
+    background: #e0f2fe;
+    color: #0369a1;
+}
+
+@media (max-width: 991px) {
+    .filter-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .filter-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .table-responsive {
+        overflow-x: auto !important;
+        display: block !important;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .table {
+        min-width: 850px;
+    }
+}

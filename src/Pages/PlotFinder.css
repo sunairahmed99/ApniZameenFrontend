@@ -1,0 +1,389 @@
+.plot-finder-container {
+    position: relative;
+    width: 100%;
+    height: calc(100vh - 110px);
+    background-color: #e6e6e6;
+    overflow: hidden;
+    font-family: 'Lato', sans-serif;
+}
+
+/* Ensure Map takes full space */
+.leaflet-container {
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* Base layer */
+}
+
+/* --- Top Left Controls --- */
+.pf-controls-top-left {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    align-items: flex-start; /* Changed to handle stacking */
+    gap: 10px;
+    z-index: 1000; /* Above Map */
+}
+
+/* Select City Button */
+.pf-select-city-btn {
+    background: white;
+    border: none;
+    border-radius: 30px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #333;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.pf-select-city-btn:hover {
+    background-color: #f8f9fa;
+}
+
+/* Search Bar Container (City/Society View) */
+.pf-search-bar-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* City Pill (Blue) */
+.pf-city-pill {
+    background: #007bff; /* Blue like screenshot */
+    color: white;
+    padding: 8px 16px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex; /* Changed to inline-flex */
+    align-items: center;
+    gap: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 10px;
+}
+
+/* Society Pill (White with Close) */
+.pf-society-pill {
+    background: white;
+    color: #333;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    border: 1px solid #ddd;
+}
+
+/* Main Search Input */
+.pf-search-input-wrapper {
+    background: white;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 8px 12px;
+    width: 300px;
+    display: flex;
+    align-items: center;
+}
+
+.pf-search-input-wrapper input {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 14px;
+    color: #333;
+}
+
+.pf-search-input-wrapper input::placeholder {
+    color: #999;
+}
+
+/* Dropdown/Sidebar for City Selection */
+.pf-city-dropdown {
+    position: absolute;
+    top: 60px; /* Below the button */
+    left: 20px;
+    width: 300px;
+    background: white;
+    border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    max-height: 400px;
+    overflow-y: auto;
+    z-index: 1001;
+    padding: 10px 0;
+}
+
+.pf-city-dropdown-header {
+    padding: 0 15px 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.pf-city-dropdown-input {
+    width: 100%;
+    padding: 8px;
+    border: none;
+    border-bottom: 1px solid #eee;
+    outline: none;
+    font-size: 14px;
+}
+
+.pf-city-list-item {
+    padding: 10px 20px;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+}
+
+.pf-city-list-item:hover {
+    background-color: #f5f5f5;
+}
+
+/* --- Custom Markers for Leaflet --- */
+.custom-marker-container {
+    background: transparent;
+    border: none;
+}
+
+.marker-label-green {
+    background: #28a745;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: bold;
+    white-space: nowrap;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    position: relative;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.marker-label-green::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 4px 4px 0;
+    border-style: solid;
+    border-color: #28a745 transparent transparent transparent;
+}
+
+/* --- Bottom Controls --- */
+.pf-controls-bottom-left {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    z-index: 1000;
+}
+
+.pf-collections-btn {
+    background: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px; /* Pill shape */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    font-size: 13px;
+    font-weight: 700;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.pf-icon-blue {
+    color: #007bff;
+}
+
+/* --- Bottom Right Controls (Custom) --- */
+.pf-controls-bottom-right-custom {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    z-index: 1000;
+}
+
+.pf-society-maps-toggle {
+    background: white;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 700;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.pf-toggle-icon {
+    color: #28a745;
+}
+
+.pf-satellite-btn {
+    width: 60px;
+    height: 60px;
+    border: 2px solid white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.pf-satellite-bg {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+}
+
+.pf-satellite-label {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0,0,0,0.6);
+    color: white;
+    font-size: 10px;
+    text-align: center;
+    padding: 2px 0;
+}
+
+/* Society Dropdown List */
+.pf-society-dropdown-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: white;
+    border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: 1002;
+    margin-top: 5px;
+}
+
+.pf-dropdown-item {
+    padding: 10px 15px;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.pf-dropdown-item:last-child {
+    border-bottom: none;
+}
+
+.pf-dropdown-item:hover {
+    background-color: #f5f5f5;
+}
+
+.pf-dropdown-item.no-results {
+    padding: 15px;
+    text-align: center;
+    color: #999;
+}
+
+/* Plot Inputs Wrapper */
+.pf-plot-inputs-wrapper {
+    background: white;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.pf-small-input {
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    padding: 6px 10px;
+    font-size: 13px;
+    width: 100px;
+    outline: none;
+}
+
+.pf-small-input:focus {
+    border-color: #007bff;
+}
+
+.pf-search-btn {
+    background: #28a745;
+    border: none;
+    border-radius: 3px;
+    color: white;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.pf-search-btn:hover {
+    background: #218838;
+}
+
+/* --- Society View Styling (New) --- */
+.pf-society-view-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.pf-society-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    width: 320px;
+    overflow: hidden;
+}
+
+.pf-society-card-header {
+    padding: 12px 15px;
+    border-bottom: 1px solid #f0f0f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pf-society-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: #333;
+}
+
+.pf-society-card-body {
+    padding: 15px;
+}
+
+.pf-plot-inputs-wrapper.full-width {
+    width: 100%;
+    box-shadow: none;
+    padding: 0;
+    background: transparent;
+}
+
+.pf-small-input.flex-grow {
+    flex-grow: 1;
+    width: auto;
+}

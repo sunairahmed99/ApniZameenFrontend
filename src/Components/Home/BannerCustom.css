@@ -1,0 +1,9 @@
+.banner-section.mb-0 {
+    margin-bottom: 0 !important;
+}
+
+.banner-section.min-h-auto {
+    min-height: 250px !important;
+    height: auto;
+    padding-bottom: 2rem;
+}

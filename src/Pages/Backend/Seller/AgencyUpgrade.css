@@ -1,0 +1,37 @@
+/* Simple styling for the upgrade page */
+.cursor-pointer {
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.cursor-pointer:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* BannerRequest-style Header */
+.premium-requests-card {
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
+}
+
+.campaign-card-header {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    padding: 12px 24px;
+    border-radius: 16px 16px 0 0;
+}
+
+.campaign-card-header h5 {
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.25rem;
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .campaign-card-header {
+        border-radius: 16px;
+        margin-bottom: 0;
+    }
+}

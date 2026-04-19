@@ -1,0 +1,277 @@
+/* Shared styles for all seller sub-pages */
+:root {
+    --primary-mint: #3b82f6;
+    --primary-mint-soft: rgba(59, 130, 246, 0.12);
+    --bg-dark: #0b0e14;
+    --card-dark: #151a21;
+    --sidebar-dark: #151a21;
+    --border-dark: #222b36;
+    --text-primary: #ffffff;
+    --text-secondary: #94a3b8;
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --border-radius-lg: 24px;
+    --border-radius-md: 16px;
+    --glass-bg: rgba(21, 26, 33, 0.8);
+    --glass-border: rgba(255, 255, 255, 0.05);
+}
+
+
+
+.responsive-page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    gap: 15px;
+}
+
+.responsive-page-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    color: var(--text-primary);
+}
+
+.responsive-page-subtitle {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-top: 4px;
+}
+
+@media (max-width: 768px) {
+    .responsive-page-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .responsive-page-title {
+        font-size: 1.1rem;
+    }
+
+    .responsive-page-subtitle {
+        font-size: 0.75rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .responsive-page-header {
+        flex-direction: row !important;
+        /* Force single line as per user request */
+        justify-content: space-between !important;
+        align-items: center !important;
+    }
+
+    .responsive-page-title {
+        font-size: 0.95rem !important;
+        flex: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .responsive-page-subtitle {
+        display: none !important;
+        /* Hide subtitle on very small screens to save space */
+    }
+
+    .responsive-page-header .btn {
+        padding: 4px 8px !important;
+        font-size: 11px !important;
+        white-space: nowrap;
+    }
+}
+
+/* Property Card Responsiveness */
+.card-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card-subtitle {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    height: 2.8rem;
+    line-height: 1.4rem;
+}
+
+@media (max-width: 576px) {
+    .card-title {
+        font-size: 1rem !important;
+    }
+
+    .card-subtitle {
+        font-size: 0.85rem !important;
+        height: 2.4rem;
+        line-height: 1.2rem;
+    }
+
+    .badge {
+        font-size: 0.7rem !important;
+    }
+}
+
+/* Premium Form Styling (Shared) */
+.seller-form-card,
+.banner-request-form-card,
+.seller-agencies-form-card,
+.project-request-form-card {
+    background: var(--card-dark);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--border-radius-lg);
+    padding: 40px;
+    color: var(--text-primary);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+    .seller-form-card,
+    .banner-request-form-card,
+    .seller-agencies-form-card,
+    .project-request-form-card {
+        padding: 24px;
+    }
+}
+
+.seller-form-card h4,
+.banner-request-form-card h4,
+.seller-agencies-form-card h4 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--glass-border);
+    color: var(--text-primary);
+}
+
+.form-section-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--primary-mint);
+    margin-top: 32px;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+}
+
+.form-section-title::before {
+    content: '';
+    width: 4px;
+    height: 16px;
+    background: var(--primary-mint);
+    border-radius: 4px;
+    margin-right: 12px;
+}
+
+.btn-premium-save {
+    background: var(--primary-mint);
+    border: none;
+    color: var(--bg-dark);
+    font-weight: 700;
+    padding: 12px 30px;
+    border-radius: 12px;
+    transition: var(--transition-smooth);
+    box-shadow: 0 4px 15px var(--primary-mint-soft);
+}
+
+.btn-premium-save:hover {
+    background: #2563eb;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px var(--primary-mint-soft);
+}
+
+.btn-premium-save:disabled {
+    background: var(--border-dark);
+    color: var(--text-secondary);
+    transform: none;
+    box-shadow: none;
+}
+
+.btn-premium-cancel {
+    background: transparent;
+    border: 1px solid var(--border-dark);
+    color: var(--text-secondary);
+    font-weight: 600;
+    padding: 12px 30px;
+    border-radius: 12px;
+    transition: var(--transition-smooth);
+}
+
+.btn-premium-cancel:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
+    border-color: var(--text-secondary);
+}
+
+.custom-file-upload {
+    background: var(--bg-dark);
+    border: 2px dashed var(--border-dark);
+    border-radius: 12px;
+    padding: 24px;
+    text-align: center;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    color: var(--text-secondary);
+    display: block;
+    width: 100%;
+}
+
+.custom-file-upload:hover {
+    border-color: var(--primary-mint);
+    background: var(--primary-mint-soft);
+    color: var(--primary-mint);
+}
+
+/* Animations (Shared) */
+.animate-slide-up {
+    animation: slideUp 0.5s ease-out;
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.4s ease-in;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* Common Table Styles for Tables in Dark Mode Container */
+.seller-table-container {
+    background-color: #1a1a1a;
+    border-radius: 8px;
+    padding: 20px;
+    border: 1px solid #333;
+}
+
+.seller-table-container.bg-white {
+    background-color: #fff !important;
+    border: 1px solid #eee !important;
+    color: #333 !important;
+}

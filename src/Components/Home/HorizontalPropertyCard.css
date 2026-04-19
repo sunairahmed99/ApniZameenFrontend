@@ -1,0 +1,60 @@
+/* HorizontalPropertyCard.css */
+.card {
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15) !important;
+}
+
+/* Responsive Action Buttons */
+.property-actions-container {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.property-actions-container .btn {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+@media (max-width: 576px) {
+    .property-actions-container {
+        gap: 4px;
+    }
+
+    .property-actions-container .btn {
+        padding-left: 4px !important;
+        padding-right: 4px !important;
+        font-size: 10px !important;
+    }
+
+    .property-actions-container .btn svg {
+        margin-right: 2px !important;
+        font-size: 12px;
+    }
+}
+
+/* Very small screens - hide text if necessary */
+@media (max-width: 380px) {
+    .property-actions-container .btn {
+        font-size: 0 !important;
+        /* Hide text */
+        padding: 8px !important;
+    }
+
+    .property-actions-container .btn svg {
+        margin-right: 0 !important;
+        font-size: 14px;
+    }
+}

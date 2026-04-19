@@ -1,0 +1,10 @@
+.admin-plans-container {
+  padding: 20px;
+}
+
+.admin-plans-container h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Add any specific styles for plans table here if needed */

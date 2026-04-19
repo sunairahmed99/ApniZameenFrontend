@@ -1,0 +1,59 @@
+.blog-form-container {
+    padding: 20px;
+}
+
+.blog-form-container h2 {
+    font-weight: 700;
+    color: #fff;
+    margin: 0;
+}
+
+.blog-form {
+    border: none;
+    border-radius: 12px;
+}
+
+.blog-form .form-label {
+    font-weight: 600;
+    color: #555;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.blog-form .form-control,
+.blog-form .form-select {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.blog-form .form-control:focus {
+    border-color: #28a745;
+    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+}
+
+.quill {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.ql-container {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 16px !important;
+}
+
+.ql-toolbar {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    background: #f8f9fa;
+}
+
+.btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+}

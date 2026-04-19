@@ -1,0 +1,309 @@
+.seller-dashboard {
+    padding-bottom: 50px;
+}
+
+/* Header Styles */
+.dashboard-header-modern {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.welcome-title {
+    font-size: 1.75rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+    color: var(--text-primary);
+}
+
+.welcome-subtitle {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+.highlight-user-name {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.header-date-pill {
+    background: var(--card-dark);
+    padding: 8px 16px;
+    border-radius: 20px;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--glass-border);
+}
+
+/* Stats Grid Modern */
+.stats-grid-modern {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+}
+
+.stat-card-modern {
+    background: var(--card-dark);
+    border-radius: var(--border-radius-lg);
+    padding: 24px;
+    border: 1px solid var(--glass-border);
+    transition: var(--transition-smooth);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 160px;
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-card-modern:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-mint);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.stat-card-inner {
+    display: flex;
+    gap: 20px;
+}
+
+.stat-icon-box {
+    width: 60px;
+    height: 60px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.stat-info {
+    flex: 1;
+}
+
+.stat-label {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.stat-value-large {
+    font-size: 1.75rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+    color: var(--text-primary);
+}
+
+.stat-trend {
+    font-size: 0.75rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.stat-trend.positive { color: var(--primary-mint); }
+.trend-label { color: var(--text-secondary); font-weight: 400; margin-left: 4px; }
+
+.stat-card-chart-mini {
+    display: flex;
+    align-items: flex-end;
+    gap: 4px;
+    height: 40px;
+    margin-top: 10px;
+}
+
+.sparkline-bar {
+    flex: 1;
+    border-radius: 2px;
+    opacity: 0.4;
+}
+
+/* Charts Grid Modern */
+.charts-grid-modern {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.chart-card-modern {
+    background: var(--card-dark);
+    border-radius: var(--border-radius-lg);
+    padding: 24px;
+    border: 1px solid var(--glass-border);
+    overflow: hidden; /* Added to contain charts */
+    min-width: 0;    /* Added to allow shrinking in grid */
+}
+
+.chart-content-modern {
+    width: 100%;
+    overflow: hidden;
+}
+
+.chart-card-modern.lg-col {
+    grid-column: span 2;
+}
+
+.chart-header-modern {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.chart-title-modern {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 0;
+    color: var(--text-primary);
+}
+
+.chart-legend-fake {
+    display: flex;
+    gap: 16px;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.chart-legend-fake .dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 6px;
+}
+
+.dot.deals { background: var(--primary-mint); }
+.dot.value { background: #3b82f6; }
+
+/* Section Title */
+.section-title-modern {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.btn-view-all {
+    background: var(--card-dark);
+    border: 1px solid var(--border-dark);
+    color: var(--text-primary);
+    padding: 8px 16px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.btn-view-all:hover {
+    background: var(--border-dark);
+    border-color: var(--primary-mint);
+}
+
+/* Property Mock Grid */
+.property-mock-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+}
+
+.property-mock-card {
+    background: var(--card-dark);
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    border: 1px solid var(--glass-border);
+    transition: var(--transition-smooth);
+}
+
+.property-mock-card:hover {
+    transform: scale(1.02);
+    border-color: var(--primary-mint);
+}
+
+.property-mock-img {
+    height: 180px;
+    background: linear-gradient(135deg, #1e293b, #0f172a);
+    position: relative;
+    padding: 20px;
+}
+
+.property-badge-mock {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    background: var(--primary-mint);
+    color: var(--bg-dark);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.property-mock-body {
+    padding: 20px;
+}
+
+.property-mock-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+}
+
+.property-mock-name {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+    color: var(--text-primary);
+}
+
+.property-mock-loc {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.property-mock-price {
+    color: var(--primary-mint);
+    font-size: 1.1rem;
+    font-weight: 800;
+}
+
+.property-mock-footer {
+    display: flex;
+    gap: 20px;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    padding-top: 16px;
+    border-top: 1px solid var(--glass-border);
+}
+
+@media (max-width: 1200px) {
+    .charts-grid-modern {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .chart-card-modern.lg-col {
+        grid-column: span 2;
+    }
+}
+
+@media (max-width: 768px) {
+    .dashboard-header-modern {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+    .charts-grid-modern {
+        grid-template-columns: 1fr;
+    }
+    .chart-card-modern.lg-col {
+        grid-column: span 1;
+    }
+}

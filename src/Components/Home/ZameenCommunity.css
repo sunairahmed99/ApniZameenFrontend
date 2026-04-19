@@ -1,0 +1,15 @@
+.hover-link:hover {
+    color: #28a745 !important; /* Zameen green hover */
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.forum-card {
+    background-color: #f8f9fa; /* Light grey */
+    transition: background-color 0.2s;
+    cursor: pointer;
+}
+
+.forum-card:hover {
+    background-color: #e9ecef;
+}

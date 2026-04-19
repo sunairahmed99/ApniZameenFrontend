@@ -1,0 +1,651 @@
+.search-filter-container {
+    width: 100%;
+    max-width: 950px;
+    margin: 0 auto;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Tabs */
+.filter-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 0;
+}
+
+.filter-tab {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 10px 25px;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    transition: all 0.2s;
+}
+
+.filter-tab:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.filter-tab.active {
+    background: white;
+    color: #333;
+    border-color: white;
+    font-weight: 700;
+    position: relative;
+}
+
+/* Arrow for active tab */
+.filter-tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 8px solid white;
+    z-index: 10;
+}
+
+/* Filter Box - High-End Dark Mesh */
+.filter-box {
+    background: linear-gradient(135deg, rgba(13, 22, 18, 0.95), rgba(26, 78, 50, 0.98));
+    padding: 24px;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+.filter-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.secondary-row {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.secondary-row.visible {
+    opacity: 1;
+    max-height: 500px;
+    /* Allow expansion */
+    overflow: visible;
+    /* Allow dropdowns to show */
+}
+
+
+/* Input Styles */
+.filter-input-wrapper {
+    background: white;
+    border-radius: 8px; /* Slightly more rounded */
+    padding: 6px 16px;
+    flex: 1;
+    position: relative;
+    cursor: pointer;
+    min-height: 54px;
+    display: flex;
+    align-items: center;
+    user-select: none;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+}
+
+.filter-input-wrapper:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    background-color: #fdfdfd;
+}
+
+.filter-input-wrapper:focus-within {
+    border-color: rgba(46, 158, 70, 0.3);
+    box-shadow: 0 0 0 4px rgba(46, 158, 70, 0.05);
+}
+
+.city-wrapper {
+    flex: 0 0 25%;
+}
+
+/* Adjusted per screenshot roughly */
+.location-wrapper {
+    flex: 1;
+}
+
+.type-wrapper {
+    flex: 0 0 25%;
+}
+
+.price-wrapper {
+    flex: 0 0 25%;
+}
+
+.area-wrapper {
+    flex: 0 0 25%;
+}
+
+.beds-wrapper {
+    flex: 0 0 15%;
+}
+
+.filter-input-group {
+    width: 100%;
+}
+
+/* Label above Value styling */
+.filter-input-group label {
+    display: block;
+    font-size: 10px;
+    font-weight: 700;
+    color: #888;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    /* Increase space between label and value */
+    letter-spacing: 0.5px;
+    line-height: 1;
+    /* Ensure tight line height for label */
+}
+
+.input-display {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+}
+
+.input-display .icon {
+    font-size: 10px;
+    color: #999;
+}
+
+.filter-input-group input {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    padding: 0;
+    margin: 0;
+}
+
+.filter-input-group input::placeholder {
+    color: #333;
+    font-weight: 700;
+    /* Bold placeholder */
+    opacity: 1;
+    /* Firefox fix */
+}
+
+/* Find Button - Premium Gradient */
+.btn-find {
+    background: linear-gradient(135deg, #2e9e46, #25833a);
+    color: white;
+    border: none;
+    font-weight: 700;
+    font-size: 16px;
+    border-radius: 8px; /* Match input rounding */
+    padding: 0 35px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    height: 54px; /* Match input height */
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    box-shadow: 0 4px 15px rgba(46, 158, 70, 0.3);
+}
+
+.btn-find:hover {
+    background: linear-gradient(135deg, #32ad4d, #2a9442);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(46, 158, 70, 0.4);
+}
+
+.btn-find:active {
+    transform: translateY(0);
+}
+
+/* Dropdown Menu - State of the Art Glass */
+.search-dropdown-menu {
+    position: absolute;
+    top: calc(100% + 12px);
+    left: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 20px;
+    box-shadow: 
+        0 4px 6px -1px rgba(0, 0, 0, 0.1),
+        0 10px 40px -5px rgba(0, 0, 0, 0.15),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+    z-index: 1000;
+    padding: 8px;
+    overflow: hidden;
+}
+
+.dropdown-footer {
+    padding: 12px 16px;
+    background: rgba(248, 250, 251, 0.5);
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+.btn-close-custom {
+    background-color: #444;
+    color: white;
+    border: none;
+    padding: 4px 12px;
+    font-size: 11px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.btn-close-custom:hover {
+    background-color: #333;
+}
+
+/* City Dropdown */
+.city-dropdown {
+    min-width: 250px;
+}
+
+.city-list {
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.city-item {
+    padding: 10px 15px;
+    cursor: pointer;
+    border-bottom: 1px solid #f5f5f5;
+    font-size: 13px;
+    transition: all 0.1s;
+}
+
+.city-item:hover {
+    background-color: #f0f0f0;
+}
+
+.city-item.active {
+    background-color: #0091ff;
+    color: white;
+}
+
+/* Property Type Dropdown */
+.type-dropdown {
+    width: 350px;
+    min-width: 100%;
+}
+
+.type-tabs {
+    display: flex;
+    background: rgba(0, 0, 0, 0.04);
+    padding: 4px;
+    border-radius: 12px;
+    margin: 8px;
+    gap: 4px;
+}
+
+.type-tab {
+    flex: 1;
+    padding: 8px 4px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #666;
+    cursor: pointer;
+    text-transform: uppercase;
+    position: relative;
+    border-radius: 8px;
+    transition: all 0.2s;
+    text-align: center;
+    z-index: 1;
+}
+
+.type-tab:hover {
+    color: #333;
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.type-tab.active {
+    color: #1a4e32;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+/* Rounded tile style for options */
+.type-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 8px;
+    padding: 12px;
+}
+
+.type-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 16px;
+    padding: 14px 8px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 600;
+    color: #444;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.type-option .type-icon {
+    font-size: 24px;
+    margin-bottom: 2px;
+    transition: transform 0.3s;
+}
+
+.type-option:hover {
+    border-color: #2e9e46;
+    background: #f1f8f3;
+}
+
+.type-option:hover .type-icon {
+    transform: scale(1.15) translateY(-2px);
+}
+
+.type-option.active {
+    background: linear-gradient(135deg, #1a4e32, #2e9e46);
+    color: white;
+    border-color: transparent;
+    box-shadow: 0 8px 20px rgba(26, 78, 50, 0.2);
+}
+
+.type-option.active .type-icon {
+    color: white;
+}
+
+/* Range Dropdowns (Price/Area) */
+/* Range Dropdowns (Price/Area) */
+.range-dropdown {
+    width: 300px;
+    min-width: 100%;
+    padding-bottom: 0;
+}
+
+.range-header-link {
+    padding: 10px 15px;
+    font-size: 13px;
+    color: #0091ff;
+    font-weight: 700;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+    background-color: #f2f2f2;
+    /* Light background for header */
+    text-align: center;
+}
+
+.range-inputs-row {
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+    background: white;
+}
+
+.range-lists {
+    max-height: 250px;
+    overflow-y: auto;
+    display: flex;
+}
+
+.range-list {
+    width: 50%;
+    border-right: 1px solid #eee;
+}
+
+.range-list:last-child {
+    border-right: none;
+}
+
+.range-item {
+    padding: 10px 15px;
+    font-size: 13px;
+    cursor: pointer;
+    text-align: center;
+    color: #555;
+    border-bottom: 1px solid #f9f9f9;
+}
+
+.range-item:hover {
+    background-color: #f5f5f5;
+}
+
+.range-item.active {
+    background: linear-gradient(135deg, #2e9e46, #25833a);
+    color: white;
+    font-weight: 600;
+}
+
+/* Custom Scrollbar for range lists */
+.range-lists::-webkit-scrollbar {
+    width: 6px;
+}
+
+.range-lists::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.range-lists::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 3px;
+}
+
+.range-lists::-webkit-scrollbar-thumb:hover {
+    background: #aaa;
+}
+
+/* Beds Dropdown */
+.beds-dropdown {
+    min-width: 100px;
+}
+
+.beds-list {
+    padding: 5px 0;
+}
+
+.bed-item {
+    padding: 8px 15px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.bed-item:hover {
+    background-color: #f5f5f5;
+}
+
+.bed-item.active {
+    color: #0091ff;
+    font-weight: 600;
+}
+
+
+/* Bottom Links */
+.filter-links {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    color: white;
+    font-size: 12px;
+    margin-top: 10px;
+}
+
+.link-item {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.link-item:hover {
+    text-decoration: underline;
+}
+
+.text-blue {
+    color: #4dbfd9;
+}
+
+.pipe {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.rotate {
+    transform: rotate(180deg);
+}
+
+.icon-sm {
+    font-size: 10px;
+}
+
+/* Area Modal */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.area-modal {
+    background: white;
+    width: 400px;
+    max-width: 90%;
+    border-radius: 4px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+.area-modal-header {
+    padding: 15px 20px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.area-modal-header h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #444;
+    font-weight: 600;
+}
+
+.btn-close-modal {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #bbb;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.btn-close-modal:hover {
+    color: #444;
+}
+
+.area-modal-body {
+    padding: 20px;
+}
+
+.btn-save {
+    width: 100%;
+    background-color: #2e9e46;
+    color: white;
+    border: none;
+    padding: 10px;
+    font-weight: 700;
+    border-radius: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.btn-save:hover {
+    background-color: #25833a;
+}
+
+/* Responsive - Mobile and Tablet */
+@media (max-width: 992px) {
+
+    /* Show only BUY and RENT tabs as prominent green buttons */
+    .filter-tab {
+        background: #2e9e46 !important;
+        color: white !important;
+        border: none !important;
+        padding: 16px 40px !important;
+        font-size: 16px !important;
+        font-weight: 700;
+        border-radius: 4px !important;
+        transition: all 0.2s;
+        text-transform: uppercase;
+        flex: 1;
+    }
+
+    .filter-tab:hover {
+        background: #25833a !important;
+    }
+
+    .filter-tab.active {
+        background: #2e9e46 !important;
+        color: white !important;
+        border: none !important;
+    }
+
+    .filter-tab.active::after {
+        display: none !important;
+    }
+
+    /* Hide PROJECTS tab on mobile/tablet */
+    .filter-tab:nth-child(3) {
+        display: none !important;
+    }
+
+    .filter-tabs {
+        gap: 5px;
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    /* Hide entire filter box (search inputs) */
+    .filter-box {
+        display: none !important;
+    }
+}
+
+@media (max-width: 576px) {
+
+    /* Mobile specific adjustments */
+    .filter-tab {
+        padding: 14px 30px !important;
+        font-size: 14px !important;
+    }
+
+    .filter-tabs {
+        gap: 5px;
+    }
+}

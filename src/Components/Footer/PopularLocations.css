@@ -1,0 +1,50 @@
+.tab-item {
+    cursor: pointer;
+    font-weight: 500;
+    color: #6c757d;
+    position: relative;
+    display: inline-block;
+}
+
+.tab-item.active {
+    color: #28a745;
+    border-bottom: 2px solid #28a745;
+}
+
+.section-subtitle {
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.city-title {
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #343a40;
+}
+
+.location-link {
+    text-decoration: none;
+    color: #555;
+    font-size: 0.8rem;
+    display: block;
+    margin-bottom: 6px;
+    transition: color 0.2s;
+}
+
+.location-link:hover {
+    color: #28a745;
+    text-decoration: underline;
+}
+
+.location-link:before {
+    content: "› ";
+    color: #28a745;
+    font-weight: bold;
+    margin-right: 4px;
+}
+
+.link-count {
+    color: #999;
+    font-size: 0.75rem;
+}

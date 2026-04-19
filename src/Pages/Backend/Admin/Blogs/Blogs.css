@@ -1,0 +1,18 @@
+.blogs-management-container {
+    padding: 20px;
+}
+
+.blogs-management-container .page-header h2 {
+    font-weight: 700;
+    color: #fff;
+}
+
+.blogs-management-container .btn-primary {
+    background-color: #28a745;
+    border-color: #28a745;
+    font-weight: 600;
+}
+
+.blogs-management-container .btn-primary:hover {
+    background-color: #218838;
+}

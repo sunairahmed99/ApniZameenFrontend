@@ -1,0 +1,33 @@
+.footer-title {
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+}
+
+.footer-list li {
+    margin-bottom: 8px;
+}
+
+.footer-list a {
+    color: #ced4da; /* Light grey text */
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: color 0.2s;
+}
+
+.footer-list a:hover {
+    color: white;
+}
+
+.social-icon {
+    width: 32px;
+    height: 32px;
+    transition: background-color 0.2s;
+}
+
+.social-icon:hover {
+    background-color: #28a745 !important;
+}
+
+.main-footer {
+    background-color: #1e1e1e !important; /* Slightly lighter than pure black if needed */
+}

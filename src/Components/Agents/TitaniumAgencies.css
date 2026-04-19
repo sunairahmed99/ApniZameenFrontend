@@ -1,0 +1,102 @@
+.agent-titanium-section {
+  position: relative;
+}
+
+.agent-titanium-card {
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: 1px solid #eee;
+}
+
+.agent-titanium-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Pagination Styling (Consolidated) */
+.pagination-container-v2 {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+
+
+.pagination-btn-v2 {
+  padding: 8px 16px;
+  border: 1px solid #ddd;
+  background: #fff;
+  color: #333;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.pagination-btn-v2:hover:not(:disabled) {
+  border-color: #ff5a5f;
+  color: #ff5a5f;
+}
+
+.pagination-btn-v2.active {
+  background-color: #ff5a5f;
+  border-color: #ff5a5f;
+  color: #fff;
+}
+
+.pagination-btn-v2:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: #f9f9f9;
+}
+
+.agent-logo-wrapper {
+  width: 80px;
+  height: 80px;
+  min-width: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  border-radius: 8px;
+  border: 1px solid #eee;
+  padding: 5px;
+  overflow: hidden;
+}
+
+.agent-logo-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.agent-stats {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.agent-stats strong {
+  color: #333;
+}
+
+@media (max-width: 768px) {
+  .agent-titanium-section h3 {
+    text-align: center;
+  }
+
+  .agent-titanium-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 20px !important;
+  }
+
+  .agent-logo-wrapper {
+    margin-right: 0 !important;
+    margin-bottom: 15px;
+  }
+
+  .agent-stats,
+  .text-success,
+  .text-primary {
+    justify-content: center;
+  }
+}

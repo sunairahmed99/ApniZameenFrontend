@@ -1,0 +1,111 @@
+/* ===== DataTable - Seller Dashboard Style ===== */
+
+.data-table-container {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    border: 1px solid #f0f0f0;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.data-table-container:hover {
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.data-table-header {
+    margin-bottom: 1rem;
+}
+
+.data-table-footer {
+    margin-top: 1rem;
+}
+
+/* Show entries select */
+.data-table-header .form-select {
+    border-radius: 8px;
+    border-color: #e2e8f0;
+    font-size: 0.875rem;
+    color: #1e293b;
+}
+
+/* Search input */
+.data-table-header .form-control {
+    border-radius: 8px;
+    border-color: #e2e8f0;
+    font-size: 0.875rem;
+    color: #1e293b;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.data-table-header .form-control:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.1);
+}
+
+/* Table Head */
+.table thead th {
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #64748b;
+    border-bottom: 2px solid #f0f0f0;
+    background-color: #f8fafc;
+    white-space: nowrap;
+    padding: 12px 16px;
+}
+
+/* Table Body */
+.table tbody tr {
+    transition: background-color 0.2s, transform 0.1s;
+    border-bottom: 1px solid #f8fafc;
+}
+
+.table tbody tr:hover {
+    background-color: #f8fafc;
+    transform: translateX(2px);
+}
+
+.table tbody td {
+    padding: 12px 16px;
+    color: #1e293b;
+    font-size: 0.9rem;
+    vertical-align: middle;
+}
+
+/* Pagination */
+.pagination .page-link {
+    border-radius: 6px;
+    border-color: #e2e8f0;
+    color: #64748b;
+    font-size: 0.85rem;
+    padding: 6px 12px;
+    margin: 0 2px;
+    transition: all 0.2s;
+}
+
+.pagination .page-link:hover {
+    background-color: #f0f7ff;
+    border-color: #0d6efd;
+    color: #0d6efd;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+    color: white;
+    box-shadow: 0 2px 6px rgba(13, 110, 253, 0.3);
+}
+
+.pagination .page-item.disabled .page-link {
+    color: #adb5bd;
+    background-color: #f8f9fa;
+    border-color: #e2e8f0;
+}
+
+/* Footer text */
+.data-table-footer .text-muted {
+    font-size: 0.85rem;
+    color: #64748b !important;
+}

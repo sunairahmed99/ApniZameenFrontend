@@ -1,0 +1,116 @@
+.compact-filter-wrapper {
+    background-color: #1c1e1f !important;
+    /* Dark background matching the image */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    margin-bottom: -40px;
+    /* Pull it down slightly if needed, or just standard positioning */
+    position: relative;
+    top: 20px;
+    /* Push it down towards the bottom edge of banner if banner content is flex-end */
+}
+
+.filter-label {
+    color: #a0a0a0;
+    font-size: 11px;
+    /* Increased from 10px */
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    /* Slightly more space */
+    display: block;
+}
+
+.compact-filter-wrapper .form-select,
+.compact-filter-wrapper .form-control,
+.compact-filter-wrapper input {
+    font-size: 14px;
+    /* Increased from 13px */
+    color: #333;
+    box-shadow: none !important;
+    border: 1px solid #ddd;
+    border-radius: 0;
+    height: 38px;
+    /* Slightly taller */
+}
+
+.compact-filter-wrapper .form-select:focus,
+.compact-filter-wrapper .form-control:focus,
+.compact-filter-wrapper input:focus {
+    border-color: #28a745;
+}
+
+.compact-filter-wrapper .outline-none:focus {
+    outline: none;
+}
+
+.compact-filter-wrapper .btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+    font-size: 16px;
+    /* Larger button text */
+    text-transform: uppercase;
+    height: 38px;
+    /* Match input height */
+    font-weight: 700;
+}
+
+.compact-filter-wrapper .btn-success:hover {
+    background-color: #218838;
+}
+
+/* Adjust height for custom input group (price/area) */
+.compact-filter-wrapper .d-flex.bg-white {
+    height: 38px !important;
+}
+
+
+/* ... existing styles ... */
+
+/* Mobile Filter Button */
+.mobile-filter-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1050;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+/* Mobile Filter Modal/Overlay */
+.mobile-filter-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.2s;
+}
+
+.mobile-filter-content {
+    background: #fff;
+    width: 90%;
+    max-width: 400px;
+    max-height: 90vh;
+    overflow-y: auto;
+    border-radius: 8px;
+    padding: 20px;
+    animation: slideUp 0.3s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}

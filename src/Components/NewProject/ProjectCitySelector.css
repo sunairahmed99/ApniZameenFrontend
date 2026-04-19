@@ -1,0 +1,31 @@
+.project-city-selector .city-circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid #eee;
+    transition: all 0.3s ease;
+}
+
+.project-city-selector .city-circle-item.active .city-circle {
+    border-color: #17a2b8;
+    background: #e0f7fa;
+    transform: translateY(-5px);
+}
+
+.project-city-selector .city-circle-item.active span {
+    color: #17a2b8;
+}
+
+.project-city-selector .city-circle:hover {
+    border-color: #17a2b8;
+    transform: translateY(-5px);
+}
+
+.project-city-selector .city-circle img {
+    opacity: 0.7;
+}
+
+.project-city-selector .city-circle-item.active img {
+    opacity: 1;
+}

@@ -1,0 +1,198 @@
+/* ===== Agency Dashboard - Seller Dashboard Style ===== */
+
+.agency-dashboard-wrapper {
+    padding: 20px;
+}
+
+/* ── Page Header ── */
+.agency-page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.agency-page-header h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 0;
+}
+
+/* ── Agency Banner Card (stat-card style) ── */
+.agency-banner-card {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    border: 1px solid #f0f0f0;
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
+}
+
+.agency-banner-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.agency-name {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 0 0 4px 0;
+}
+
+.agency-city {
+    color: #64748b;
+    font-size: 0.95rem;
+    margin-bottom: 12px;
+    font-weight: 500;
+}
+
+.agency-badges {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.agency-status-badge {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.agency-status-badge.active {
+    background-color: #d1fae5;
+    color: #065f46;
+}
+
+.agency-status-badge.pending {
+    background-color: #fef3c7;
+    color: #92400e;
+}
+
+.agency-status-badge.rejected {
+    background-color: #fee2e2;
+    color: #991b1b;
+}
+
+.agency-featured-badge {
+    background-color: #fef3c7;
+    color: #92400e;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+/* ── Agency Logo ── */
+.agency-logo-container img {
+    height: 80px;
+    width: 80px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 1px solid #f0f0f0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* ── Upgrade Section Card ── */
+.agency-upgrade-section {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    border: 1px solid #f0f0f0;
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
+}
+
+.agency-upgrade-section:hover {
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* ── Alert Cards ── */
+.agency-alert-success {
+    background: white;
+    border-radius: 12px;
+    padding: 20px 24px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    border: 1px solid #d1fae5;
+    border-left: 4px solid #198754;
+    color: #065f46;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.agency-alert-info {
+    background: white;
+    border-radius: 12px;
+    padding: 20px 24px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    border: 1px solid #bfdbfe;
+    border-left: 4px solid #0d6efd;
+    color: #1e40af;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+/* ── No Agency State ── */
+.no-agency-card {
+    background: white;
+    border-radius: 12px;
+    padding: 60px 24px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    border: 1px solid #f0f0f0;
+    text-align: center;
+}
+
+.no-agency-card h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 16px;
+}
+
+.no-agency-card p {
+    color: #64748b;
+    margin-bottom: 24px;
+}
+
+.create-agency-btn {
+    background-color: #0d6efd;
+    color: white;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(13, 110, 253, 0.2);
+}
+
+.create-agency-btn:hover {
+    background-color: #0b5ed7;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(13, 110, 253, 0.3);
+    color: white;
+}
+
+/* ── Loading State ── */
+.agency-loading {
+    background: white;
+    border-radius: 12px;
+    padding: 40px;
+    text-align: center;
+    color: #64748b;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    border: 1px solid #f0f0f0;
+}

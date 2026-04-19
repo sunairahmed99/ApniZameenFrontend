@@ -1,0 +1,25 @@
+.footer-promo-section {
+    background-color: #f8f9fa; /* Light grey background */
+}
+
+.app-store-btn {
+    transition: transform 0.2s;
+}
+
+.app-store-btn:hover {
+    transform: scale(1.05);
+}
+
+.partner-logo {
+    opacity: 0.6;
+    transition: opacity 0.2s;
+    mix-blend-mode: multiply;
+}
+
+.partner-logo:hover {
+    opacity: 1;
+}
+
+.grayscale {
+    filter: grayscale(100%);
+}

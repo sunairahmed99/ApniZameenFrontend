@@ -1,0 +1,741 @@
+/* Standard Classes */
+.bg-gold {
+    background-color: #ffd700;
+}
+
+.seller-agencies-container {
+    padding: 20px;
+    width: 100%;
+}
+
+/* Premium Header Bar (Blue Gradient) */
+.campaign-header-bar {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    padding: 24px;
+    border-radius: 16px 16px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    flex-wrap: nowrap;
+    gap: 20px;
+}
+
+.campaign-header-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    white-space: nowrap;
+}
+
+.campaign-header-controls {
+    display: flex;
+    gap: 12px;
+    flex-wrap: nowrap;
+    align-items: center;
+    flex: 1;
+    justify-content: flex-end;
+}
+
+/* Premium Filter Boxes (Glassmorphism) */
+.premium-filter-box {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    padding: 2px 8px;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+    min-width: 150px;
+}
+
+.premium-filter-box:focus-within {
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.1);
+}
+
+.premium-filter-box input,
+.premium-filter-box select {
+    background: transparent !important;
+    border: none !important;
+    color: #fff !important;
+    box-shadow: none !important;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 8px 12px;
+    outline: none;
+    width: 100%;
+}
+
+.premium-filter-box input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.premium-filter-box select option {
+    background: #fff;
+    color: #333;
+}
+
+.campaign-search-wrapper {
+    position: relative;
+    flex: 1;
+    max-width: 300px;
+}
+
+.search-icon {
+    color: rgba(255, 255, 255, 0.8);
+    margin-left: 8px;
+}
+
+/* Form Card Heading */
+.seller-agencies-form-card h4 {
+    text-align: center;
+    font-size: 22px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #eee;
+}
+
+/* Campaign Table Container */
+.campaign-table-container {
+    background: white;
+    border-radius: 0 0 16px 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    margin-bottom: 30px;
+}
+
+/* Premium Table Styling */
+.campaign-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0;
+}
+
+.campaign-table thead th {
+    background-color: #f8fafc;
+    color: #64748b;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 1px;
+    padding: 16px 20px;
+    border-bottom: 2px solid #f1f5f9;
+    text-align: left;
+}
+
+.campaign-table tbody td {
+    padding: 16px 20px;
+    border-bottom: 1px solid #f1f5f9;
+    color: #1e293b;
+    vertical-align: middle;
+    font-size: 14px;
+}
+
+.campaign-table tbody tr {
+    transition: all 0.2s ease;
+}
+
+.campaign-table tbody tr:hover {
+    background-color: #f8fafc;
+}
+
+/* Specific Column Styling */
+.td-sno {
+    width: 60px;
+    color: #94a3b8;
+    text-align: center;
+    font-weight: 600;
+}
+
+.td-banner {
+    width: 120px;
+}
+
+.agency-thumb {
+    width: 100%;
+    height: 55px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.agency-main-name {
+    font-weight: 700;
+    color: #1e293b;
+    display: block;
+    font-size: 15px;
+}
+
+.agency-sub-text {
+    font-size: 12px;
+    color: #64748b;
+}
+
+.td-plan {
+    color: #3b82f6;
+    font-weight: 700;
+    font-size: 13px;
+}
+
+.td-dates {
+    font-size: 13px;
+    color: #475569;
+}
+
+.date-label {
+    color: #94a3b8;
+    margin-right: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.td-receipt-img {
+    width: 80px;
+    height: 45px;
+    object-fit: cover;
+    border-radius: 6px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
+}
+
+.td-receipt-img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.badge-campaign-status {
+    padding: 6px 14px;
+    border-radius: 30px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: inline-block;
+}
+
+.status-pending {
+    background-color: #fef9c3;
+    color: #854d0e;
+}
+
+.status-active,
+.status-approved {
+    background-color: #dcfce7;
+    color: #166534;
+}
+
+.status-rejected {
+    background-color: #fee2e2;
+    color: #991b1b;
+}
+
+.status-inactive {
+    background-color: #f1f5f9;
+    color: #475569;
+}
+
+.campaign-table-footer {
+    padding: 16px 24px;
+    background: #fff;
+    text-align: right;
+    font-size: 13px;
+    font-weight: 700;
+    color: #64748b;
+    border-top: 1px solid #f1f5f9;
+}
+
+/* Action Icons */
+.action-icons {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+}
+
+.btn-icon-action {
+    background: #f8fafc;
+    border: none;
+    padding: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-icon-action:hover {
+    background: #f1f5f9;
+    transform: translateY(-2px);
+}
+
+.btn-edit-icon {
+    color: #3b82f6;
+}
+
+.btn-delete-icon {
+    color: #ef4444;
+}
+
+.btn-boost-icon {
+    color: #f59e0b;
+}
+
+/* Premium Form Styling */
+.seller-agencies-form-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 40px;
+    color: #333;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    max-width: 900px;
+    margin: 20px auto;
+}
+
+.seller-agencies-form-card h4 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #f1f5f9;
+    color: #1e293b;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.form-section-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #3b82f6;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.form-section-title::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #e2e8f0;
+}
+
+.seller-agencies-form-card label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #64748b;
+    margin-bottom: 8px;
+}
+
+.seller-agencies-form-card .form-control,
+.seller-agencies-form-card .form-select {
+    background-color: #f8fafc;
+    border: 1.5px solid #e2e8f0;
+    color: #1a202c;
+    padding: 12px 16px;
+    border-radius: 10px;
+    font-size: 14px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.seller-agencies-form-card .form-control:focus,
+.seller-agencies-form-card .form-select:focus {
+    border-color: #3b82f6;
+    background-color: #fff;
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+}
+
+.custom-file-upload {
+    background: #f8fafc;
+    border: 2px dashed #cbd5e1;
+    border-radius: 12px;
+    padding: 24px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.custom-file-upload:hover {
+    border-color: #3b82f6;
+    background: #eff6ff;
+    color: #3b82f6;
+}
+
+.btn-premium-save {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    border: none;
+    color: #fff;
+    font-weight: 700;
+    padding: 14px 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-premium-save:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+}
+
+.btn-premium-cancel {
+    background: #f8fafc;
+    border: 1.5px solid #e2e8f0;
+    color: #64748b;
+    font-weight: 600;
+    padding: 14px 40px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.btn-premium-cancel:hover {
+    background: #f1f5f9;
+    color: #1e293b;
+    border-color: #cbd5e1;
+}
+
+/* Responsiveness */
+@media (max-width: 991px) {
+    .campaign-header-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .campaign-search-wrapper {
+        max-width: none;
+    }
+
+    .premium-filter-box {
+        min-width: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .campaign-header-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        border-radius: 16px;
+        margin-bottom: 0;
+        gap: 12px;
+    }
+
+    .campaign-header-title {
+        font-size: 1.1rem;
+    }
+
+    .campaign-header-controls {
+        width: 100%;
+        margin-top: 4px;
+        gap: 8px;
+    }
+
+    .premium-filter-box {
+        min-width: 0;
+        width: 100%;
+    }
+
+    .campaign-search-wrapper {
+        max-width: none;
+        width: 100%;
+    }
+
+    /* Horizontal scroll for table on mobile */
+    .table-responsive {
+        overflow-x: auto !important;
+        display: block !important;
+        -webkit-overflow-scrolling: touch;
+        border-radius: 0 0 16px 16px;
+    }
+
+    .campaign-table {
+        min-width: 750px;
+    }
+
+    .seller-agencies-form-card {
+        padding: 20px 16px;
+        border-radius: 16px;
+        margin: 12px;
+    }
+
+    .seller-agencies-form-card h4 {
+        font-size: 18px;
+        text-align: center;
+    }
+
+    .d-flex.gap-3 {
+        flex-direction: column;
+    }
+
+    .btn-premium-save,
+    .btn-premium-cancel {
+        width: 100%;
+    }
+}
+
+/* Mobile Agency Card Styles */
+.agency-mobile-card {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 14px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    transition: box-shadow 0.2s ease;
+}
+
+.agency-mobile-card:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.agency-card-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.agency-card-logo {
+    width: 60px;
+    height: 45px;
+    object-fit: cover;
+    border-radius: 8px;
+    flex-shrink: 0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.agency-card-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.agency-card-name {
+    font-weight: 700;
+    font-size: 15px;
+    color: #1e293b;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.agency-card-city {
+    font-size: 12px;
+    color: #64748b;
+}
+
+.agency-card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 12px;
+    font-size: 12px;
+}
+
+.agency-card-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: #475569;
+}
+
+.agency-card-meta-label {
+    color: #94a3b8;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 10px;
+}
+
+.agency-card-plan {
+    color: #3b82f6;
+    font-weight: 700;
+    font-size: 12px;
+}
+
+.agency-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 10px;
+    border-top: 1px solid #f1f5f9;
+}
+
+.agency-card-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.agency-card-cover {
+    width: 60px;
+    height: 38px;
+    object-fit: cover;
+    border-radius: 6px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.campaign-table-footer-mobile {
+    padding: 12px 16px;
+    background: #fff;
+    text-align: right;
+    font-size: 13px;
+    font-weight: 700;
+    color: #64748b;
+    border-top: 1px solid #f1f5f9;
+    border-radius: 0 0 16px 16px;
+}
+
+/* ============================================
+   BannerRequest-style Card Layout for Agency
+   ============================================ */
+
+.premium-requests-card {
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
+}
+
+/* Blue gradient card header (same as BannerRequest) */
+.campaign-card-header {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    padding: 24px;
+    border-radius: 16px 16px 0 0;
+}
+
+.campaign-card-header h5 {
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.25rem;
+    margin-bottom: 20px !important;
+}
+
+@media (max-width: 768px) {
+    .premium-requests-card {
+        background: transparent !important;
+        box-shadow: none !important;
+        overflow: visible !important;
+    }
+}
+
+/* Filter grid — auto-fit columns on desktop, 1 col on mobile */
+.filter-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+    align-items: center;
+}
+
+/* White table area below the blue header */
+.premium-table-container {
+    background: #fff;
+    border-radius: 0 0 16px 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* Bootstrap table overrides inside premium-table-container */
+.premium-table-container .table {
+    margin-bottom: 0;
+}
+
+.premium-table-container .table thead th {
+    background: #f8fafc !important;
+    color: #64748b !important;
+    font-weight: 700;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 16px 20px !important;
+    border-bottom: 2px solid #f1f5f9;
+}
+
+.premium-table-container .table tbody tr {
+    transition: all 0.2s ease;
+}
+
+.premium-table-container .table tbody tr:hover {
+    background-color: #f8fafc;
+}
+
+.premium-table-container .table tbody td {
+    padding: 16px 20px !important;
+    border-bottom: 1px solid #f1f5f9;
+    font-size: 14px;
+}
+
+/* Status badges (shared with BannerRequest) */
+.status-badge {
+    padding: 6px 14px;
+    border-radius: 30px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    display: inline-block;
+}
+
+.status-approved {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.status-pending {
+    background: #fef9c3;
+    color: #854d0e;
+}
+
+.status-rejected {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.status-inactive {
+    background: #f1f5f9;
+    color: #475569;
+}
+
+@media (max-width: 991px) {
+    .filter-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .filter-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .campaign-card-header {
+        border-radius: 16px !important;
+        margin-bottom: 16px !important;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .premium-table-container {
+        border-radius: 16px !important;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Horizontal scroll for Bootstrap table on mobile */
+    .premium-table-container .table-responsive {
+        overflow-x: auto !important;
+        display: block !important;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .premium-table-container .table {
+        min-width: 750px;
+    }
+}

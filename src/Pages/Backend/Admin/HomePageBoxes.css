@@ -1,0 +1,88 @@
+.homepage-boxes-container {
+  /* Allow parent background (#121212) to show through */
+  padding: 20px;
+  color: #fff;
+  /* White text for page headers */
+}
+
+/* Ensure headings are white */
+.homepage-boxes-container h2 {
+  color: #fff;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+/* The table container should be white */
+.homepage-boxes-container .table-responsive {
+  background-color: #fff;
+  color: #333;
+  /* Dark text inside the white box */
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Table Styles */
+.homepage-boxes-container .table {
+  width: 100%;
+  margin-bottom: 0;
+  color: #333;
+  /* Dark text for table content */
+}
+
+.homepage-boxes-container .table th {
+  font-weight: 600;
+  color: #000;
+  background-color: #f8f9fa;
+  /* Light gray header background */
+  border-bottom: 2px solid #dee2e6;
+  padding: 12px 15px;
+  text-align: left;
+}
+
+.homepage-boxes-container .table td {
+  vertical-align: middle;
+  padding: 12px 15px;
+  border-top: 1px solid #dee2e6;
+  color: #333;
+}
+
+.homepage-boxes-container .table tr:hover {
+  background-color: #f8f9fa;
+  /* Light hover effect */
+}
+
+/* Code snippet for Box Key */
+.homepage-boxes-container code {
+  color: #e83e8c;
+  background-color: #fdf2f6;
+  /* Ensure code block background is light/contrast */
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
+/* Buttons */
+.homepage-boxes-container .btn-primary {
+  background-color: #27ae60;
+  border-color: #27ae60;
+}
+
+.homepage-boxes-container .btn-primary:hover {
+  background-color: #219150;
+  border-color: #1e8449;
+}
+
+/* Form Styles Override (since Form is modal-like or embedded, make sure it has white bg if used) */
+/* The form is currently rendered inside this container, so we need to ensure it has a white background */
+/* Assuming HomePageBoxForm is rendered directly. If it's a modal, it might be different. 
+   In existing JSX, it replaces the table. */
+
+/* We need to target the form container if it exists. 
+   Looking at JSX: <HomePageBoxForm ... /> is rendered. 
+   And HomePageBoxForm.jsx has <div className="bg-white p-4..."> 
+   So it should be fine, but let's ensure text color is dark for the form. */
+/* Scoped bg-white to avoid global leaks */
+.homepage-boxes-container .bg-white {
+  background-color: #fff;
+  color: #333;
+  /* Ensure text is dark on white background */
+}

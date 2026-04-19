@@ -1,0 +1,104 @@
+/* AddProperty.css */
+
+.premium-header-card {
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.campaign-card-header {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    padding: 24px 30px;
+    border-radius: 16px;
+}
+
+.campaign-card-header h5 {
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.25rem;
+}
+
+@media (max-width: 768px) {
+    .campaign-card-header {
+        padding: 20px;
+    }
+}
+
+/* Package Selection area in header or below header */
+.package-selection-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.premium-package-box {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    padding: 4px 12px;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease;
+}
+
+.premium-package-box label {
+    font-size: 10px;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 0;
+    margin-top: 4px;
+}
+
+.premium-package-box select {
+    background: transparent !important;
+    border: none !important;
+    color: #fff !important;
+    box-shadow: none !important;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 4px 0 8px 0;
+    outline: none;
+    width: 100%;
+}
+
+.premium-package-box select option {
+    background: #fff;
+    color: #333;
+}
+
+.form-section-title {
+    background: #f8fafc;
+    padding: 12px 20px;
+    border-radius: 8px;
+    color: #1e293b;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 25px;
+    border-left: 4px solid #3b82f6;
+}
+
+.btn-premium-save {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.2);
+}
+
+.btn-premium-save:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.3);
+}
+
+.btn-premium-save:disabled {
+    background: #94a3b8;
+    transform: none;
+    box-shadow: none;
+}

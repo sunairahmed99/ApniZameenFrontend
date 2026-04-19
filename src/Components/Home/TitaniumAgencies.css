@@ -1,0 +1,224 @@
+.agency-card {
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+    cursor: pointer;
+}
+
+.agency-card:hover {
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15) !important;
+    transform: translateY(-2px);
+}
+
+.agency-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    /* Explicit gap */
+}
+
+.agency-logo {
+    flex: 0 0 80px;
+    /* Fixed width */
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8f9fa;
+    border-radius: 8px;
+    overflow: hidden;
+    padding: 5px;
+}
+
+.agency-info {
+    flex: 1;
+    min-width: 0;
+    /* Allows text truncation to work */
+}
+
+.agency-info h6 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Wrapper for scroll container */
+.agencies-scroll-wrapper {
+    position: relative;
+    padding: 0 50px;
+    /* Space for arrows */
+}
+
+/* Grid Layout - Desktop: 2 rows x 4 columns with horizontal scroll */
+.agencies-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    max-height: calc(2 * (120px + 20px));
+    /* 2 rows: each row ~120px + gap */
+}
+
+.agencies-grid::-webkit-scrollbar {
+    display: none;
+}
+
+.agency-item {
+    flex: 0 0 calc(25% - 15px);
+    /* 4 items per row on desktop */
+    min-width: 0;
+    max-width: calc(25% - 15px);
+}
+
+/* Arrow Styling */
+.agency-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    border: 1px solid #dee2e6;
+    z-index: 10;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.agency-arrow:hover {
+    background-color: #f8f9fa;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.left-arrow {
+    left: 0;
+}
+
+.right-arrow {
+    right: 0;
+}
+
+/* Mobile Responsive - 2 items per row, 2 rows, horizontal scroll */
+@media (max-width: 768px) {
+    .agencies-grid {
+        gap: 15px;
+        max-height: calc(2 * (120px + 15px));
+        /* 2 rows on mobile */
+    }
+
+    .agency-item {
+        flex: 0 0 100%;
+        /* 1 item per row on mobile */
+        max-width: 100%;
+    }
+
+    .agencies-scroll-wrapper {
+        padding: 0 20px;
+    }
+
+    .agency-arrow {
+        width: 32px;
+        height: 32px;
+    }
+
+    .left-arrow {
+        left: -5px;
+    }
+
+    .right-arrow {
+        right: -5px;
+    }
+}
+
+/* Tablet - 3 items per row, 2 rows */
+@media (min-width: 769px) and (max-width: 991px) {
+    .agency-item {
+        flex: 0 0 calc(33.333% - 14px);
+        /* 3 items per row on tablet */
+        max-width: calc(33.333% - 14px);
+    }
+}
+
+/* City Tabs Slider */
+.titanium-section .city-tabs-container {
+    padding: 0 40px;
+    margin-bottom: 2rem;
+}
+
+.titanium-section .city-tabs-scroll-wrapper {
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.titanium-section .city-tabs-scroll-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+.titanium-section .city-tabs {
+    display: flex;
+    gap: 12px;
+    width: max-content;
+    padding: 4px 0;
+}
+
+.titanium-section .city-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 32px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 5;
+    color: #666;
+    transition: all 0.2s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.titanium-section .city-nav-btn:hover {
+    background: #f8f8f8;
+    color: #0ea800;
+    border-color: #0ea800;
+}
+
+.titanium-section .city-nav-btn.left {
+    left: 0;
+}
+
+.titanium-section .city-nav-btn.right {
+    right: 0;
+}
+
+.titanium-section .city-tab {
+    padding: 8px 24px;
+    border: 1px solid #eee;
+    background: #f9f9f9;
+    font-size: 14px;
+    font-weight: 600;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.2s;
+    border-radius: 50px;
+    white-space: nowrap;
+}
+
+.titanium-section .city-tab:hover {
+    color: #0ea800;
+    background: #eef7ee;
+}
+
+.titanium-section .city-tab.active {
+    color: #fff;
+    background-color: #0ea800;
+    border-color: #0ea800;
+}

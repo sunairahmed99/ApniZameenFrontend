@@ -1,0 +1,25 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# Disallow admin and backend pages
+Disallow: /admin/
+Disallow: /seller/
+Disallow: /backend/
+Disallow: /api/
+
+# Disallow authentication pages
+Disallow: /login
+Disallow: /register
+Disallow: /forgot-password
+Disallow: /reset-password
+
+# Allow search engines to crawl important pages
+Allow: /search
+Allow: /property/
+Allow: /project/
+Allow: /agents
+Allow: /area-guide
+
+# Sitemap location
+Sitemap: http://localhost:5173/sitemap.xml

@@ -1,0 +1,745 @@
+.mobile-filter-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ffffff;
+    z-index: 9999;
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    font-family: 'Open Sans', 'Lato', sans-serif;
+    width: 100vw;
+    height: 100vh;
+    /* Fallback */
+    height: 100dvh;
+    /* Dynamic viewport height for mobile */
+}
+
+/* Show modal when active */
+.mobile-filter-modal.show {
+    display: flex;
+}
+
+/* Only show on mobile and tablet */
+@media (min-width: 993px) {
+    .mobile-filter-modal {
+        display: none !important;
+    }
+}
+
+/* Header */
+.mobile-filter-header {
+    background-color: white;
+    height: 56px;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #e0e0e0;
+    flex-shrink: 0;
+}
+
+.mobile-filter-header h2 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 800;
+    /* Extra Bold */
+    color: #000;
+    /* Black */
+    flex: 1;
+    text-align: left;
+    margin-left: 16px;
+}
+
+.back-icon {
+    font-size: 20px;
+    color: #000;
+    cursor: pointer;
+}
+
+.done-btn {
+    background: none;
+    border: none;
+    color: #000;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    padding: 5px;
+}
+
+/* Content */
+.mobile-filter-content {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-bottom: 80px;
+    /* Space for footer */
+    background-color: #ffffff;
+    -webkit-overflow-scrolling: touch;
+    color: #000;
+}
+
+/* Filter Section */
+.filter-section {
+    background-color: white;
+    padding: 20px 16px;
+    margin-bottom: 8px;
+    /* Gap between sections */
+    border-top: 1px solid white;
+    border-bottom: 1px solid #eee;
+}
+
+.filter-section.clickable {
+    cursor: pointer;
+}
+
+.filter-label-icon {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.filter-icon {
+    display: none;
+}
+
+.filter-label {
+    font-size: 16px;
+    font-weight: 700;
+    color: #000;
+    margin: 0;
+}
+
+.filter-label-small {
+    font-size: 13px;
+    color: #000;
+    margin-bottom: 4px;
+    font-weight: 600;
+}
+
+.filter-value-green {
+    font-size: 15px;
+    font-weight: 700;
+    color: #2e9e46;
+}
+
+.filter-row-between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.chevron-icon {
+    color: #000;
+    font-size: 14px;
+}
+
+/* I want to - Inline Toggle */
+.button-group-inline {
+    display: flex;
+    background-color: #f5f5f5;
+    border-radius: 20px;
+    padding: 2px;
+    position: relative;
+    width: auto;
+}
+
+.toggle-btn-inline {
+    padding: 6px 20px;
+    background: transparent;
+    border: none;
+    border-radius: 18px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #000;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.toggle-btn-inline.active {
+    background-color: #2e9e46;
+    color: white;
+}
+
+/* Hide Scrollbar */
+.mobile-filter-content::-webkit-scrollbar {
+    display: none;
+}
+
+.mobile-filter-content {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.pill-group-inline {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+}
+
+.pill-btn-small {
+    padding: 6px 12px;
+    background-color: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 16px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #000;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.pill-btn-small.active,
+.pill-btn-small.active-green {
+    background-color: #2e9e46;
+    border-color: #2e9e46;
+    color: white;
+    font-weight: 700;
+}
+
+/* Range Inputs Inline */
+.range-inputs-inline {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.range-input-small {
+    width: 100px;
+    padding: 8px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #000;
+    font-weight: 700;
+    outline: none;
+    text-align: center;
+}
+
+.range-input-small:focus {
+    border-color: #2e9e46;
+}
+
+.range-divider-small {
+    font-size: 12px;
+    color: #000;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+/* Property Type Tabs */
+.tab-group {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.tab-btn {
+    background: none;
+    border: none;
+    padding: 8px 4px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #000;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+}
+
+.tab-btn.active {
+    color: #2e9e46;
+    border-bottom-color: #2e9e46;
+    font-weight: 800;
+}
+
+.divider-thin {
+    height: 1px;
+    background-color: #f0f0f0;
+    margin: 8px 0;
+    display: none;
+    /* Hidden as tabs have border */
+}
+
+/* Property Type Scrollable */
+.pill-scroll-container {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+.pill-scroll-container::-webkit-scrollbar {
+    display: none;
+}
+
+.pill-btn-icon {
+    padding: 8px 16px;
+    background-color: #f9f9f9;
+    border: 1px solid transparent;
+    /* No border by default in image usually, or very light */
+    border-radius: 20px;
+    /* Pill shape */
+    font-size: 14px;
+    font-weight: 700;
+    color: #000;
+    cursor: pointer;
+    white-space: nowrap;
+    /* Prevent wrapping */
+    flex-shrink: 0;
+    /* Prevent shrinking */
+}
+
+.pill-btn-icon.active {
+    background-color: #e8f5e9;
+    border: 1px solid #2e9e46;
+    color: #2e9e46;
+    font-weight: 700;
+}
+
+.range-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.range-label-text {
+    font-size: 12px;
+    color: #888;
+}
+
+/* Custom Dual Range Slider */
+.range-slider-container {
+    position: relative;
+    width: 100%;
+    height: 30px;
+    /* Container height for touch target */
+    margin: 10px 0 20px 0;
+}
+
+.slider-track {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    height: 4px;
+    background-color: #e0e0e0;
+    border-radius: 2px;
+    z-index: 1;
+}
+
+.slider-range-highlight {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 4px;
+    background-color: #2e9e46;
+    z-index: 2;
+}
+
+.dual-range-slider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Cover container */
+    margin: 0;
+    pointer-events: none;
+    /* Allow click-through to element below EXCEPT thumb */
+    -webkit-appearance: none;
+    appearance: none;
+    background: none;
+    /* Invisible track */
+    z-index: 3;
+    outline: none;
+}
+
+/* Thumb Styling */
+.dual-range-slider::-webkit-slider-thumb {
+    pointer-events: auto;
+    /* Re-enable pointer events for thumb */
+    -webkit-appearance: none;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    background: white;
+    border: 3px solid #000;
+    /* Bold dark border */
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    margin-top: 3px;
+    /* Center vertical relative to what? usually needs centering calc */
+    /* Webkit thumb margin top behaves weirdly on invisible track. 
+       Usually track height is small. Let's rely on flex centering if possible or specific offsets.
+       With height 30px container, and default thumb center...
+    */
+}
+
+/* Firefox Thumb */
+.dual-range-slider::-moz-range-thumb {
+    pointer-events: auto;
+    width: 24px;
+    height: 24px;
+    background: white;
+    border: 3px solid #000;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    border: none;
+}
+
+/* Chrome/Safari specific fix to center thumb on the "track" visual */
+.dual-range-slider::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 30px;
+    /* Match container to easy vertical align */
+    background: transparent;
+    cursor: pointer;
+}
+
+/* Area Presets */
+.area-presets {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    margin-top: 4px;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.area-presets::-webkit-scrollbar {
+    display: none;
+}
+
+.preset-btn {
+    padding: 8px 16px;
+    background-color: #f5f5f5;
+    border: 1px solid transparent;
+    border-radius: 20px;
+    font-size: 13px;
+    color: #333;
+    cursor: pointer;
+    white-space: nowrap;
+    font-weight: 600;
+}
+
+.preset-btn:hover {
+    background-color: #e8f5e9;
+    color: #2e9e46;
+}
+
+/* Checkbox Row */
+.checkbox-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.checkbox-row-simple {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.checkbox-label {
+    font-size: 15px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.checkbox-desc {
+    font-size: 12px;
+    color: #888;
+    line-height: 1.4;
+    padding-right: 10px;
+    max-width: 85%;
+}
+
+/* Toggle Switch */
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 30px;
+    flex-shrink: 0;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toggle-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #e0e0e0;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.toggle-slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 2px;
+    bottom: 2px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+input:checked+.toggle-slider {
+    background-color: #2e9e46;
+}
+
+input:checked+.toggle-slider:before {
+    transform: translateX(20px);
+}
+
+/* Grid Options (Bedrooms/Bathrooms) */
+.grid-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.grid-option-btn {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f5f5f5;
+    border: none;
+    border-radius: 22px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.grid-option-btn:first-child,
+.grid-option-btn:last-child {
+    width: auto;
+    padding: 0 16px;
+}
+
+.grid-option-btn.selected {
+    background-color: #2e9e46;
+    color: white;
+}
+
+/* Keyword Input */
+.keyword-input-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.keyword-input {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    font-size: 14px;
+    outline: none;
+}
+
+.add-keyword-btn {
+    width: 48px;
+    background-color: white;
+    border: 1px solid #2e9e46;
+    color: #2e9e46;
+    border-radius: 4px;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+/* Footer */
+.mobile-filter-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: white;
+    padding: 12px 16px;
+    display: flex;
+    gap: 12px;
+    border-top: 1px solid #e0e0e0;
+    z-index: 1000;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.reset-btn {
+    flex: 0 0 25%;
+    padding: 12px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.find-btn {
+    flex: 1;
+    padding: 12px;
+    background-color: #2e9e46;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.divider {
+    height: 10px;
+    background-color: #f2f2f2;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    margin: 0;
+}
+
+/* Location Modal Overlay */
+.location-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: white;
+    z-index: 10000;
+    /* Higher than base filter modal */
+    display: none;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+}
+
+.location-modal-overlay.show {
+    display: flex;
+}
+
+.location-content {
+    flex: 1;
+    overflow-y: auto;
+    padding-bottom: 80px;
+    background-color: white;
+    /* Clean white background */
+}
+
+/* Location Header Adjustments */
+.location-modal-overlay .mobile-filter-header {
+    justify-content: flex-start;
+    /* Left align title */
+    gap: 16px;
+}
+
+.location-modal-overlay .mobile-filter-header h2 {
+    margin-left: 0;
+    text-align: left;
+    margin-right: auto;
+}
+
+.location-modal-overlay .back-icon {
+    order: 2;
+    /* Put close icon on right if using flex order, or just standard flex layout matching JSX */
+    /* Accessing Close Icon which is FaTimes in this case */
+    font-size: 18px;
+    color: #333;
+}
+
+/* Search Box */
+.location-search-container {
+    padding: 16px;
+    background-color: white;
+}
+
+.location-search-input {
+    width: 100%;
+    padding: 12px 16px;
+    background-color: #f5f5f5;
+    border: 1px solid transparent;
+    border-radius: 25px;
+    /* Pill shape */
+    font-size: 15px;
+    color: #333;
+    outline: none;
+}
+
+.location-search-input::placeholder {
+    color: #888;
+}
+
+.location-search-input:focus {
+    background-color: white;
+    border-color: #e0e0e0;
+}
+
+/* Location Lists */
+.location-list-section {
+    padding: 0 16px;
+    margin-bottom: 24px;
+}
+
+.location-section-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 12px;
+}
+
+.location-item {
+    padding: 12px 0;
+    border-bottom: 1px solid #f5f5f5;
+    cursor: pointer;
+}
+
+.location-name {
+    font-size: 15px;
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+
+.location-count {
+    font-size: 12px;
+    color: #888;
+}
+
+/* Ensure footer is visible */
+.location-modal-overlay .mobile-filter-footer {
+    z-index: 10001;
+}

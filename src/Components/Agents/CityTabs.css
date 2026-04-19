@@ -1,0 +1,91 @@
+/* Agents Page City Tabs Slider */
+.project-city-tabs-container {
+    position: relative;
+    padding: 0 40px;
+    margin-bottom: 25px;
+}
+
+.city-tabs-scroll-wrapper {
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.city-tabs-scroll-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+.project-city-tabs {
+    display: flex;
+    gap: 12px;
+    width: max-content;
+    padding: 4px 0;
+}
+
+.city-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 32px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 5;
+    color: #666;
+    transition: all 0.2s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.city-nav-btn:hover {
+    background: #f8f8f8;
+    color: #ff5a5f;
+    border-color: #ff5a5f;
+}
+
+.city-nav-btn.left {
+    left: 0;
+}
+
+.city-nav-btn.right {
+    right: 0;
+}
+
+.project-city-tab {
+    padding: 8px 18px;
+    border: 1px solid #ddd;
+    background: #fff;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #444;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.project-city-tab:hover {
+    border-color: #ff5a5f;
+    color: #ff5a5f;
+}
+
+.project-city-tab.active {
+    border-color: #ff5a5f;
+    color: #ff5a5f;
+    background-color: #fcebeb;
+    box-shadow: 0 0 0 1px #ff5a5f;
+}
+
+@media (max-width: 768px) {
+    .project-city-tabs-container {
+        padding: 0 5px;
+    }
+
+    .city-nav-btn {
+        display: none;
+    }
+}

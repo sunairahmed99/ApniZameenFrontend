@@ -1,0 +1,204 @@
+.blog-page {
+    background-color: #fcfcfc;
+}
+
+.featured-post-card {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.featured-image-wrapper {
+    position: relative;
+    height: 450px;
+}
+
+.featured-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.featured-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 40px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    color: white;
+}
+
+.blog-badge {
+    background-color: #fbc02d;
+    color: #333;
+    padding: 3px 10px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    border-radius: 2px;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.featured-title {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 15px;
+    line-height: 1.2;
+}
+
+.post-meta {
+    font-size: 0.8rem;
+    opacity: 0.9;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.btn-read-more {
+    background: transparent;
+    border: 1px solid white;
+    color: white;
+    padding: 8px 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.btn-read-more:hover {
+    background: white;
+    color: #333;
+}
+
+/* Blog Cards */
+.blog-card {
+    background: white;
+    border-radius: 4px;
+    overflow: hidden;
+    height: 100%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s;
+    border: 1px solid #eee;
+}
+
+.blog-card:hover {
+    transform: translateY(-5px);
+}
+
+.blog-card-img {
+    height: 200px;
+}
+
+.blog-card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.blog-card-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    line-height: 1.4;
+    margin-bottom: 10px;
+}
+
+.blog-card-meta {
+    font-size: 0.7rem;
+    color: #777;
+}
+
+.blog-card-excerpt {
+    font-size: 0.85rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Pagination */
+.blog-pagination .page-num,
+.blog-pagination .page-next {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ddd;
+    background: white;
+    margin: 0 3px;
+    font-size: 0.9rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.blog-pagination .page-num.active {
+    background: #00a884;
+    color: white;
+    border-color: #00a884;
+}
+
+/* Sidebar */
+.sidebar-widget {
+    background: white;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.widget-header {
+    padding: 12px;
+    color: white;
+    font-weight: 700;
+    text-align: center;
+}
+
+.instagram-gradient {
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+}
+
+.instagram-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+}
+
+.insta-item img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+}
+
+.btn-insta-follow {
+    background-color: #3897f0;
+    color: white;
+    border: none;
+    padding: 8px;
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+.newsletter-bg {
+    background-color: #ffca28;
+    color: #333;
+}
+
+.email-icon {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+    .featured-image-wrapper {
+        height: 300px;
+    }
+
+    .featured-title {
+        font-size: 1.4rem;
+    }
+
+    .featured-overlay {
+        padding: 20px;
+    }
+}
