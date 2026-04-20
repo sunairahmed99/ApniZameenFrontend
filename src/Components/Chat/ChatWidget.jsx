@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
+import axios from 'axios';
+import { API_BASE_URL } from '../../config';
 import { useChats, useInitiateChat, useMessages } from '../../hooks/useChats';
 import { useSocket } from '../../context/SocketContext';
 import { FaComments, FaArrowLeft, FaTimes, FaPaperPlane, FaCheckDouble } from 'react-icons/fa';
@@ -27,21 +29,31 @@ const ChatWidget = () => {
     };
 
     const getChatName = (chatData) => {
-        if (chatData?.chatName) return chatData.chatName;
-        let name = "Chat";
-        if (chatData?.participants && Array.isArray(chatData.participants)) {
-            const currentUserId = user?._id || user?.id;
-            const otherParticipant = chatData.participants.find(p => p._id !== currentUserId);
-            if (otherParticipant && otherParticipant.name) {
-                name = otherParticipant.name;
+        if (!chatData) return "Chat";
+        
+        // 1. If we have an explicit name (synthetic or merged), prioritize it
+        if (chatData.name && chatData.name !== "Seller" && chatData.name !== "Support") {
+            return chatData.name;
+        }
+
+        // 2. Try to find other participant's name if populated
+        if (chatData.participants && Array.isArray(chatData.participants)) {
+            const currentUserId = getCurrentUserId();
+            const otherParticipant = chatData.participants.find(p => {
+                const pid = p._id || p; // Handle populated vs ID
+                return pid && String(pid) !== String(currentUserId);
+            });
+            
+            if (otherParticipant && typeof otherParticipant === 'object' && otherParticipant.name) {
+                return otherParticipant.name;
             }
         }
         
-        if (chatData?.propertyId && chatData.propertyId.title) {
-            if (name === "Chat") name = "Seller"; // Default if we only know property
-            name = `${name} - ${chatData.propertyId.title}`;
-        }
-        return name;
+        // 3. Fallback to property title if it's the only info we have
+        if (chatData.propertyId?.title) return "Seller";
+        
+        // 4. Last resort
+        return "Support";
     };
 
     const activeChatId = activeChat?._id || activeChat?.chatId;
@@ -58,13 +70,15 @@ const ChatWidget = () => {
         }
     }, [fetchedMessages, socket, activeChatId, user]);
 
-    // If activeChat is set via property page, switch to chat view
+    // If activeChat is set via property page (synthetic object without ID), initialize it
     useEffect(() => {
-        if (activeChat) {
+        if (activeChat && !activeChat._id && !activeChat.chatId) {
             setView('chat');
             initiateChat(activeChat);
+        } else if (activeChat) {
+            setView('chat');
         }
-    }, [activeChat]);
+    }, [activeChat]); // Trigger on any change to activeChat state
 
     // Listen for incoming messages
     useEffect(() => {
@@ -96,9 +110,9 @@ const ChatWidget = () => {
 
     const initiateChat = async (details) => {
         if (details._id || details.chatId) {
-            // Room join is handled by socket emit in loadMessages logic or similar
-            if (socket) socket.emit('join_chat', details._id || details.chatId);
-            return;
+            const id = details._id || details.chatId;
+            if (socket) socket.emit('join_chat', id);
+            return { _id: id };
         }
 
         try {
@@ -109,28 +123,76 @@ const ChatWidget = () => {
             });
 
             if (chat && chat._id) {
-                setActiveChat(chat);
+                // Merge context from synthetic activeChat (like name/property info) 
+                // if the backend response is somehow incomplete or delayed.
+                const mergedChat = {
+                    ...details,
+                    ...chat,
+                    name: details.name || getChatName(chat)
+                };
+                setActiveChat(mergedChat);
                 if (socket) socket.emit('join_chat', chat._id);
+                return mergedChat;
             }
         } catch (err) {
-            
             alert("Failed to start chat. Please try again.");
+            return null;
         }
     };
 
-    const handleSend = () => {
+    const handleSend = async () => {
         if (!message.trim() || !activeChat) return;
 
+        let chatId = activeChat._id || activeChat.chatId;
+
+        // If chat isn't initialized yet (started from property page), initialize it first
+        if (!chatId) {
+            try {
+                const chat = await initiateChat(activeChat);
+                if (!chat?._id) return;
+                chatId = chat._id;
+            } catch (err) {
+                console.error("Failed to initiate chat in handleSend:", err);
+                return;
+            }
+        }
+
         const msgData = {
-            chatId: activeChat._id,
+            chatId: chatId,
             senderId: user._id || user.id,
             text: message
         };
 
-        socket.emit('send_message', msgData);
-        setMessages(prev => [...prev, { ...msgData, timestamp: new Date() }]); // Optimistic UI
-        setMessage('');
-        scrollToBottom();
+        try {
+            // Get token from common localStorage path
+            const userStr = localStorage.getItem('user');
+            const userData = userStr ? JSON.parse(userStr) : null;
+            const token = userData?.token;
+
+            // Use Dynamic API Base URL for local/prod compatibility
+            const response = await axios.post(`${API_BASE_URL}/api/chats/message`, {
+                chatId: msgData.chatId,
+                text: msgData.text
+            }, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+
+            // Update local state (Optimistic)
+            setMessages(prev => [...prev, { ...msgData, timestamp: new Date() }]);
+            setMessage('');
+            scrollToBottom();
+        } catch (err) {
+            console.error("Failed to send message via HTTP:", err);
+            let errorMsg = "Please try again later.";
+            if (err.response?.status === 401) {
+                errorMsg = "Your session has expired. Please log in again.";
+            } else if (err.response?.data?.message) {
+                errorMsg = err.response.data.message;
+            } else if (err.message) {
+                errorMsg = err.message;
+            }
+            alert(`Unable to send: ${errorMsg}`);
+        }
     };
 
     const scrollToBottom = () => {
@@ -182,15 +244,31 @@ const ChatWidget = () => {
                             <div className="chat-list">
                                 {chats.length === 0 ? <p className="text-center mt-3 text-muted">No conversations yet.</p> : (
                                     chats.map(chat => {
-                                        const name = getChatName(chat);
+                                        const currentUserId = user?._id || user?.id;
+                                        
+                                        // Helper to safely get ID for comparison
+                                        const getPid = (p) => p && typeof p === 'object' ? (p._id || p.id) : p;
+                                        
+                                        const otherParticipant = chat.participants?.find(p => 
+                                            getPid(p) && String(getPid(p)) !== String(currentUserId)
+                                        );
+                                        
+                                        const displayName = otherParticipant?.name || "Seller";
+                                        const propertyTitle = chat.propertyId?.title || "";
+                                        
                                         return (
                                             <div key={chat._id} className="chat-list-item d-flex align-items-center" onClick={() => { setActiveChat(chat); setView('chat'); }}>
                                                 <div className="chat-avatar me-3">
-                                                    <img src={`https://ui-avatars.com/api/?name=${name}&background=random`} alt="av" />
+                                                    <img src={`https://ui-avatars.com/api/?name=${displayName}&background=random`} alt="av" />
                                                 </div>
-                                                <div className="flex-grow-1">
-                                                    <div className="fw-bold">{name}</div>
-                                                    <div className="small text-muted text-truncate">{chat.lastMessage?.text || "No messages"}</div>
+                                                <div className="flex-grow-1 overflow-hidden">
+                                                    <div className="chat-item-title">{displayName}</div>
+                                                    {propertyTitle && (
+                                                        <div className="chat-item-subtitle text-truncate">
+                                                            {propertyTitle}
+                                                        </div>
+                                                    )}
+                                                    <div className="chat-item-last-msg text-truncate">{chat.lastMessage?.text || "No messages"}</div>
                                                 </div>
                                             </div>
                                         )
@@ -233,7 +311,17 @@ const ChatWidget = () => {
                                         onChange={(e) => setMessage(e.target.value)}
                                         onKeyPress={(e) => e.key === 'Enter' && handleSend()}
                                     />
-                                    <button className="btn btn-primary" onClick={handleSend}><FaPaperPlane /></button>
+                                    <button 
+                                        className="btn btn-primary" 
+                                        onClick={handleSend}
+                                        disabled={initiateChatMutation.isLoading || !message.trim()}
+                                    >
+                                        {initiateChatMutation.isLoading ? (
+                                            <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                        ) : (
+                                            <FaPaperPlane />
+                                        )}
+                                    </button>
                                 </div>
                             </div>
                         )}

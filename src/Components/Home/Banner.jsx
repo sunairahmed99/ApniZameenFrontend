@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import './Banner.css';
 import SearchFilter from './SearchFilter';
+import OptimizedImage from '../OptimizedImage';
 
 import { useBanners } from '../../hooks/useBanners';
 
@@ -18,11 +19,8 @@ const Banner = ({ currentCategory, listingType, setListingType, showSearchFilter
 
   // Construct banner style
   const bgImage = currentBanner ? (currentBanner.image || currentBanner.bannerImage) : '';
-  const bannerStyle = bgImage ? {
-    backgroundImage: `url("${bgImage}")`,
-    opacity: imageLoaded ? 1 : 0,
-    transition: 'opacity 0.5s ease-in-out'
-  } : {};
+  
+  // For rotation, we keep the index-based logic but let OptimizedImage handle the heavy lifting
 
   // Preload image function
   const preloadImage = (url) => {
@@ -76,18 +74,23 @@ const Banner = ({ currentCategory, listingType, setListingType, showSearchFilter
   }, [displayBanners.length]);
 
   return (
-    <div className={`banner-section ${!showSearchFilter ? 'mb-0 min-h-auto' : ''}`} style={bannerStyle}>
-      {!imageLoaded && (
-        <div className="banner-skeleton" style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          background: 'linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%)',
-          backgroundSize: '200% 100%',
-          animation: 'shimmer 1.5s infinite'
-        }} />
+    <div className={`banner-section ${!showSearchFilter ? 'mb-0 min-h-auto' : ''}`}>
+      {bgImage && (
+        <OptimizedImage
+          src={bgImage}
+          alt="Banner"
+          isPriority={currentIndex === 0}
+          className="banner-bg-img"
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            zIndex: 0
+          }}
+        />
       )}
       <div className="banner-overlay"></div>
       <div className="container position-relative z-index-10 w-100 h-100 d-flex flex-column justify-content-center align-items-center">

@@ -52,6 +52,7 @@ export const useChats = (userId) => {
         queryFn: () => fetchChats(userId),
         enabled: !!userId,
         staleTime: 5 * 60 * 1000,
+        refetchInterval: 4000, // Smart polling fallback for Vercel
     });
 };
 
@@ -75,6 +76,7 @@ export const useAllChats = () => {
         queryKey: ['all_chats'],
         queryFn: fetchAllChats,
         staleTime: 5 * 60 * 1000,
+        refetchInterval: 4000, // Smart polling fallback
     });
 };
 
@@ -83,6 +85,7 @@ export const useMessages = (chatId) => {
         queryKey: ['messages', chatId],
         queryFn: () => fetchMessages(chatId),
         enabled: !!chatId,
-        staleTime: 0, // Messages should be fresh
+        staleTime: 0, 
+        refetchInterval: 4000, // Smart polling fallback
     });
 };

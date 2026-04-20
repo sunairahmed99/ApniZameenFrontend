@@ -154,8 +154,8 @@ const Navbar = ({ currentCategory, setCurrentCategory, listingType, setListingTy
                         </div>
                     </Link>
 
-                    <button className="navbar-toggler" type="button" onClick={toggleSidebar}>
-                        <span className="navbar-toggler-icon"></span>
+                    <button className="navbar-toggler" type="button" onClick={toggleSidebar} aria-label="Toggle navigation">
+                        <span className="navbar-toggler-icon" aria-hidden="true"></span>
                     </button>
 
                     <div className="collapse navbar-collapse" id="mainNav">

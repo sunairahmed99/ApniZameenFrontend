@@ -182,8 +182,10 @@ const AddProperty = () => {
             await createPropertyMutation.mutateAsync(data);
             setSuccess(true);
         } catch (err) {
-            
-            setError(err.response?.data?.message || 'Failed to submit property.');
+            const errorMessage = err.response?.data?.details 
+                ? `${err.response.data.message}: ${err.response.data.details}` 
+                : (err.response?.data?.message || 'Failed to submit property.');
+            setError(errorMessage);
         }
     };
 

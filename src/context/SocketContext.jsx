@@ -23,6 +23,9 @@ export const SocketProvider = ({ children }) => {
         // Connect to centralized API base URL
         const newSocket = io(API_BASE_URL, {
             autoConnect: false,
+            transports: ['polling', 'websocket'], // Allow both for better compatibility
+            reconnectionAttempts: 3, // Limit noise if platform rejects
+            timeout: 5000, // Fail fast to let polling take over
         });
 
         setSocket(newSocket);

@@ -245,7 +245,11 @@ const HorizontalPropertyCard = ({ property }) => {
                                                 alert("You cannot chat with yourself");
                                                 return;
                                             }
-                                            openChatWith({ sellerId: property.sellerId?._id || property.sellerId, propertyId: property._id });
+                                            openChatWith({ 
+                                                sellerId: property.sellerId?._id || property.sellerId, 
+                                                propertyId: property._id,
+                                                name: property.sellerId?.name || property.seller?.name || "Private Seller"
+                                            });
                                         }}
                                     >
                                         <FaComments className="me-2" /> CHAT

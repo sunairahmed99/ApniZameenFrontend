@@ -9,19 +9,22 @@ const OptimizedImage = ({
     className = '',
     style = {},
     loading = 'lazy',
+    isPriority = false,
+    fetchPriority = 'auto',
     quality = 80,
-    placeholder = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23e0e0e0" width="400" height="300"/%3E%3C/svg%3E',
+    placeholder = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23f0f0f0" width="400" height="300"/%3E%3C/svg%3E',
     onLoad,
     onError,
     ...props
 }) => {
-    const [imageSrc, setImageSrc] = useState(placeholder);
-    const [isLoaded, setIsLoaded] = useState(false);
+    const optimizedSrc = optimizeImageUrl(src, { width, height, quality });
+    const [imageSrc, setImageSrc] = useState(isPriority ? optimizedSrc : placeholder);
+    const [isLoaded, setIsLoaded] = useState(isPriority);
     const [hasError, setHasError] = useState(false);
     const imgRef = useRef(null);
 
     useEffect(() => {
-        if (!src) return;
+        if (!src || isPriority) return;
 
         // Check cache first
         if (imageCache.has(src)) {
@@ -29,9 +32,6 @@ const OptimizedImage = ({
             setIsLoaded(true);
             return;
         }
-
-        // Optimize image URL
-        const optimizedSrc = optimizeImageUrl(src, { width, height, quality });
 
         // Preload image
         preloadImage(optimizedSrc)
@@ -42,11 +42,10 @@ const OptimizedImage = ({
                 if (onLoad) onLoad();
             })
             .catch((error) => {
-                
                 setHasError(true);
                 if (onError) onError(error);
             });
-    }, [src, width, height, quality, onLoad, onError]);
+    }, [src, width, height, quality, onLoad, onError, isPriority, optimizedSrc]);
 
     return (
         <img
@@ -58,10 +57,11 @@ const OptimizedImage = ({
             className={className}
             style={{
                 ...style,
-                opacity: isLoaded ? 1 : 0.5,
-                transition: 'opacity 0.3s ease-in-out'
+                opacity: isLoaded ? 1 : (isPriority ? 1 : 0.5),
+                transition: isPriority ? 'none' : 'opacity 0.3s ease-in-out'
             }}
-            loading={loading}
+            loading={isPriority ? 'eager' : loading}
+            fetchpriority={isPriority ? 'high' : fetchPriority}
             {...props}
         />
     );

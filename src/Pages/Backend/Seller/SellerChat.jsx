@@ -195,6 +195,11 @@ const SellerChat = () => {
                 <div className="wa-chat-list">
                     {filteredChats.map(chat => {
                         const isSelected = selectedChatId === chat._id;
+                        const currentId = getCurrentUserId();
+                        const otherParticipant = chat.participants?.find(p => p._id !== String(currentId));
+                        const displayName = otherParticipant?.name || "Client";
+                        const propertyTitle = chat.propertyId?.title || "";
+
                         return (
                             <div
                                 key={chat._id}
@@ -202,15 +207,22 @@ const SellerChat = () => {
                                 onClick={() => setSelectedChatId(chat._id)}
                             >
                                 <div className="wa-avatar">
-                                    <img src={`https://ui-avatars.com/api/?name=${chat.chatName || 'C'}&background=random`} alt="avatar" />
+                                    <img src={`https://ui-avatars.com/api/?name=${displayName}&background=random`} alt="avatar" />
                                 </div>
                                 <div className="wa-chat-info">
                                     <div className="wa-chat-top">
-                                        <span className="wa-chat-name">{chat.chatName || "Client"}</span>
+                                        <span className="wa-chat-name">{displayName}</span>
                                         <span className="wa-chat-time">{formatTime(chat.lastMessage?.timestamp)}</span>
                                     </div>
-                                    <div className="wa-chat-bottom">
-                                        <p className="wa-chat-msg">{chat.lastMessage?.text || "No messages yet"}</p>
+                                    <div className="wa-chat-bottom flex-column align-items-start overflow-hidden">
+                                        {propertyTitle && (
+                                            <div className="wa-chat-property text-truncate w-100">
+                                                {propertyTitle}
+                                            </div>
+                                        )}
+                                        <p className="wa-chat-msg text-truncate w-100">
+                                            {chat.lastMessage?.text || "No messages yet"}
+                                        </p>
                                     </div>
                                 </div>
                             </div>

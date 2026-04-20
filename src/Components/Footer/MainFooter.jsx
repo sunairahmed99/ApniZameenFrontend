@@ -66,7 +66,8 @@ const MainFooter = () => {
             <p className="small mb-1 mt-3"><span className="fw-bold">{settings?.contactNumber || '0800-APNIZAMEEN (92633)'}</span></p>
             <p className="small text-muted">{settings?.timings || 'Monday To Sunday 9AM To 6PM'}</p>
 
-            <a href={`mailto:${settings?.email || 'info@zameen.com'}`} className="email-link small text-decoration-none text-white d-block mt-2">Email Us</a>
+            <p className="small mb-1 mt-2"><span className="fw-bold">Email:</span></p>
+            <a href={`mailto:${settings?.email || 'sunairahmed9908@gmail.com'}`} className="email-link small text-decoration-none text-info d-block">{settings?.email || 'sunairahmed9908@gmail.com'}</a>
           </div>
 
           {/* Social & Other */}

@@ -188,7 +188,11 @@ const PropertyItem = ({ property, onPrefetch }) => {
                             e.stopPropagation();
                             if (!user) { setIsAuthModalOpen(true); return; }
                             if (user._id === property.seller?._id || user._id === property.seller) { alert("You cannot chat with yourself"); return; }
-                            openChatWith({ sellerId: property.seller?._id || property.seller, propertyId: property._id });
+                            openChatWith({ 
+                                sellerId: property.seller?._id || property.seller, 
+                                propertyId: property._id,
+                                name: property.seller?.name || property.sellerId?.name || "Private Seller"
+                            });
                         }}
                     >
                         <FaComments />

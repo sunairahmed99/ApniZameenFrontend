@@ -339,7 +339,7 @@ const PropertyDetail = () => {
                                 openChatWith({
                                     sellerId: property.sellerId?._id || property.sellerId,
                                     propertyId: property._id,
-                                    name: property.sellerId?.name || "Seller"
+                                    name: property.sellerId?.name || property.seller?.name || "Private Seller"
                                 });
                             })}>
                                 <FaComments /> Live Chat with Seller

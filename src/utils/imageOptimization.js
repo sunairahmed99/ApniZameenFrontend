@@ -29,6 +29,24 @@ export const optimizeImageUrl = (url, options = {}) => {
         return `${url}${separator}${params.toString()}`;
     }
 
+    // For Cloudinary URLs, add transformation parameters
+    if (url.includes('cloudinary.com')) {
+        const transformations = [];
+        if (width) transformations.push(`w_${width}`);
+        if (height) transformations.push(`h_${height}`);
+        transformations.push(`q_auto`);
+        transformations.push(`f_auto`);
+        transformations.push('c_fill');
+
+        const transformationString = transformations.join(',');
+        
+        // Find /upload/ and insert transformations after it
+        // Ensure we don't add them if they already exist or if it's not a standard upload URL
+        if (url.includes('/upload/') && !url.includes('/upload/w_')) {
+            return url.replace('/upload/', `/upload/${transformationString}/`);
+        }
+    }
+
     // For external URLs (Unsplash, etc.), use their optimization params
     if (url.includes('unsplash.com')) {
         const params = new URLSearchParams();

@@ -1,9 +1,13 @@
 import React from 'react';
 import { createPortal } from 'react-dom';
-import { FaTimes, FaPhone, FaMobileAlt, FaCopy } from 'react-icons/fa';
+import { FaTimes, FaPhone, FaMobileAlt, FaEnvelope, FaCopy } from 'react-icons/fa';
 
 const ContactModal = ({ isOpen, onClose, seller, property, agency }) => {
     if (!isOpen) return null;
+
+    // Use seller phone or fallback to property whatsapp number
+    const phoneNumber = seller?.phone || property?.whatsapp || property?.phone || null;
+    const emailAddress = seller?.email || property?.email || null;
 
     const copyToClipboard = (text) => {
         navigator.clipboard.writeText(text);
@@ -17,6 +21,7 @@ const ContactModal = ({ isOpen, onClose, seller, property, agency }) => {
                     onClick={onClose}
                     className="btn btn-sm position-absolute top-0 end-0 m-2 text-secondary hover-dark"
                     style={{ fontSize: '1.2rem', border: 'none', background: 'none' }}
+                    aria-label="Close contact modal"
                 >
                     <FaTimes />
                 </button>
@@ -33,26 +38,41 @@ const ContactModal = ({ isOpen, onClose, seller, property, agency }) => {
                             <FaMobileAlt size={24} className="text-success" />
                             <div>
                                 <div className="text-muted small">Mobile</div>
-                                <div className="fw-bold text-dark">{seller?.phone || "Not Available"}</div>
+                                <div className="fw-bold text-dark">{phoneNumber || "Not Available"}</div>
                             </div>
                         </div>
-                        {seller?.phone && (
-                            <button className="btn btn-outline-success btn-sm d-flex align-items-center gap-1 py-1" onClick={() => copyToClipboard(seller.phone)}>
+                        {phoneNumber && (
+                            <button className="btn btn-outline-success btn-sm d-flex align-items-center gap-1 py-1" onClick={() => copyToClipboard(phoneNumber)}>
                                 <FaCopy /> Copy
                             </button>
                         )}
                     </div>
 
-                    {seller?.phone && (
-                        <div className="d-flex align-items-center justify-content-between">
+                    {phoneNumber && (
+                        <div className="d-flex align-items-center justify-content-between border-bottom pb-2 mb-2">
                             <div className="d-flex align-items-center gap-3">
                                 <FaPhone size={24} className="text-success" />
                                 <div>
                                     <div className="text-muted small">Phone</div>
-                                    <div className="fw-bold text-dark">{seller?.phone}</div>
+                                    <div className="fw-bold text-dark">{phoneNumber}</div>
                                 </div>
                             </div>
-                            <button className="btn btn-outline-success btn-sm d-flex align-items-center gap-1 py-1" onClick={() => copyToClipboard(seller.phone)}>
+                            <button className="btn btn-outline-success btn-sm d-flex align-items-center gap-1 py-1" onClick={() => copyToClipboard(phoneNumber)}>
+                                <FaCopy /> Copy
+                            </button>
+                        </div>
+                    )}
+
+                    {emailAddress && (
+                        <div className="d-flex align-items-center justify-content-between">
+                            <div className="d-flex align-items-center gap-3">
+                                <FaEnvelope size={24} className="text-primary" />
+                                <div>
+                                    <div className="text-muted small">Email</div>
+                                    <div className="fw-bold text-dark" style={{ fontSize: '13px' }}>{emailAddress}</div>
+                                </div>
+                            </div>
+                            <button className="btn btn-outline-primary btn-sm d-flex align-items-center gap-1 py-1" onClick={() => copyToClipboard(emailAddress)}>
                                 <FaCopy /> Copy
                             </button>
                         </div>
