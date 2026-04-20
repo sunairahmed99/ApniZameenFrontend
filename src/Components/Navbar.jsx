@@ -144,7 +144,7 @@ const Navbar = ({ currentCategory, setCurrentCategory, listingType, setListingTy
             {/* Main Navbar */}
             <nav className="navbar navbar-expand-lg navbar-light bg-white border-bottom py-2 sticky-top">
                 <div className="container-fluid px-4">
-                    <Link className="navbar-brand d-flex align-items-center me-4" to="/">
+                    <Link className="navbar-brand d-flex align-items-center me-4" to="/" aria-label="Apni Zameen Home">
                         <div className="logo-text">
                             <span className="z-icon">A</span>
                             <div className="logo-name">
@@ -214,13 +214,19 @@ const Navbar = ({ currentCategory, setCurrentCategory, listingType, setListingTy
                         <div className="d-flex align-items-center gap-3 ps-3 border-start">
                             {user ? (
                                 <div className="seller-menu-container" ref={sellerMenuRef}>
-                                    <div className="seller-profile-trigger" onClick={() => setIsSellerMenuOpen(!isSellerMenuOpen)} style={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}>
+                                    <button 
+                                        className="seller-profile-trigger btn btn-link p-0 text-decoration-none border-0" 
+                                        onClick={() => setIsSellerMenuOpen(!isSellerMenuOpen)} 
+                                        style={{ display: 'flex', alignItems: 'center' }}
+                                        aria-label="User Menu"
+                                        aria-expanded={isSellerMenuOpen}
+                                    >
                                         <div className="seller-avatar" style={{ width: '30px', height: '30px', borderRadius: '50%', background: '#3b82f6', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', marginRight: '8px', fontWeight: 'bold' }}>
                                             {user.name?.charAt(0).toUpperCase()}
                                         </div>
                                         <span className="seller-name-nav" style={{ fontSize: '13px', fontWeight: 'bold', color: '#333' }}>{user.name?.split(' ')[0]}</span>
                                         {isSellerMenuOpen ? <FaChevronUp className="ms-1" style={{ fontSize: '10px' }} /> : <FaChevronDown className="ms-1" style={{ fontSize: '10px' }} />}
-                                    </div>
+                                    </button>
 
                                     {isSellerMenuOpen && (
                                         <div className="seller-dropdown-menu">
@@ -243,9 +249,9 @@ const Navbar = ({ currentCategory, setCurrentCategory, listingType, setListingTy
                                     )}
                                 </div>
                             ) : (
-                                <div className="navbar-item login-nav-link" onClick={() => setIsAuthModalOpen(true)} style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', color: '#666', fontWeight: '700', fontSize: '12px' }}>
+                                <button className="navbar-item login-nav-link btn btn-link p-0 text-decoration-none border-0" onClick={() => setIsAuthModalOpen(true)} style={{ display: 'flex', alignItems: 'center', color: '#666', fontWeight: '700', fontSize: '12px' }} aria-label="Login">
                                     <FaUser className="me-2" /> LOGIN
-                                </div>
+                                </button>
                             )}
                         </div>
                     </div>

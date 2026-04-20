@@ -1,4 +1,5 @@
 import React from 'react';
+import OptimizedImage from '../OptimizedImage';
 import './FooterPromo.css';
 import { FaApple, FaGooglePlay, FaQrcode } from 'react-icons/fa';
 
@@ -19,7 +20,7 @@ const FooterPromo = () => {
                   <div className="fw-bold" style={{ lineHeight: '1' }}>App Store</div>
                 </div>
               </div>
-              <div className="app-store-btn bg-dark text-white rounded p-2 d-flex align-items-center px-3">
+              <div className="app-store-btn bg-dark text-white rounded p-2 d-flex align-items-center px-3" style={{ cursor: 'not-allowed' }}>
                 <FaGooglePlay size={20} className="me-2" />
                 <div className="text-start">
                   <div className="small-text" style={{ fontSize: '10px' }}>GET IT ON</div>
@@ -31,7 +32,14 @@ const FooterPromo = () => {
           <div className="col-md-4 text-center">
             {/* Phone Image */}
             <div className="phone-mockup mx-auto d-flex align-items-center justify-content-center">
-              <img src="https://images.pexels.com/photos/1092644/pexels-photo-1092644.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="App Mockup" className="img-fluid rounded shadow" style={{ maxHeight: '200px', filter: 'grayscale(0.5)' }} />
+              <OptimizedImage 
+                  src="https://images.pexels.com/photos/1092644/pexels-photo-1092644.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
+                  alt="App Mockup" 
+                  width={200} 
+                  height={400} 
+                  className="img-fluid rounded shadow" 
+                  style={{ maxHeight: '200px', filter: 'grayscale(0.5)' }} 
+              />
             </div>
           </div>
           <div className="col-md-2 text-center">

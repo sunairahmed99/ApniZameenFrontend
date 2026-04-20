@@ -5,6 +5,7 @@ import { useLocations } from '../../hooks/useLocations';
 import './TitaniumAgencies.css';
 import { AgencySkeleton } from '../Common/Skeleton';
 import { API_BASE_URL } from '../../config';
+import OptimizedImage from '../OptimizedImage';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -77,7 +78,7 @@ const TitaniumAgencies = () => {
           <button className="city-nav-btn left" onClick={() => {
             const el = document.querySelector('.titanium-section .city-tabs-scroll-wrapper');
             el?.scrollBy({ left: -200, behavior: 'smooth' });
-          }}><FaChevronLeft /></button>
+          }} aria-label="Scroll cities left"><FaChevronLeft /></button>
 
           <div className="city-tabs-scroll-wrapper">
             <div className="city-tabs d-flex gap-2">
@@ -96,7 +97,7 @@ const TitaniumAgencies = () => {
           <button className="city-nav-btn right" onClick={() => {
             const el = document.querySelector('.titanium-section .city-tabs-scroll-wrapper');
             el?.scrollBy({ left: 200, behavior: 'smooth' });
-          }}><FaChevronRight /></button>
+          }} aria-label="Scroll cities right"><FaChevronRight /></button>
         </div>
 
         {loading ? (
@@ -110,6 +111,7 @@ const TitaniumAgencies = () => {
               <button
                 className="agency-arrow left-arrow btn btn-white shadow-sm rounded-circle"
                 onClick={handlePrev}
+                aria-label="Slide agencies left"
               >
                 <FaChevronLeft />
               </button>
@@ -124,11 +126,13 @@ const TitaniumAgencies = () => {
                     onClick={() => navigate(`/agency/${agency._id}`)}
                   >
                     <div className="agency-logo">
-                      <img
+                      <OptimizedImage
                         src={agency.logo && !agency.logo.startsWith('http')
                           ? `${API_BASE_URL}/${agency.logo.replace(/\\/g, '/')}`
                           : (agency.logo || "https://cdn-icons-png.flaticon.com/512/3135/3135715.png")}
-                        alt={agency.name}
+                        alt={agency.name || 'Agency Logo'}
+                        width={80}
+                        height={60}
                         loading="lazy"
                         className="img-fluid rounded"
                         style={{ maxWidth: '80px', maxHeight: '60px', objectFit: 'contain' }}
@@ -155,6 +159,7 @@ const TitaniumAgencies = () => {
               <button
                 className="agency-arrow right-arrow btn btn-white shadow-sm rounded-circle"
                 onClick={handleNext}
+                aria-label="Slide agencies right"
               >
                 <FaChevronRight />
               </button>

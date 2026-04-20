@@ -97,94 +97,99 @@ export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter future={{ v7_relativeSplatPath: true, v7_startTransition: false }}>
-        <Suspense fallback={<LoadingFallback />}>
-          <Routes>
-            <Route path="/" element={<Homepage />} />
-            <Route path="/agents" element={<Agents />} />
-            <Route path="/new-projects" element={<NewProjects />} />
-            <Route path="/plot-finder" element={<PlotFinder />} />
-            <Route path="/area-guides" element={<AreaGuide />} />
-            <Route path="/project/:slug" element={<ProjectDetail />} />
-            <Route path="/property/:slug" element={<PropertyDetail />} />
-            <Route path="/project-zameen/:id" element={<ZameenProjectDetail />} />
-            <Route path="/search" element={<SearchResults />} />
-            <Route path="/agency/:id" element={<AgencyDetail />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/blog/:id" element={<BlogDetail />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact-us" element={<Contact />} />
-            <Route path="/advertise" element={<Advertise />} />
-            <Route path="/terms-of-use" element={<TermsOfUse />} />
-            <Route path="/support" element={<HelpSupport />} />
-            <Route path="/jobs" element={<Jobs />} />
-            <Route path="/:type/:city" element={<SearchResults />} />
+        <a href="#main-content" className="visually-hidden-focusable position-absolute p-3 bg-white text-primary" style={{ zIndex: 9999 }}>
+          Skip to main content
+        </a>
+        <main id="main-content" className="flex-grow-1 d-flex flex-column" style={{ minHeight: '100vh' }}>
+          <Suspense fallback={<LoadingFallback />}>
+            <Routes>
+              <Route path="/" element={<Homepage />} />
+              <Route path="/agents" element={<Agents />} />
+              <Route path="/new-projects" element={<NewProjects />} />
+              <Route path="/plot-finder" element={<PlotFinder />} />
+              <Route path="/area-guides" element={<AreaGuide />} />
+              <Route path="/project/:slug" element={<ProjectDetail />} />
+              <Route path="/property/:slug" element={<PropertyDetail />} />
+              <Route path="/project-zameen/:id" element={<ZameenProjectDetail />} />
+              <Route path="/search" element={<SearchResults />} />
+              <Route path="/agency/:id" element={<AgencyDetail />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/:id" element={<BlogDetail />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/contact-us" element={<Contact />} />
+              <Route path="/advertise" element={<Advertise />} />
+              <Route path="/terms-of-use" element={<TermsOfUse />} />
+              <Route path="/support" element={<HelpSupport />} />
+              <Route path="/jobs" element={<Jobs />} />
+              <Route path="/:type/:city" element={<SearchResults />} />
 
 
-            {/* Admin Routes */}
-            <Route path="/admin" element={
-              <ProtectedRoute role="admin">
-                <AdminLayout />
-              </ProtectedRoute>
-            }>
-              <Route index element={<AdminDashboard />} />
-              <Route path="dashboard" element={<AdminDashboard />} />
-              <Route path="home-banner" element={<HomeBanner />} />
-              <Route path="banner-requests" element={<BannerRequests />} />
-              <Route path="browse-sections" element={<BrowseSections />} />
-              <Route path="projects" element={<Projects />} />
-              <Route path="projects/add" element={<AddProject />} />
-              <Route path="projects/edit/:id" element={<EditProject />} />
-              <Route path="agencies" element={<Agencies />} />
-              <Route path="plans" element={<AdminPlans />} />
-              <Route path="project-plans" element={<AdminProjectPlans />} />
-              <Route path="banner-plans" element={<AdminBannerPlans />} />
-              <Route path="properties" element={<PropertyManagement />} />
-              <Route path="locations" element={<LocationManagement />} />
-              <Route path="upgrade-requests" element={<AdminUpgradeRequests />} />
-              <Route path="inquiries" element={<Inquiries />} />
-              <Route path="deals" element={<ManageDeals />} />
-              <Route path="approvals" element={<SubscriptionApprovals />} />
-              <Route path="approved-deals" element={<ApprovedSubscriptions />} />
-              <Route path="agency-plans" element={<AgencyPlans />} />
-              <Route path="agency-upgrades" element={<AgencyUpgradeRequests />} />
-              <Route path="pricelisting" element={<PriceListing />} />
-              <Route path="payment-prices" element={<AdminPaymentPrices />} />
-              <Route path="chat" element={<AdminChat />} />
-              <Route path="pending-payments" element={<PendingPayments />} />
-              <Route path="jobs" element={<AdminJobs />} />
-              <Route path="settings" element={<SiteSettings />} />
+              {/* Admin Routes */}
+              <Route path="/admin" element={
+                <ProtectedRoute role="admin">
+                  <AdminLayout />
+                </ProtectedRoute>
+              }>
+                <Route index element={<AdminDashboard />} />
+                <Route path="dashboard" element={<AdminDashboard />} />
+                <Route path="home-banner" element={<HomeBanner />} />
+                <Route path="banner-requests" element={<BannerRequests />} />
+                <Route path="browse-sections" element={<BrowseSections />} />
+                <Route path="projects" element={<Projects />} />
+                <Route path="projects/add" element={<AddProject />} />
+                <Route path="projects/edit/:id" element={<EditProject />} />
+                <Route path="agencies" element={<Agencies />} />
+                <Route path="plans" element={<AdminPlans />} />
+                <Route path="project-plans" element={<AdminProjectPlans />} />
+                <Route path="banner-plans" element={<AdminBannerPlans />} />
+                <Route path="properties" element={<PropertyManagement />} />
+                <Route path="locations" element={<LocationManagement />} />
+                <Route path="upgrade-requests" element={<AdminUpgradeRequests />} />
+                <Route path="inquiries" element={<Inquiries />} />
+                <Route path="deals" element={<ManageDeals />} />
+                <Route path="approvals" element={<SubscriptionApprovals />} />
+                <Route path="approved-deals" element={<ApprovedSubscriptions />} />
+                <Route path="agency-plans" element={<AgencyPlans />} />
+                <Route path="agency-upgrades" element={<AgencyUpgradeRequests />} />
+                <Route path="pricelisting" element={<PriceListing />} />
+                <Route path="payment-prices" element={<AdminPaymentPrices />} />
+                <Route path="chat" element={<AdminChat />} />
+                <Route path="pending-payments" element={<PendingPayments />} />
+                <Route path="jobs" element={<AdminJobs />} />
+                <Route path="settings" element={<SiteSettings />} />
 
-              {/* Blog Management */}
-              <Route path="blogs" element={<Blogs />} />
-              <Route path="blogs/add" element={<AddBlog />} />
-              <Route path="blogs/edit/:id" element={<EditBlog />} />
-            </Route>
+                {/* Blog Management */}
+                <Route path="blogs" element={<Blogs />} />
+                <Route path="blogs/add" element={<AddBlog />} />
+                <Route path="blogs/edit/:id" element={<EditBlog />} />
+              </Route>
 
-            {/* Seller Routes */}
-            <Route path="/seller" element={
-              <ProtectedRoute role="seller">
-                <SellerLayout />
-              </ProtectedRoute>
-            }>
-              <Route index element={<SellerDashboard />} />
-              <Route path="dashboard" element={<SellerDashboard />} />
-              <Route path="banner-request" element={<BannerRequest />} />
-              <Route path="my-properties" element={<MyProperties />} />
-              <Route path="add-property" element={<AddProperty />} />
-              <Route path="agency" element={<SellerAgencies />} />
-              <Route path="packages" element={<SellerPackages />} />
-              <Route path="agency-upgrade" element={<AgencyUpgrade />} />
-              <Route path="chat" element={<SellerChat />} />
-              <Route path="inquiries" element={<SellerInquiries />} />
-              <Route path="expired-properties" element={<ExpiredProperties />} />
-              <Route path="sold-rented-properties" element={<SoldRentedProperties />} />
-              <Route path="scoreboard" element={<SellerScoreboard />} />
-              <Route path="project-requests" element={<SellerProjectRequests />} />
-              <Route path="my-subscriptions" element={<MySubscriptions />} />
-              <Route path="edit-property/:id" element={<EditProperty />} />
-            </Route>
-          </Routes>
-        </Suspense>
+              {/* Seller Routes */}
+              <Route path="/seller" element={
+                <ProtectedRoute role="seller">
+                  <SellerLayout />
+                </ProtectedRoute>
+              }>
+                <Route index element={<SellerDashboard />} />
+                <Route path="dashboard" element={<SellerDashboard />} />
+                <Route path="banner-request" element={<BannerRequest />} />
+                <Route path="my-properties" element={<MyProperties />} />
+                <Route path="add-property" element={<AddProperty />} />
+                <Route path="agency" element={<SellerAgencies />} />
+                <Route path="packages" element={<SellerPackages />} />
+                <Route path="agency-upgrade" element={<AgencyUpgrade />} />
+                <Route path="chat" element={<SellerChat />} />
+                <Route path="inquiries" element={<SellerInquiries />} />
+                <Route path="expired-properties" element={<ExpiredProperties />} />
+                <Route path="sold-rented-properties" element={<SoldRentedProperties />} />
+                <Route path="scoreboard" element={<SellerScoreboard />} />
+                <Route path="project-requests" element={<SellerProjectRequests />} />
+                <Route path="my-subscriptions" element={<MySubscriptions />} />
+                <Route path="edit-property/:id" element={<EditProperty />} />
+              </Route>
+            </Routes>
+          </Suspense>
+        </main>
         <ChatWidget />
         <NetworkStatus />
       </BrowserRouter>

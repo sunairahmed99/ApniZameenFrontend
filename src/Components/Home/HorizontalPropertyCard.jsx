@@ -8,6 +8,7 @@ import EmailModal from '../EmailModal'; // Import new modal
 import AuthModal from '../../Components/AuthModal/AuthModal';
 import { useCreateLead, fetchPropertyDetail } from '../../hooks/useProperties';
 import { API_BASE_URL } from '../../config';
+import OptimizedImage from '../OptimizedImage';
 import './HorizontalPropertyCard.css';
 
 const HorizontalPropertyCard = ({ property }) => {
@@ -88,12 +89,14 @@ const HorizontalPropertyCard = ({ property }) => {
                         style={{ height: '260px', cursor: 'pointer' }} // Fixed height
                         onClick={handleClick}
                     >
-                        <img
+                        <OptimizedImage
                             src={image}
-                            alt={title}
+                            alt={title || 'Property Image'}
+                            width={400}
+                            height={260}
                             className="img-fluid w-100 h-100"
                             loading="lazy"
-                            style={{ objectFit: 'cover' }} // Inline style to guarantee behavior
+                            style={{ objectFit: 'cover' }}
                         />
 
                         {/* Boosted/Super Hot Badge */}
@@ -201,6 +204,7 @@ const HorizontalPropertyCard = ({ property }) => {
                                             e.stopPropagation();
                                             handleContactAction('email', () => setIsEmailModalOpen(true));
                                         }}
+                                        aria-label="Email Seller"
                                     >
                                         <FaEnvelope className="me-2" /> EMAIL
                                     </button>
@@ -211,6 +215,7 @@ const HorizontalPropertyCard = ({ property }) => {
                                             e.stopPropagation();
                                             handleContactAction('call', () => setIsContactModalOpen(true));
                                         }}
+                                        aria-label="Call Seller"
                                     >
                                         <FaPhone className="me-2" /> CALL
                                     </button>
@@ -229,6 +234,7 @@ const HorizontalPropertyCard = ({ property }) => {
                                                 }
                                             });
                                         }}
+                                        aria-label="WhatsApp Seller"
                                     >
                                         <FaWhatsapp className="me-2" /> WHATSAPP
                                     </button>
@@ -251,6 +257,7 @@ const HorizontalPropertyCard = ({ property }) => {
                                                 name: property.sellerId?.name || property.seller?.name || "Private Seller"
                                             });
                                         }}
+                                        aria-label="Chat with Seller"
                                     >
                                         <FaComments className="me-2" /> CHAT
                                     </button>
@@ -258,9 +265,11 @@ const HorizontalPropertyCard = ({ property }) => {
 
                                 {/* Agency Logo (Placeholder if not in data) */}
                                 <div className="d-none d-sm-block">
-                                    <img
+                                    <OptimizedImage
                                         src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=80&h=40&q=80"
-                                        alt="Agency"
+                                        alt="Agency Logo"
+                                        width={80}
+                                        height={40}
                                         loading="lazy"
                                         className="img-fluid"
                                         style={{ maxHeight: '40px' }}

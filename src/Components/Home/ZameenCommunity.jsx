@@ -2,6 +2,7 @@ import React from 'react';
 import { FaArrowRight, FaBullhorn, FaComments } from 'react-icons/fa';
 import { useBlogs } from '../../hooks/useBlogs';
 import { Link } from 'react-router-dom';
+import OptimizedImage from '../OptimizedImage';
 import './ZameenCommunity.css';
 
 const ZameenCommunity = () => {
@@ -56,7 +57,14 @@ const ZameenCommunity = () => {
                 <p>Loading news...</p>
               ) : firstColBlogs.map(item => (
                 <Link key={item.id} to={`/blog/${item.id}`} className="text-decoration-none d-flex gap-3 mb-4 align-items-start">
-                  <img src={item.image} alt="News" className="rounded" width="60" height="60" style={{ objectFit: 'cover' }} />
+                  <OptimizedImage 
+                      src={item.image} 
+                      alt={item.title || 'Blog Thumbnail'} 
+                      className="rounded" 
+                      width={60} 
+                      height={60} 
+                      style={{ objectFit: 'cover' }} 
+                  />
                   <div>
                     <h6 className="mb-1 fw-normal text-dark hover-link">{item.title}</h6>
                     <small className="text-muted">{item.date}</small>
@@ -84,7 +92,14 @@ const ZameenCommunity = () => {
                 <p>Loading more blogs...</p>
               ) : secondColBlogs.map(item => (
                 <Link key={item.id} to={`/blog/${item.id}`} className="text-decoration-none d-flex gap-3 mb-4 align-items-start">
-                  <img src={item.image} alt="News" className="rounded" width="60" height="60" style={{ objectFit: 'cover' }} />
+                  <OptimizedImage 
+                      src={item.image} 
+                      alt={item.title || 'Blog Thumbnail'} 
+                      className="rounded" 
+                      width={60} 
+                      height={60} 
+                      style={{ objectFit: 'cover' }} 
+                  />
                   <div>
                     <h6 className="mb-1 fw-normal text-dark hover-link">{item.title}</h6>
                     <small className="text-muted">{item.date}</small>

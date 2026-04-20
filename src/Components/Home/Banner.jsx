@@ -80,6 +80,8 @@ const Banner = ({ currentCategory, listingType, setListingType, showSearchFilter
           src={bgImage}
           alt="Banner"
           isPriority={currentIndex === 0}
+          width={1920}
+          height={600}
           className="banner-bg-img"
           style={{
             position: 'absolute',
@@ -94,12 +96,12 @@ const Banner = ({ currentCategory, listingType, setListingType, showSearchFilter
       )}
       <div className="banner-overlay"></div>
       <div className="container position-relative z-index-10 w-100 h-100 d-flex flex-column justify-content-center align-items-center">
-        {/* {showHeading && (
+        {showHeading && (
           <div className="text-center text-white mb-5">
             <h1 className="display-4 fw-bold mb-3">Search Properties for Sale in Pakistan</h1>
             <p className="lead">With the largest number of property listings</p>
           </div>
-        )} */}
+        )}
 
         {showSearchFilter && (
           <div className="banner-content">

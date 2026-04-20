@@ -11,6 +11,7 @@ import { API_BASE_URL } from '../../config';
 import ContactModal from '../ContactModal';
 import EmailModal from '../EmailModal';
 import AuthModal from '../AuthModal/AuthModal';
+import OptimizedImage from '../OptimizedImage';
 import './FeaturedProperties.css';
 
 // Helper for price formatting (kept here as it's UI specific)
@@ -47,7 +48,7 @@ const CityTabs = ({ activeCity, onCityChange, cities }) => {
 
     return (
         <div className="city-tabs-container position-relative mb-4">
-            <button className="city-nav-btn left" onClick={() => scroll('left')}><FaAngleLeft /></button>
+            <button className="city-nav-btn left" onClick={() => scroll('left')} aria-label="Scroll cities left"><FaAngleLeft /></button>
             <div className="city-tabs-scroll-wrapper" ref={scrollRef}>
                 <div className="city-tabs">
                     {cities.map((city) => (
@@ -61,7 +62,7 @@ const CityTabs = ({ activeCity, onCityChange, cities }) => {
                     ))}
                 </div>
             </div>
-            <button className="city-nav-btn right" onClick={() => scroll('right')}><FaAngleRight /></button>
+            <button className="city-nav-btn right" onClick={() => scroll('right')} aria-label="Scroll cities right"><FaAngleRight /></button>
         </div>
     );
 };
@@ -102,7 +103,14 @@ const PropertyItem = ({ property, onPrefetch }) => {
                     onMouseEnter={() => onPrefetch(property._id)}
                 >
                     <div className="property-image-container">
-                        <img src={imageSrc} alt={property.title} loading="lazy" />
+                        <OptimizedImage 
+                            src={imageSrc} 
+                            alt={property.title || 'Property Image'} 
+                            width={400} 
+                            height={300} 
+                            loading="lazy" 
+                            className="property-main-img"
+                        />
                         {property.images && property.images.length > 1 && (
                             <div className="image-count">
                                 <i className="fas fa-camera"></i> {property.images.length}
@@ -154,12 +162,14 @@ const PropertyItem = ({ property, onPrefetch }) => {
                     <button
                         className="btn btn-sm btn-white border flex-grow-1 text-success fw-bold"
                         onClick={(e) => { e.preventDefault(); e.stopPropagation(); handleContactAction('call', () => setIsContactModalOpen(true)); }}
+                        aria-label="Call Seller"
                     >
                         <FaPhone />
                     </button>
                     <button
                         className="btn btn-sm btn-white border flex-grow-1 text-success fw-bold"
                         onClick={(e) => { e.preventDefault(); e.stopPropagation(); handleContactAction('email', () => setIsEmailModalOpen(true)); }}
+                        aria-label="Email Seller"
                     >
                         <FaEnvelope />
                     </button>
@@ -178,6 +188,7 @@ const PropertyItem = ({ property, onPrefetch }) => {
                                 }
                             });
                         }}
+                        aria-label="WhatsApp Seller"
                     >
                         <FaWhatsapp />
                     </button>
@@ -194,6 +205,7 @@ const PropertyItem = ({ property, onPrefetch }) => {
                                 name: property.seller?.name || property.sellerId?.name || "Private Seller"
                             });
                         }}
+                        aria-label="Chat with Seller"
                     >
                         <FaComments />
                     </button>
@@ -239,9 +251,9 @@ const PropertySection = ({ title, properties, loading, activeCity, onCityChange,
 
     return (
         <div className="property-section mb-5">
-            <h3 className="section-title mb-3" style={{ fontSize: '24px', fontWeight: '700', color: '#333' }}>
+            <h2 className="section-title mb-3" style={{ fontSize: '24px', fontWeight: '700', color: '#333' }}>
                 {title}
-            </h3>
+            </h2>
 
             <CityTabs activeCity={activeCity} onCityChange={onCityChange} cities={cities} />
 
@@ -251,12 +263,12 @@ const PropertySection = ({ title, properties, loading, activeCity, onCityChange,
                 </div>
             ) : properties.length > 0 ? (
                 <div className="properties-grid-wrapper position-relative">
-                    <div className="nav-arrow left-arrow" onClick={() => scroll('left')}>
+                    <button className="nav-arrow left-arrow" onClick={() => scroll('left')} aria-label="Slide properties left">
                         <FaAngleLeft />
-                    </div>
-                    <div className="nav-arrow right-arrow" onClick={() => scroll('right')}>
+                    </button>
+                    <button className="nav-arrow right-arrow" onClick={() => scroll('right')} aria-label="Slide properties right">
                         <FaAngleRight />
-                    </div>
+                    </button>
 
                     <div className="properties-grid" ref={scrollRef}>
                         {properties.map((property, index) => (

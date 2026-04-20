@@ -50,7 +50,7 @@ const Homepage = () => {
         setListingType={setListingType}
         city={city}
         setCity={setCity}
-        showHeading={false}
+        showHeading={true}
       />
       <BrowseProperties listingType={listingType} city={city} />
       <FeaturedProperties />

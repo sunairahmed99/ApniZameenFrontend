@@ -102,19 +102,25 @@ const PopularLocations = () => {
       <div className="container">
         <h4 className="fw-bold mb-3">Popular Locations</h4>
 
-        <div className="tabs mb-4 border-bottom">
-          <span
-            className={`tab-item me-4 pb-2 ${activeTab === 'For Sale' ? 'active' : ''}`}
+        <div className="tabs mb-4 border-bottom" role="tablist">
+          <button
+            className={`tab-item btn btn-link me-4 pb-2 text-decoration-none border-0 ${activeTab === 'For Sale' ? 'active' : ''}`}
             onClick={() => setActiveTab('For Sale')}
+            role="tab"
+            aria-selected={activeTab === 'For Sale'}
+            aria-controls="location-panels"
           >
             For Sale
-          </span>
-          <span
-            className={`tab-item pb-2 ${activeTab === 'To Rent' ? 'active' : ''}`}
+          </button>
+          <button
+            className={`tab-item btn btn-link pb-2 text-decoration-none border-0 ${activeTab === 'To Rent' ? 'active' : ''}`}
             onClick={() => setActiveTab('To Rent')}
+            role="tab"
+            aria-selected={activeTab === 'To Rent'}
+            aria-controls="location-panels"
           >
             To Rent
-          </span>
+          </button>
         </div>
 
         {renderList('Plots', 'Plot', majorCities)}

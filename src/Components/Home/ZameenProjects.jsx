@@ -6,6 +6,7 @@ import { useLocations } from '../../hooks/useLocations';
 import './ZameenProjects.css';
 import { PropertyCardSkeleton } from '../Common/Skeleton';
 import { API_BASE_URL } from '../../config';
+import OptimizedImage from '../OptimizedImage';
 
 const ZameenProjects = () => {
   const [startIndex, setStartIndex] = useState(0);
@@ -119,7 +120,7 @@ const ZameenProjects = () => {
           <button className="city-nav-btn left" onClick={() => {
             const el = document.querySelector('.zameen-projects-section .city-tabs-scroll-wrapper');
             el?.scrollBy({ left: -200, behavior: 'smooth' });
-          }}><FaChevronLeft /></button>
+          }} aria-label="Scroll cities left"><FaChevronLeft /></button>
 
           <div className="city-tabs-scroll-wrapper">
             <div className="city-tabs d-flex gap-2">
@@ -138,7 +139,7 @@ const ZameenProjects = () => {
           <button className="city-nav-btn right" onClick={() => {
             const el = document.querySelector('.zameen-projects-section .city-tabs-scroll-wrapper');
             el?.scrollBy({ left: 200, behavior: 'smooth' });
-          }}><FaChevronRight /></button>
+          }} aria-label="Scroll cities right"><FaChevronRight /></button>
         </div>
 
         <div className="d-flex justify-content-end align-items-center mb-3">
@@ -153,6 +154,7 @@ const ZameenProjects = () => {
             <button
               className="project-arrow left-arrow"
               onClick={handlePrev}
+              aria-label="Slide projects left"
             >
               <FaChevronLeft />
             </button>
@@ -176,7 +178,13 @@ const ZameenProjects = () => {
                   <Link to={`/project-zameen/${project._id}`} className="text-decoration-none">
                     <div className="project-card-refined">
                       <div className="project-img-container">
-                        <img src={imageSrc} alt={project.name} loading="lazy" />
+                        <OptimizedImage 
+                            src={imageSrc} 
+                            alt={project.name || 'Project Image'} 
+                            width={400} 
+                            height={250} 
+                            loading="lazy" 
+                        />
                         {project.isHot && (
                           <span className="hot-tag">HOT</span>
                         )}
@@ -213,6 +221,7 @@ const ZameenProjects = () => {
             <button
               className="project-arrow right-arrow"
               onClick={handleNext}
+              aria-label="Slide projects right"
             >
               <FaChevronRight />
             </button>

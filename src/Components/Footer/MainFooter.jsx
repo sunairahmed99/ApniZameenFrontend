@@ -79,11 +79,11 @@ const MainFooter = () => {
 
             <h6 className="footer-title text-uppercase fw-bold mb-3">Get Connected</h6>
             <div className="social-icons d-flex gap-2">
-              <a href={settings?.socialLinks?.facebook || "https://facebook.com"} target="_blank" rel="noopener noreferrer" className="social-icon bg-secondary rounded-circle d-flex align-items-center justify-content-center text-white"><FaFacebookF /></a>
-              <a href={settings?.socialLinks?.instagram || "https://instagram.com"} target="_blank" rel="noopener noreferrer" className="social-icon bg-secondary rounded-circle d-flex align-items-center justify-content-center text-white"><FaInstagram /></a>
-              <a href={settings?.socialLinks?.youtube || "https://youtube.com"} target="_blank" rel="noopener noreferrer" className="social-icon bg-secondary rounded-circle d-flex align-items-center justify-content-center text-white"><FaYoutube /></a>
-              <a href={settings?.socialLinks?.linkedin || "https://linkedin.com"} target="_blank" rel="noopener noreferrer" className="social-icon bg-secondary rounded-circle d-flex align-items-center justify-content-center text-white"><FaLinkedinIn /></a>
-              <a href={settings?.socialLinks?.twitter || "https://twitter.com"} target="_blank" rel="noopener noreferrer" className="social-icon bg-secondary rounded-circle d-flex align-items-center justify-content-center text-white"><FaTwitter /></a>
+              <a href={settings?.socialLinks?.facebook || "https://facebook.com"} target="_blank" rel="noopener noreferrer" className="social-icon bg-secondary rounded-circle d-flex align-items-center justify-content-center text-white" aria-label="Visit our Facebook"><FaFacebookF /></a>
+              <a href={settings?.socialLinks?.instagram || "https://instagram.com"} target="_blank" rel="noopener noreferrer" className="social-icon bg-secondary rounded-circle d-flex align-items-center justify-content-center text-white" aria-label="Visit our Instagram"><FaInstagram /></a>
+              <a href={settings?.socialLinks?.youtube || "https://youtube.com"} target="_blank" rel="noopener noreferrer" className="social-icon bg-secondary rounded-circle d-flex align-items-center justify-content-center text-white" aria-label="Visit our YouTube"><FaYoutube /></a>
+              <a href={settings?.socialLinks?.linkedin || "https://linkedin.com"} target="_blank" rel="noopener noreferrer" className="social-icon bg-secondary rounded-circle d-flex align-items-center justify-content-center text-white" aria-label="Visit our LinkedIn"><FaLinkedinIn /></a>
+              <a href={settings?.socialLinks?.twitter || "https://twitter.com"} target="_blank" rel="noopener noreferrer" className="social-icon bg-secondary rounded-circle d-flex align-items-center justify-content-center text-white" aria-label="Visit our Twitter"><FaTwitter /></a>
             </div>
           </div>
         </div>
