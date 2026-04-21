@@ -1,3 +1,11 @@
+import { API_BASE_URL } from '../config';
+
+export const getImageUrl = (url) => {
+  if (!url) return 'https://via.placeholder.com/800x400';
+  if (url.startsWith('http')) return url;
+  return `${API_BASE_URL}/${url.replace(/\\/g, '/')}`;
+};
+
 export const formatPrice = (price) => {
   if (!price) return "0";
   const num = Number(price);

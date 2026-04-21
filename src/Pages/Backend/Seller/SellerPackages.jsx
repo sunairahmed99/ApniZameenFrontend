@@ -86,14 +86,18 @@ const SellerPackages = () => {
                 {deals.map(deal => (
                     <div className={`plan-card ${selectedDeal?._id === deal._id ? 'selected' : ''}`} key={deal._id}>
                         <div className="plan-header">
-                            <div className="plan-name">{deal.name}</div>
+                            <div className="d-flex justify-content-between align-items-center mb-1">
+                                <div className="plan-name">{deal.name}</div>
+                                {deal.planType === 'titanium' && <span className="badge" style={{ background: 'linear-gradient(45deg, #FFD700, #FFA500)', color: '#000', fontSize: '10px' }}>TITANIUM</span>}
+                                {deal.planType === 'standard' && <span className="badge bg-secondary" style={{ fontSize: '10px' }}>STANDARD</span>}
+                            </div>
                             <div className="plan-price">
                                 <span className="plan-currency">PKR</span> {deal.price?.toLocaleString()}
                             </div>
                         </div>
                         <div className="plan-body">
                             <ul className="plan-features">
-                                <li><FaCheck /> <strong>{deal.propertyLimit}</strong> Enhanced Listings</li>
+                                <li><FaCheck /> <strong>{deal.propertyLimit}</strong> {deal.planType === 'standard' ? 'Standard' : 'Titanium'} Listings</li>
                                 <li><FaCheck /> Valid for <strong>{deal.durationDays}</strong> Days</li>
                                 <li><FaCheck /> Premium Support</li>
                                 <li className="text-muted opacity-75 small">{deal.description}</li>

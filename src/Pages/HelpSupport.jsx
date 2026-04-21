@@ -5,6 +5,8 @@ import { FaQuestionCircle, FaHeadset, FaEnvelope, FaPhone, FaWhatsapp, FaMapMark
 import { useSocket } from '../context/SocketContext';
 import { useSelector } from 'react-redux';
 import AuthModal from '../Components/AuthModal/AuthModal';
+import axios from 'axios';
+import { API_BASE_URL } from '../config';
 import './HelpSupport.css';
 
 const HelpSupport = () => {
@@ -12,10 +14,24 @@ const HelpSupport = () => {
     const { toggleWidget } = useSocket();
     const { user } = useSelector((state) => state.auth);
     const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+    const [settings, setSettings] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         window.scrollTo(0, 0);
+        fetchSettings();
     }, []);
+
+    const fetchSettings = async () => {
+        try {
+            const { data } = await axios.get(`${API_BASE_URL}/api/settings`);
+            setSettings(data);
+        } catch (error) {
+            console.error('Error fetching settings:', error);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     const toggleFAQ = (index) => {
         setOpenFAQ(openFAQ === index ? null : index);
@@ -111,7 +127,7 @@ const HelpSupport = () => {
                 },
                 {
                     q: "How do I report a bug or technical issue?",
-                    a: "Email us at support@zameen.com with a detailed description of the issue, including screenshots if possible. Our technical team will investigate and respond within 24-48 hours."
+                    a: `Email us at ${settings?.email || 'support@zameen.com'} with a detailed description of the issue, including screenshots if possible. Our technical team will investigate and respond within 24-48 hours.`
                 }
             ]
         }
@@ -121,21 +137,21 @@ const HelpSupport = () => {
         {
             icon: <FaPhone />,
             title: "Phone Support",
-            description: "0800-APNIZAMEEN (92633)",
-            time: "Monday to Sunday, 9 AM - 6 PM",
+            description: settings?.contactNumber || "0800-APNIZAMEEN (92633)",
+            time: settings?.timings || "Monday to Sunday, 9 AM - 6 PM",
             color: "#00a651"
         },
         {
             icon: <FaWhatsapp />,
             title: "WhatsApp",
-            description: "+92-XXX-XXXXXXX",
+            description: settings?.contactNumber || "+92-XXX-XXXXXXX",
             time: "Quick responses during business hours",
             color: "#25D366"
         },
         {
             icon: <FaEnvelope />,
             title: "Email Support",
-            description: "support@zameen.com",
+            description: settings?.email || "support@zameen.com",
             time: "Response within 24-48 hours",
             color: "#0088cc"
         },
@@ -143,7 +159,7 @@ const HelpSupport = () => {
             icon: <FaHeadset />,
             title: "Live Chat",
             description: "Chat with our support team",
-            time: "Available 9 AM - 6 PM",
+            time: `Available ${settings?.timings?.split('To')[1]?.trim() || '9 AM - 6 PM'}`,
             color: "#e74c3c"
         }
     ];
@@ -195,13 +211,31 @@ const HelpSupport = () => {
                         <div className="col-md-6">
                             <div className="location-info">
                                 <h3><FaMapMarkerAlt className="me-2 text-success" />Visit Our Office</h3>
-                                <h5 className="mt-4">Head Office</h5>
-                                <p className="mb-3">
-                                    Pearl One, 94-B/I, MM Alam Road,<br />
-                                    Gulberg III, Lahore, Pakistan
-                                </p>
+                                {settings?.branches && settings.branches.length > 0 ? (
+                                    settings.branches.map((branch, idx) => (
+                                        <div key={idx} className="branch-item mt-4">
+                                            <h5>{branch.title}</h5>
+                                            <p className="mb-0">
+                                                {branch.addressLines.map((line, i) => (
+                                                    <React.Fragment key={i}>
+                                                        {line}
+                                                        {i < branch.addressLines.length - 1 && <br />}
+                                                    </React.Fragment>
+                                                ))}
+                                            </p>
+                                        </div>
+                                    ))
+                                ) : (
+                                    <>
+                                        <h5 className="mt-4">Head Office</h5>
+                                        <p className="mb-3">
+                                            Pearl One, 94-B/I, MM Alam Road,<br />
+                                            Gulberg III, Lahore, Pakistan
+                                        </p>
+                                    </>
+                                )}
                                 <h5 className="mt-4">Office Hours</h5>
-                                <p>Monday to Sunday: 9:00 AM - 6:00 PM</p>
+                                <p>{settings?.timings || 'Monday to Sunday: 9:00 AM - 6:00 PM'}</p>
                             </div>
                         </div>
                         <div className="col-md-6">
@@ -271,4 +305,5 @@ const HelpSupport = () => {
 };
 
 export default HelpSupport;
+
 

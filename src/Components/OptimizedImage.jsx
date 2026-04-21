@@ -12,56 +12,44 @@ const OptimizedImage = ({
     isPriority = false,
     fetchPriority = 'auto',
     quality = 80,
-    placeholder = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23f0f0f0" width="400" height="300"/%3E%3C/svg%3E',
     onLoad,
     onError,
     ...props
 }) => {
+    const [isLoaded, setIsLoaded] = useState(false);
     const optimizedSrc = optimizeImageUrl(src, { width, height, quality });
-    const [imageSrc, setImageSrc] = useState(isPriority ? optimizedSrc : placeholder);
-    const [isLoaded, setIsLoaded] = useState(isPriority);
-    const [hasError, setHasError] = useState(false);
     const imgRef = useRef(null);
 
     useEffect(() => {
-        if (!src || isPriority) return;
-
-        // Check cache first
-        if (imageCache.has(src)) {
-            setImageSrc(imageCache.get(src));
+        if (imgRef.current && imgRef.current.complete) {
             setIsLoaded(true);
-            return;
         }
-
-        // Preload image
-        preloadImage(optimizedSrc)
-            .then(() => {
-                imageCache.set(src, optimizedSrc);
-                setImageSrc(optimizedSrc);
-                setIsLoaded(true);
-                if (onLoad) onLoad();
-            })
-            .catch((error) => {
-                setHasError(true);
-                if (onError) onError(error);
-            });
-    }, [src, width, height, quality, onLoad, onError, isPriority, optimizedSrc]);
+    }, [src]);
 
     return (
         <img
             ref={imgRef}
-            src={imageSrc}
+            src={optimizedSrc || src}
             alt={alt}
             width={width}
             height={height}
             className={className}
             style={{
-                ...style,
-                opacity: isLoaded ? 1 : (isPriority ? 1 : 0.5),
-                transition: isPriority ? 'none' : 'opacity 0.3s ease-in-out'
+                opacity: isLoaded ? 1 : 0.6,
+                transition: 'opacity 0.4s ease-in-out',
+                backgroundColor: '#f5f5f5',
+                ...style
             }}
             loading={isPriority ? 'eager' : loading}
-            fetchpriority={isPriority ? 'high' : fetchPriority}
+            fetchPriority={isPriority ? 'high' : fetchPriority}
+            onLoad={() => {
+                setIsLoaded(true);
+                if (onLoad) onLoad();
+            }}
+            onError={(e) => {
+                setIsLoaded(true);
+                if (onError) onError(e);
+            }}
             {...props}
         />
     );

@@ -11,6 +11,7 @@ import { API_BASE_URL } from '../../config';
 import ContactModal from '../ContactModal';
 import EmailModal from '../EmailModal';
 import AuthModal from '../AuthModal/AuthModal';
+import { getImageUrl } from '../../utils/formatters';
 import OptimizedImage from '../OptimizedImage';
 import './FeaturedProperties.css';
 
@@ -86,13 +87,7 @@ const PropertyItem = ({ property, onPrefetch }) => {
         if (callback) callback();
     };
 
-    let imageSrc = property.images && property.images.length > 0
-        ? property.images[0]
-        : 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=800&q=80';
-
-    if (imageSrc && !imageSrc.startsWith('http')) {
-        imageSrc = `${API_BASE_URL}/${imageSrc.replace(/\\/g, '/')}`;
-    }
+    let imageSrc = getImageUrl(property.images && property.images.length > 0 ? property.images[0] : null);
 
     return (
         <div className="featured-property-card-wrapper h-100 text-decoration-none">
@@ -119,6 +114,11 @@ const PropertyItem = ({ property, onPrefetch }) => {
                         <div className="fav-icon">
                             <i className="far fa-heart text-white"></i>
                         </div>
+                        {property.isTitanium && (
+                            <div className="titanium-badge-overlay">
+                                <i className="fas fa-crown me-1"></i> TITANIUM
+                            </div>
+                        )}
                     </div>
 
                     <div className="property-details">
@@ -328,16 +328,16 @@ const FeaturedProperties = () => {
     };
 
     // Use React Query for Rent Properties
-    const { data: rentProperties = [], isLoading: loadingRent } = useProperties({ purpose: 'For Rent', city: rentCity, featured: true, limit: 10 }, { keepPreviousData: true });
+    const { data: rentProperties = [], isLoading: loadingRent } = useProperties({ purpose: 'For Rent', city: rentCity, titanium: true, limit: 200 }, { keepPreviousData: true });
 
     // Use React Query for Sale Properties
-    const { data: saleProperties = [], isLoading: loadingSale } = useProperties({ purpose: 'For Sale', city: saleCity, featured: true, limit: 10 }, { keepPreviousData: true });
+    const { data: saleProperties = [], isLoading: loadingSale } = useProperties({ purpose: 'For Sale', city: saleCity, titanium: true, limit: 200 }, { keepPreviousData: true });
 
     return (
         <div className="featured-properties-section py-5 bg-white">
             <div className="container">
                 <PropertySection
-                    title="Featured Properties for Rent"
+                    title="Titanium Properties for Rent"
                     properties={rentProperties}
                     loading={loadingRent}
                     activeCity={rentCity}
@@ -349,7 +349,7 @@ const FeaturedProperties = () => {
                 <div className="my-5"></div> {/* Spacer */}
 
                 <PropertySection
-                    title="Featured Properties for Sale"
+                    title="Titanium Properties for Sale"
                     properties={saleProperties}
                     loading={loadingSale}
                     activeCity={saleCity}

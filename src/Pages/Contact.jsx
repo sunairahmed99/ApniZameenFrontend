@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer/Footer';
 import { FaMapMarkerAlt, FaPhoneAlt, FaClock, FaPaperPlane } from 'react-icons/fa';
+import axios from 'axios';
+import { API_BASE_URL } from '../config';
 import './Contact.css';
 
 const Contact = () => {
@@ -13,6 +15,21 @@ const Contact = () => {
         message: ''
     });
     const [status, setStatus] = useState(null);
+    const [settings, setSettings] = useState(null);
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+        fetchSettings();
+    }, []);
+
+    const fetchSettings = async () => {
+        try {
+            const { data } = await axios.get(`${API_BASE_URL}/api/settings`);
+            setSettings(data);
+        } catch (error) {
+            console.error('Error fetching settings:', error);
+        }
+    };
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -48,21 +65,23 @@ const Contact = () => {
                             <h3>Head Office</h3>
                             <div className="info-item">
                                 <FaMapMarkerAlt />
-                                <span>Karachi North Nazimabad, Karachi, Pakistan</span>
+                                <span>
+                                    {settings?.branches?.[0]?.addressLines?.join(', ') || 'Karachi North Nazimabad, Karachi, Pakistan'}
+                                </span>
                             </div>
                         </div>
 
                         <div className="info-block">
                             <div className="info-item">
                                 <FaPhoneAlt />
-                                <span>0800-ZAMEEN (92633)</span>
+                                <span>{settings?.contactNumber || '0800-ZAMEEN (92633)'}</span>
                             </div>
                         </div>
 
                         <div className="info-block">
                             <div className="info-item">
                                 <FaClock />
-                                <span>Monday To Friday (9AM-6PM)</span>
+                                <span>{settings?.timings || 'Monday To Friday (9AM-6PM)'}</span>
                             </div>
                         </div>
 
@@ -165,3 +184,4 @@ const Contact = () => {
 };
 
 export default Contact;
+

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FaCheck, FaTimes, FaRocket, FaStar, FaTrash } from 'react-icons/fa';
+import { FaCheck, FaTimes, FaRocket, FaStar, FaTrash, FaCrown } from 'react-icons/fa';
 import { useAdminProperties, useUpdateAdminProperty, useAdminDeleteProperty } from '../../../hooks/useProperties';
 import DataTable from '../../../Components/Backend/Admin/DataTable';
 
@@ -53,7 +53,18 @@ const PropertyManagement = () => {
         {
             key: 'location',
             label: 'Location',
-            render: (_, row) => `${row.city}, ${row.state}`
+            render: (_, row) => `${row.city || ''}, ${row.areaName || ''}`
+        },
+        {
+            key: 'level',
+            label: 'Listing Level',
+            render: (_, row) => (
+                <div className="d-flex flex-wrap gap-1">
+                    {row.isTitanium && <span className="badge" style={{ background: 'linear-gradient(45deg, #FFD700, #FFA500)', color: '#000' }}>Titanium</span>}
+                    {row.isBoosted && <span className="badge bg-danger">Boosted</span>}
+                    {!row.isTitanium && !row.isBoosted && <span className="badge bg-light text-dark border">Normal</span>}
+                </div>
+            )
         },
         {
             key: 'price',
@@ -71,16 +82,6 @@ const PropertyManagement = () => {
             )
         },
         {
-            key: 'agency',
-            label: 'Agency',
-            render: (_, row) => (
-                <div>
-                    <div className="fw-bold text-primary">{row.agency?.name || 'No Agency'}</div>
-                    {row.agency?.phone && <small className="text-muted">{row.agency.phone}</small>}
-                </div>
-            )
-        },
-        {
             key: 'status',
             label: 'Status',
             render: (status) => (
@@ -91,23 +92,24 @@ const PropertyManagement = () => {
         },
         {
             key: 'highlights',
-            label: 'Highlights',
+            label: 'Highlight Controls',
             sortable: false,
             render: (_, row) => (
                 <div className="d-flex gap-2">
                     <button
-                        className={`btn btn-sm ${row.isBoosted ? 'btn-danger' : 'btn-outline-secondary'}`}
-                        onClick={() => handleUpdateStatus(row._id, { isBoosted: !row.isBoosted })}
-                        title="Boosted"
+                        className={`btn btn-sm ${row.isTitanium ? 'btn-warning' : 'btn-outline-secondary'}`}
+                        onClick={() => handleUpdateStatus(row._id, { isTitanium: !row.isTitanium, isFeatured: !row.isTitanium })}
+                        title="Toggle Titanium"
+                        style={row.isTitanium ? { background: 'linear-gradient(45deg, #FFD700, #FFA500)', borderColor: '#FFA500', color: '#000' } : {}}
                     >
-                        <FaRocket />
+                        <FaCrown />
                     </button>
                     <button
-                        className={`btn btn-sm ${row.isFeatured ? 'btn-warning' : 'btn-outline-secondary'}`}
-                        onClick={() => handleUpdateStatus(row._id, { isFeatured: !row.isFeatured })}
-                        title="Featured"
+                        className={`btn btn-sm ${row.isBoosted ? 'btn-danger' : 'btn-outline-secondary'}`}
+                        onClick={() => handleUpdateStatus(row._id, { isBoosted: !row.isBoosted })}
+                        title="Toggle Boosted"
                     >
-                        <FaStar />
+                        <FaRocket />
                     </button>
                 </div>
             )

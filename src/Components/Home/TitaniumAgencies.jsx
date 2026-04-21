@@ -5,6 +5,7 @@ import { useLocations } from '../../hooks/useLocations';
 import './TitaniumAgencies.css';
 import { AgencySkeleton } from '../Common/Skeleton';
 import { API_BASE_URL } from '../../config';
+import { getImageUrl } from '../../utils/formatters';
 import OptimizedImage from '../OptimizedImage';
 
 import { useNavigate } from 'react-router-dom';
@@ -127,9 +128,7 @@ const TitaniumAgencies = () => {
                   >
                     <div className="agency-logo">
                       <OptimizedImage
-                        src={agency.logo && !agency.logo.startsWith('http')
-                          ? `${API_BASE_URL}/${agency.logo.replace(/\\/g, '/')}`
-                          : (agency.logo || "https://cdn-icons-png.flaticon.com/512/3135/3135715.png")}
+                        src={getImageUrl(agency.logo)}
                         alt={agency.name || 'Agency Logo'}
                         width={80}
                         height={60}

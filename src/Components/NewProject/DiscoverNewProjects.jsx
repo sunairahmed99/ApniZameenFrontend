@@ -6,6 +6,7 @@ import { FaCheckCircle } from 'react-icons/fa';
 import HorizontalScroll from './HorizontalScroll';
 import { NewProjectCardSkeleton } from '../Common/Skeleton';
 import { API_BASE_URL } from '../../config';
+import { getImageUrl } from '../../utils/formatters';
 
 const DiscoverNewProjects = () => {
   const [selectedCity, setSelectedCity] = useState('Islamabad');
@@ -65,7 +66,7 @@ const DiscoverNewProjects = () => {
           <div className="project-grid-v2">
             {paginatedProjects.map((project) => (
               <Link to={`/project-zameen/${project._id}`} key={project._id} className="project-card-v2 text-decoration-none">
-                <div className="project-image-v2" style={{ backgroundImage: `url(${API_BASE_URL}/${project.thumbnail?.replace(/\\/g, '/')})` }}>
+                <div className="project-image-v2" style={{ backgroundImage: `url(${getImageUrl(project.thumbnail)})` }}>
                   {(project.isTrending || project.isHot) && (
                     <div className="trending-badge-v2">
                       <FaCheckCircle className="me-1" size={10} /> {project.isHot ? 'HOT' : 'TRENDING'}

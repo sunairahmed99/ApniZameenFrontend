@@ -6,6 +6,7 @@ import { useLocations } from '../../hooks/useLocations';
 import './ZameenProjects.css';
 import { PropertyCardSkeleton } from '../Common/Skeleton';
 import { API_BASE_URL } from '../../config';
+import { getImageUrl } from '../../utils/formatters';
 import OptimizedImage from '../OptimizedImage';
 
 const ZameenProjects = () => {
@@ -169,21 +170,24 @@ const ZameenProjects = () => {
               const locationDisplay = `${project.city}${project.area ? ', ' + project.area : ''}`;
               const typeDisplay = project.projectTypes ? project.projectTypes.join(', ') : 'Mixed Use';
 
-              const imageSrc = project.thumbnail
-                ? project.thumbnail.startsWith('http') ? project.thumbnail : `${API_BASE_URL}/${project.thumbnail.replace(/\\/g, '/')}`
-                : 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=800&q=80';
+              const imageSrc = getImageUrl(project.thumbnail);
 
               return (
                 <div key={project._id} className="project-column">
                   <Link to={`/project-zameen/${project._id}`} className="text-decoration-none">
                     <div className="project-card-refined">
                       <div className="project-img-container">
-                        <OptimizedImage 
+                        <img 
                             src={imageSrc} 
                             alt={project.name || 'Project Image'} 
-                            width={400} 
-                            height={250} 
-                            loading="lazy" 
+                            fetchPriority="high"
+                            className="project-main-image-img"
+                            style={{
+                              width: '100%',
+                              height: '100%',
+                              objectFit: 'cover',
+                              backgroundColor: '#f0f0f0'
+                            }}
                         />
                         {project.isHot && (
                           <span className="hot-tag">HOT</span>

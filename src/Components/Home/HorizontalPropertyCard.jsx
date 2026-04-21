@@ -129,9 +129,9 @@ const HorizontalPropertyCard = ({ property }) => {
                                 <FaCheckCircle className="text-success fs-5" title="Verified" />
                             </div>
                             <div>
-                                {property.isFeatured && (
-                                    <span className="badge bg-secondary text-warning d-flex align-items-center gap-1" style={{ background: '#333' }}>
-                                        <span>FEATURED</span>
+                                {property.isTitanium && (
+                                    <span className="badge d-flex align-items-center gap-1" style={{ background: 'linear-gradient(45deg, #FFD700, #FFA500)', color: '#000', fontWeight: '800' }}>
+                                        <i className="fas fa-crown"></i> <span>TITANIUM</span>
                                     </span>
                                 )}
                             </div>

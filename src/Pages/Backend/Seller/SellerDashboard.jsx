@@ -209,7 +209,7 @@ const SellerDashboard = () => {
       {propertiesLoading ? (
          <div className="p-4 text-center text-muted"><div className="spinner-border spinner-border-sm text-light"></div> Loading properties...</div>
       ) : myProperties.length === 0 ? (
-         <div className="p-4 text-center text-muted border rounded border-secondary" style={{ background: 'var(--card-dark)' }}>No properties found. <Link to="/seller/add-property" className="text-primary text-decoration-none ms-2">Add New</Link></div>
+         <div className="p-4 text-center text-white border rounded border-secondary" style={{ background: 'var(--card-dark)' }}>No properties found. <Link to="/seller/add-property" className="text-primary text-decoration-none ms-2">Add New</Link></div>
       ) : (
         <div className="property-mock-grid">
            {myProperties.map(p => (

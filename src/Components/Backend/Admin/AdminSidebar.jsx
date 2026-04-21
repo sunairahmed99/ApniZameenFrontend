@@ -55,6 +55,7 @@ const AdminSidebar = ({ isOpen, onClose }) => {
     { path: '/admin/chat', name: 'Chat', icon: <FaComments /> },
     { path: '/admin/blogs', name: 'Blogs', icon: <FaList /> },
     { path: '/admin/jobs', name: 'BiG Jobs', icon: <FaBriefcase /> },
+    { path: '/admin/job-applications', name: 'Job Applications', icon: <FaEnvelope /> },
     { path: '/admin/settings', name: 'Settings', icon: <FaCog /> },
   ];
 

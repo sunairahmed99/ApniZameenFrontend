@@ -49,8 +49,12 @@ const SubscriptionApprovals = () => {
             label: 'Deal',
             render: (value) => (
                 <div>
-                    <span className="badge bg-info text-dark">{value?.name}</span><br />
-                    <small>Limit: {value?.propertyLimit}</small>
+                    <div className="d-flex align-items-center gap-1 mb-1">
+                        <span className="badge bg-info text-dark">{value?.name}</span>
+                        {value?.planType === 'titanium' && <span className="badge" style={{ background: 'linear-gradient(45deg, #FFD700, #FFA500)', color: '#000', fontSize: '9px' }}>TITANIUM</span>}
+                        {value?.planType === 'standard' && <span className="badge bg-secondary" style={{ fontSize: '9px' }}>STANDARD</span>}
+                    </div>
+                    <small>Limit: {value?.propertyLimit} Properties</small>
                 </div>
             )
         },

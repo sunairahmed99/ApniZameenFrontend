@@ -95,7 +95,10 @@ const ManageDeals = () => {
         {
             key: 'planType',
             label: 'Type',
-            render: (value) => value === 'featured' ? <span className="badge bg-warning text-dark">Featured</span> : <span className="badge bg-secondary">Standard</span>
+            render: (value) => {
+                if (value === 'titanium') return <span className="badge" style={{ background: 'linear-gradient(45deg, #FFD700, #FFA500)', color: '#000' }}>Titanium</span>;
+                return <span className="badge bg-secondary">Standard</span>;
+            }
         },
         { key: 'description', label: 'Description' }
     ];
@@ -105,7 +108,7 @@ const ManageDeals = () => {
             <div className="d-flex justify-content-between align-items-center mb-4">
                 <h2 className="mb-0">Manage Deals / Packages</h2>
                 <button className="btn btn-warning" onClick={async () => {
-                    if (!window.confirm('Create default Standard and Featured property plans?')) return;
+                    if (!window.confirm('Create default Standard and Titanium property plans?')) return;
                     try {
                         // Standard Plan
                         await createDeal({
@@ -116,14 +119,14 @@ const ManageDeals = () => {
                             planType: 'standard',
                             description: 'Post 5 standard properties. Visible in normal search results.'
                         });
-                        // Featured Plan
+                        // Titanium Plan
                         await createDeal({
-                            name: 'Featured Listing Plan',
-                            price: 5000,
-                            propertyLimit: 3,
+                            name: 'Titanium Homepage Plan',
+                            price: 15000,
+                            propertyLimit: 2,
                             durationDays: 30,
-                            planType: 'featured',
-                            description: 'Post 3 FEATURED properties. Visible on Home Page with premium badge.'
+                            planType: 'titanium',
+                            description: 'Post 2 TITANIUM properties. Visible on Home Page main sliders with premium badge.'
                         });
                         alert('Default Property Plans Created!');
                     } catch (err) {
@@ -160,7 +163,7 @@ const ManageDeals = () => {
                             <label className="form-label">Plan Type</label>
                             <select className="form-select" name="planType" value={formData.planType} onChange={handleChange}>
                                 <option value="standard">Standard (Normal Listing)</option>
-                                <option value="featured">Featured (Home Page)</option>
+                                <option value="titanium">Titanium (Home Page Sliders)</option>
                             </select>
                         </div>
                         <div className="col-md-12">

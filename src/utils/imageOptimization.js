@@ -47,8 +47,13 @@ export const optimizeImageUrl = (url, options = {}) => {
         }
     }
 
-    // For external URLs (Unsplash, etc.), use their optimization params
+    // For external URLs (Unsplash, etc.), use their optimization params if they don't have them
     if (url.includes('unsplash.com')) {
+        // If the URL already has width/quality/auto params, don't append more
+        if (url.includes('w=') || url.includes('q=') || url.includes('auto=')) {
+            return url;
+        }
+
         const params = new URLSearchParams();
         if (width) params.append('w', width);
         if (height) params.append('h', height);
@@ -57,6 +62,11 @@ export const optimizeImageUrl = (url, options = {}) => {
 
         const separator = url.includes('?') ? '&' : '?';
         return `${url}${separator}${params.toString()}`;
+    }
+
+    // Skip optimization for other absolute URLs if they are not from our server or Cloudinary
+    if (url.startsWith('http') && !url.includes(API_BASE_URL) && !url.includes('cloudinary.com')) {
+        return url;
     }
 
     return url;

@@ -4,6 +4,8 @@ import { FaMapMarkerAlt, FaCheck, FaPhoneAlt, FaEnvelope, FaBuilding, FaLayerGro
 import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer/Footer';
 import { useProject } from '../hooks/useProjects';
+import { getImageUrl } from '../utils/formatters';
+import SEO from '../Components/SEO';
 
 import { API_BASE_URL } from '../config';
 
@@ -19,7 +21,7 @@ const ProjectDetail = () => {
     const mainGallery = project.gallery || [];
     const mainImg = project.thumbnail || (mainGallery[0] || 'https://via.placeholder.com/800x400');
     const priceRangeText = `PKR ${project.priceRange?.min} ${project.priceRange?.unit} to ${project.priceRange?.max} ${project.priceRange?.unit}`;
-    const projectImage = mainImg?.startsWith('http') ? mainImg : `${API_BASE_URL}/${mainImg}`;
+    const projectImage = getImageUrl(mainImg);
 
     return (
         <div>
@@ -52,11 +54,11 @@ const ProjectDetail = () => {
 
                 {/* Gallery Grid */}
                 <div className="pd-gallery-grid">
-                    <img src={mainImg} alt={project.name} className="pd-main-img" />
+                    <img src={getImageUrl(mainImg)} alt={project.name} className="pd-main-img" />
                     <div className="pd-side-gallery">
-                        <img src={mainGallery[1] || mainImg} alt="" className="pd-side-img" />
+                        <img src={getImageUrl(mainGallery[1] || mainImg)} alt="" className="pd-side-img" />
                         <div style={{ position: 'relative' }}>
-                            <img src={mainGallery[2] || mainImg} alt="" className="pd-side-img" />
+                            <img src={getImageUrl(mainGallery[2] || mainImg)} alt="" className="pd-side-img" />
                             <div className="gallery-overlay d-flex align-items-center justify-content-center text-white cursor-pointer" style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.4)', borderRadius: '8px' }}>
                                 <FaImages className="me-2" /> View All
                             </div>
@@ -111,9 +113,20 @@ const ProjectDetail = () => {
                                             <div className="pd-cat-units">
                                                 {cat.units.map((unit, j) => (
                                                     <div key={j} className="pd-unit-card">
-                                                        <div>
-                                                            <div className="fw-bold">{unit.title}</div>
-                                                            <small className="text-secondary">Area: {unit.area} | Beds: {unit.beds} | Baths: {unit.baths}</small>
+                                                        <div className="d-flex align-items-center gap-3">
+                                                            {unit.floorPlan && (
+                                                                <img 
+                                                                    src={getImageUrl(unit.floorPlan)} 
+                                                                    alt="Plan" 
+                                                                    style={{ width: '50px', height: '50px', objectFit: 'cover', borderRadius: '4px' }}
+                                                                    className="cursor-pointer"
+                                                                    onClick={() => window.open(getImageUrl(unit.floorPlan), '_blank')}
+                                                                />
+                                                            )}
+                                                            <div>
+                                                                <div className="fw-bold">{unit.title}</div>
+                                                                <small className="text-secondary">Area: {unit.area} | Beds: {unit.beds} | Baths: {unit.baths}</small>
+                                                            </div>
                                                         </div>
                                                         <div className="text-success fw-bold">PKR {unit.price}</div>
                                                     </div>
@@ -225,7 +238,7 @@ const ProjectDetail = () => {
                                     <div className="p-3 border rounded h-100 bg-white">
                                         <small className="text-secondary d-block mb-2">Developed By</small>
                                         <div className="d-flex align-items-center">
-                                            <img src={project.developer?.logo} alt="" style={{ width: '60px' }} className="me-3" />
+                                            <img src={getImageUrl(project.developer?.logo)} alt="" style={{ width: '60px' }} className="me-3" />
                                             <div>
                                                 <strong>{project.developer?.name}</strong>
                                                 <p className="small text-secondary mb-0" style={{ fontSize: '11px' }}>{project.developer?.description?.substring(0, 80)}...</p>
@@ -238,7 +251,7 @@ const ProjectDetail = () => {
                                         <div className="p-3 border rounded h-100 bg-white">
                                             <small className="text-secondary d-block mb-2">Marketed By</small>
                                             <div className="d-flex align-items-center">
-                                                <img src={project.marketedBy?.logo} alt="" style={{ width: '60px' }} className="me-3" />
+                                                <img src={getImageUrl(project.marketedBy?.logo)} alt="" style={{ width: '60px' }} className="me-3" />
                                                 <div>
                                                     <strong>{project.marketedBy?.name}</strong>
                                                     <p className="small text-secondary mb-0" style={{ fontSize: '11px' }}>Official sales and marketing partner.</p>
@@ -280,7 +293,7 @@ const ProjectDetail = () => {
 
                             <div className="mt-4 pt-3 border-top">
                                 <div className="d-flex align-items-center mb-3">
-                                    <img src={project.developer?.logo || 'https://via.placeholder.com/40'} alt="" className="rounded-circle me-3" style={{ width: '40px', height: '40px' }} />
+                                    <img src={getImageUrl(project.developer?.logo)} alt="" className="rounded-circle me-3" style={{ width: '40px', height: '40px' }} />
                                     <div>
                                         <div className="fw-bold small">{project.developer?.name || 'Zameen Developments'}</div>
                                         <small className="text-secondary" style={{ fontSize: '11px' }}>Official Developer</small>

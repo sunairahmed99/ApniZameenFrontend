@@ -14,6 +14,7 @@ import { useParams } from 'react-router-dom';
 import { API_BASE_URL } from '../config';
 // import axios from 'axios'; // Removed
 import { useProject, useProjectInquiry } from '../hooks/useProjects';
+import { getImageUrl } from '../utils/formatters';
 import { useNavigate } from 'react-router-dom';
 import { IoIosShareAlt } from "react-icons/io";
 import { useMemo } from 'react';
@@ -97,7 +98,7 @@ const ZameenProjectDetail = () => {
         if (!project) return [];
         if (project.thumbnail) imgs.push(project.thumbnail);
         if (project.gallery) imgs.push(...project.gallery);
-        return imgs.map(url => url.startsWith('http') ? url : `${API_BASE_URL}/${url.replace(/\\/g, '/')}`);
+        return imgs.map(url => getImageUrl(url));
     }, [project]);
 
     const projectFeatures = useMemo(() => {
@@ -221,7 +222,7 @@ const ZameenProjectDetail = () => {
                         <div className="zp-project-title">
                             <div className="d-flex align-items-center gap-2 mb-2">
                                 <img
-                                    src={project.developer?.logo ? `${API_BASE_URL}/${project.developer.logo.replace(/\\/g, '/')}` : allImages[0]}
+                                    src={getImageUrl(project.developer?.logo || allImages[0])}
                                     alt="Logo"
                                     className="rounded border"
                                     style={{ width: '50px', height: '50px', objectFit: 'contain', background: '#fff' }}
@@ -533,7 +534,7 @@ const ZameenProjectDetail = () => {
                                     <div className="zp-floor-display flex-grow-1 p-4 d-flex align-items-center justify-content-center bg-white">
                                         {project.floorPlans.find(p => p.title === activeFloor)?.image ? (
                                             <img
-                                                src={`${API_BASE_URL}/${project.floorPlans.find(p => p.title === activeFloor).image.replace(/\\/g, '/')}`}
+                                                src={getImageUrl(project.floorPlans.find(p => p.title === activeFloor).image)}
                                                 alt="Floor Plan"
                                                 className="img-fluid"
                                                 style={{ maxHeight: '350px' }}
@@ -568,7 +569,7 @@ const ZameenProjectDetail = () => {
                                     {project.projectPaymentPlans.map((plan, i) => (
                                         <img
                                             key={i}
-                                            src={`${API_BASE_URL}/${plan.replace(/\\/g, '/')}`}
+                                            src={getImageUrl(plan)}
                                             alt="Payment Plan"
                                             className="img-fluid rounded border shadow-sm"
                                         />
@@ -585,7 +586,7 @@ const ZameenProjectDetail = () => {
                                 <div className="col-md-6">
                                     <div className="p-4 border rounded bg-light h-100">
                                         <div className="d-flex align-items-center gap-3 mb-3">
-                                            <img src={project.marketedBy?.logo ? `${API_BASE_URL}/${project.marketedBy.logo.replace(/\\/g, '/')}` : allImages[0]} alt="Logo" className="rounded-circle border bg-white" style={{ width: '60px', height: '60px', objectFit: 'contain' }} />
+                                            <img src={getImageUrl(project.marketedBy?.logo || allImages[0])} alt="Logo" className="rounded-circle border bg-white" style={{ width: '60px', height: '60px', objectFit: 'contain' }} />
                                             <div>
                                                 <div className="small text-secondary text-uppercase">Marketed By</div>
                                                 <h4 className="m-0">{project.marketedBy?.name || "Zameen.com"}</h4>
@@ -597,7 +598,7 @@ const ZameenProjectDetail = () => {
                                 <div className="col-md-6" id="developer">
                                     <div className="p-4 border rounded bg-light h-100">
                                         <div className="d-flex align-items-center gap-3 mb-3">
-                                            <img src={project.developer?.logo ? `${API_BASE_URL}/${project.developer.logo.replace(/\\/g, '/')}` : allImages[0]} alt="Logo" className="rounded-circle border bg-white" style={{ width: '60px', height: '60px', objectFit: 'contain' }} />
+                                            <img src={getImageUrl(project.developer?.logo || allImages[0])} alt="Logo" className="rounded-circle border bg-white" style={{ width: '60px', height: '60px', objectFit: 'contain' }} />
                                             <div>
                                                 <div className="small text-secondary text-uppercase">Developed By</div>
                                                 <h4 className="m-0">{project.developer?.name || "Zameen Developments"}</h4>

@@ -4,17 +4,25 @@ import { FaMapMarkerAlt, FaBriefcase, FaMoneyBillWave, FaHeartbeat, FaChartLine,
 import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer/Footer';
 import { useJobs } from '../hooks/useJobs';
+import JobApplicationModal from '../Components/Jobs/JobApplicationModal';
 
 const Jobs = () => {
     const openingsRef = useRef(null);
     const [filterDept, setFilterDept] = useState('All');
     const [filterLoc, setFilterLoc] = useState('All');
+    const [isAppModalOpen, setIsAppModalOpen] = useState(false);
+    const [selectedJob, setSelectedJob] = useState(null);
+
+    const handleApplyClick = (job) => {
+        setSelectedJob(job);
+        setIsAppModalOpen(true);
+    };
 
     const scrollToOpenings = () => {
         openingsRef.current?.scrollIntoView({ behavior: 'smooth' });
     };
 
-    const { data: jobs = [] } = useJobs();
+    const { data: jobs = [], isLoading, error } = useJobs();
 
     const departments = ['All', ...new Set(jobs.map(job => job.department))];
     const locations = ['All', ...new Set(jobs.map(job => job.location))];
@@ -27,8 +35,11 @@ const Jobs = () => {
 
     // Group by location for display
     const jobsByLocation = filteredJobs.reduce((acc, job) => {
-        if (!acc[job.location]) acc[job.location] = [];
-        acc[job.location].push(job);
+        // Group by city name instead of specific location detail
+        // Example: "Karachi (DHA)" -> "Karachi"
+        const groupLabel = job.location.split('(')[0].trim() || job.location;
+        if (!acc[groupLabel]) acc[groupLabel] = [];
+        acc[groupLabel].push(job);
         return acc;
     }, {});
 
@@ -177,7 +188,7 @@ const Jobs = () => {
                                     </div>
                                     <div className="row">
                                         {locationJobs.map(job => (
-                                            <div key={job.id} className="col-md-6">
+                                            <div key={job._id} className="col-6 col-md-6">
                                                 <div className="job-card">
                                                     <div className="job-info">
                                                         <h3>{job.title}</h3>
@@ -191,7 +202,12 @@ const Jobs = () => {
                                                         </div>
                                                     </div>
                                                     <div className="job-action">
-                                                        <button className="btn-apply">Apply</button>
+                                                        <button 
+                                                            className="btn-apply"
+                                                            onClick={() => handleApplyClick(job)}
+                                                        >
+                                                            Apply
+                                                        </button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -205,6 +221,13 @@ const Jobs = () => {
                     </div>
                 </div>
             </section>
+            
+            <JobApplicationModal 
+                isOpen={isAppModalOpen} 
+                onClose={() => setIsAppModalOpen(false)} 
+                job={selectedJob} 
+            />
+
             <Footer />
         </div>
     );

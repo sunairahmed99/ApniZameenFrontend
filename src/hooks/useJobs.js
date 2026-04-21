@@ -1,15 +1,14 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
+import { API_BASE_URL } from '../config';
 
-const API_URL = '/api/jobs';
+const API_URL = `${API_BASE_URL}/api/jobs`;
 
 // Fetch jobs (public or admin)
 export const useJobs = (isAdmin = false) => {
     return useQuery({
         queryKey: ['jobs', isAdmin],
         queryFn: async () => {
-            // For public view, we might want to filter active only on backend or pass a param
-            // But for now, backend returns all if admin, and we can filter on frontend or pass params
             const { data } = await axios.get(`${API_URL}${isAdmin ? '?isAdmin=true' : ''}`);
             return data;
         }

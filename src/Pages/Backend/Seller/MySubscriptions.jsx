@@ -101,7 +101,11 @@ const MySubscriptions = () => {
                                                 </div>
                                             </td>
                                             <td>
-                                                <div className="fw-bold text-dark">{req.dealId?.name}</div>
+                                                <div className="d-flex align-items-center gap-2">
+                                                    <div className="fw-bold text-dark">{req.dealId?.name}</div>
+                                                    {req.dealId?.planType === 'titanium' && <span className="badge" style={{ background: 'linear-gradient(45deg, #FFD700, #FFA500)', color: '#000', fontSize: '9px' }}>TITANIUM</span>}
+                                                    {req.dealId?.planType === 'standard' && <span className="badge bg-secondary" style={{ fontSize: '9px' }}>STANDARD</span>}
+                                                </div>
                                                 <div className="small text-muted">{req.dealId?.propertyLimit} Properties Limit</div>
                                             </td>
                                             <td>

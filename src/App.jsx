@@ -46,6 +46,7 @@ const AdminProjectPlans = lazy(() => import('./Pages/Backend/Admin/Plans/AdminPr
 const AdminUpgradeRequests = lazy(() => import('./Pages/Backend/Admin/Agencies/AdminUpgradeRequests'));
 const AdminBannerPlans = lazy(() => import('./Pages/Backend/Admin/Plans/AdminBannerPlans'));
 const AdminJobs = lazy(() => import('./Pages/Backend/Admin/Jobs/AdminJobs'));
+const AdminJobApplications = lazy(() => import('./Pages/Backend/Admin/Jobs/AdminJobApplications'));
 const PropertyManagement = lazy(() => import('./Pages/Backend/Admin/PropertyManagement'));
 const LocationManagement = lazy(() => import('./Pages/Backend/Admin/LocationManagement'));
 const Inquiries = lazy(() => import('./Pages/Backend/Admin/Inquiries'));
@@ -156,6 +157,7 @@ export default function App() {
                 <Route path="chat" element={<AdminChat />} />
                 <Route path="pending-payments" element={<PendingPayments />} />
                 <Route path="jobs" element={<AdminJobs />} />
+                <Route path="job-applications" element={<AdminJobApplications />} />
                 <Route path="settings" element={<SiteSettings />} />
 
                 {/* Blog Management */}

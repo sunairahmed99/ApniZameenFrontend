@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 import OptimizedImage from '../OptimizedImage';
 import { API_BASE_URL } from '../../config';
+import { getImageUrl } from '../../utils/formatters';
 import { fetchPropertyDetail } from '../../hooks/useProperties';
 import { fetchProjectDetail } from '../../hooks/useProjects';
 
@@ -32,9 +33,7 @@ const PropertyCard = ({ property }) => {
 
         const calculatedImage = property.thumbnail || property.mainImage || (property.images && property.images.length > 0 ? property.images[0] : null) || 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=800&q=80';
 
-        const finalImage = (calculatedImage && !calculatedImage.startsWith('http'))
-            ? `${API_BASE_URL}/${calculatedImage.replace(/\\/g, '/')}`
-            : calculatedImage;
+        const finalImage = getImageUrl(calculatedImage);
 
         const calculatedLocation = property.city ? `${property.areaName || property.location || ''}, ${property.city}` : property.location;
 
@@ -95,6 +94,11 @@ const PropertyCard = ({ property }) => {
                 <div className="position-absolute top-0 end-0 m-2 badge bg-success">
                     {property.status || 'For Sale'}
                 </div>
+                {property.isTitanium && (
+                    <div className="position-absolute top-0 start-0 m-2 badge" style={{ background: 'linear-gradient(45deg, #FFD700, #FFA500)', color: '#000', fontWeight: '800' }}>
+                        <i className="fas fa-crown me-1"></i> TITANIUM
+                    </div>
+                )}
             </div>
             <div className="card-body">
                 <h5 className="card-title text-truncate fw-bold mb-1">{title}</h5>

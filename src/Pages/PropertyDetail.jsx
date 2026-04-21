@@ -154,7 +154,14 @@ const PropertyDetail = () => {
                 <div className="row mb-3">
                     <div className="col-12 d-flex justify-content-between align-items-end">
                         <div className="pd-header-title">
-                            <h1>{property.name || property.title}</h1>
+                            <div className="d-flex align-items-center gap-2">
+                                <h1>{property.name || property.title}</h1>
+                                {property.isTitanium && (
+                                    <span className="badge" style={{ background: 'linear-gradient(45deg, #FFD700, #FFA500)', color: '#000', fontWeight: '800', verticalAlign: 'middle', height: 'fit-content' }}>
+                                        <i className="fas fa-crown me-1"></i> TITANIUM
+                                    </span>
+                                )}
+                            </div>
                             <div className="pd-header-location">
                                 <FaMapMarkerAlt className="me-1" />
                                 {property.location || `${safeRender(property.area)}, ${property.blockName ? property.blockName + ', ' : ''}${property.city}`}
