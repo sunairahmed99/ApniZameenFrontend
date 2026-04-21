@@ -18,18 +18,29 @@ const OptimizedImage = ({
 }) => {
     const [isLoaded, setIsLoaded] = useState(false);
     const optimizedSrc = optimizeImageUrl(src, { width, height, quality });
-    const imgRef = useRef(null);
+    
+    // Generate srcset for better responsiveness if width/height are provided
+    const generateSrcSet = () => {
+        if (!src || !width || !src.includes('cloudinary.com')) return null;
+        
+        const sizes = [0.5, 1, 1.5, 2]; // 0.5x for mobile, 1x standard, 2x for retina
+        return sizes
+            .map(s => {
+                const w = Math.round(width * s);
+                const h = height ? Math.round(height * s) : null;
+                return `${optimizeImageUrl(src, { width: w, height: h, quality })} ${w}w`;
+            })
+            .join(', ');
+    };
 
-    useEffect(() => {
-        if (imgRef.current && imgRef.current.complete) {
-            setIsLoaded(true);
-        }
-    }, [src]);
+    const srcSet = generateSrcSet();
 
     return (
         <img
             ref={imgRef}
             src={optimizedSrc || src}
+            srcSet={srcSet}
+            sizes={width ? `(max-width: ${width}px) 100vw, ${width}px` : '100vw'}
             alt={alt}
             width={width}
             height={height}
@@ -38,10 +49,11 @@ const OptimizedImage = ({
                 opacity: isLoaded ? 1 : 0.6,
                 transition: 'opacity 0.4s ease-in-out',
                 backgroundColor: '#f5f5f5',
+                objectFit: 'cover',
                 ...style
             }}
             loading={isPriority ? 'eager' : loading}
-            fetchPriority={isPriority ? 'high' : fetchPriority}
+            fetchpriority={isPriority ? 'high' : fetchPriority}
             onLoad={() => {
                 setIsLoaded(true);
                 if (onLoad) onLoad();

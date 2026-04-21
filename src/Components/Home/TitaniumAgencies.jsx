@@ -41,7 +41,7 @@ const TitaniumAgencies = () => {
     setStartIndex(0);
   }, [activeCity]);
 
-  const { data: agencies = [], isLoading: loading } = useFeaturedAgencies(activeCity);
+  const { data: agencies = [], isLoading: loading } = useFeaturedAgencies(activeCity, 12);
   const itemsPerPage = 8; // Show 8 agencies at once (2 rows x 4 columns on desktop)
   const slideBy = 8; // Slide by 8 agencies
 

@@ -128,10 +128,10 @@ export const useAgenciesList = (params) => {
     });
 };
 
-export const useFeaturedAgencies = (city) => {
+export const useFeaturedAgencies = (city, limit) => {
     return useQuery({
-        queryKey: ['agencies_list', { titanium: true, city }],
-        queryFn: () => fetchAgencies({ titanium: true, city }),
+        queryKey: ['agencies_list', { titanium: true, city, limit }],
+        queryFn: () => fetchAgencies({ titanium: true, city, limit }),
         staleTime: 15 * 60 * 1000,
     });
 };

@@ -226,6 +226,13 @@ const EditProperty = () => {
                 alert("Please upload a valid video file.");
                 return;
             }
+            // 50MB limit check
+            const maxSize = 50 * 1024 * 1024; // 50MB
+            if (file.size > maxSize) {
+                alert("Video file is too large. Maximum allowed size is 50MB.");
+                e.target.value = ''; // Reset input
+                return;
+            }
             setVideo(file);
         }
     };
@@ -253,8 +260,11 @@ const EditProperty = () => {
             await updateMutation.mutateAsync({ id, formData: data, token: user.token });
             setSuccess(true);
         } catch (err) {
-            
-            setError(err.response?.data?.message || err.message || 'Failed to update property.');
+            console.error("Update Error:", err);
+            const errorMessage = err.response?.data?.details 
+                ? `${err.response.data.message}: ${err.response.data.details}` 
+                : (err.response?.data?.message || err.message || 'Failed to update property.');
+            setError(errorMessage);
         }
     };
 

@@ -327,11 +327,17 @@ const FeaturedProperties = () => {
         });
     };
 
-    // Use React Query for Rent Properties
-    const { data: rentProperties = [], isLoading: loadingRent } = useProperties({ purpose: 'For Rent', city: rentCity, titanium: true, limit: 200 }, { keepPreviousData: true });
+    // Use React Query for Rent Properties - Optimized for Homepage (12 items limit)
+    const { data: rentProperties = [], isLoading: loadingRent } = useProperties(
+        { purpose: 'For Rent', city: rentCity, titanium: true, limit: 12 }, 
+        { keepPreviousData: true, staleTime: 5 * 60 * 1000 }
+    );
 
-    // Use React Query for Sale Properties
-    const { data: saleProperties = [], isLoading: loadingSale } = useProperties({ purpose: 'For Sale', city: saleCity, titanium: true, limit: 200 }, { keepPreviousData: true });
+    // Use React Query for Sale Properties - Optimized for Homepage (12 items limit)
+    const { data: saleProperties = [], isLoading: loadingSale } = useProperties(
+        { purpose: 'For Sale', city: saleCity, titanium: true, limit: 12 }, 
+        { keepPreviousData: true, staleTime: 5 * 60 * 1000 }
+    );
 
     return (
         <div className="featured-properties-section py-5 bg-white">

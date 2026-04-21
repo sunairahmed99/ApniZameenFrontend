@@ -141,6 +141,13 @@ const AddProperty = () => {
                 alert("Please upload a valid video file.");
                 return;
             }
+            // 50MB limit check
+            const maxSize = 50 * 1024 * 1024; // 50MB
+            if (file.size > maxSize) {
+                alert("Video file is too large. Maximum allowed size is 50MB.");
+                e.target.value = ''; // Reset input
+                return;
+            }
             setVideo(file);
         }
     };
@@ -182,10 +189,16 @@ const AddProperty = () => {
             await createPropertyMutation.mutateAsync(data);
             setSuccess(true);
         } catch (err) {
+            console.error("Submission Error:", err);
             const errorMessage = err.response?.data?.details 
                 ? `${err.response.data.message}: ${err.response.data.details}` 
-                : (err.response?.data?.message || 'Failed to submit property.');
+                : (err.response?.data?.message || err.message || 'Failed to submit property.');
+            
             setError(errorMessage);
+            // Optionally set debug info for complex errors
+            if (err.response?.data?.error) {
+                setDebugInfo(err.response.data.error);
+            }
         }
     };
 

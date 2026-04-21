@@ -11,6 +11,7 @@ import ZameenCommunity from '../Components/Home/ZameenCommunity';
 import Footer from '../Components/Footer/Footer';
 import SEO from '../Components/SEO';
 import { generateOrganizationStructuredData } from '../utils/seo';
+import LazySection from '../Components/Common/LazySection';
 
 const Homepage = () => {
   const location = useLocation();
@@ -52,13 +53,30 @@ const Homepage = () => {
         setCity={setCity}
         showHeading={true}
       />
-      <BrowseProperties listingType={listingType} city={city} />
-      <FeaturedProperties />
-      <ZameenProjects />
+      
+      <LazySection height="200px">
+        <BrowseProperties listingType={listingType} city={city} />
+      </LazySection>
 
-      <TitaniumAgencies />
-      <ZameenCommunity />
-      <Footer />
+      <LazySection height="500px">
+        <FeaturedProperties />
+      </LazySection>
+
+      <LazySection height="400px">
+        <ZameenProjects />
+      </LazySection>
+
+      <LazySection height="400px">
+        <TitaniumAgencies />
+      </LazySection>
+
+      <LazySection height="300px">
+        <ZameenCommunity />
+      </LazySection>
+
+      <LazySection height="300px">
+        <Footer />
+      </LazySection>
     </div>
   );
 };

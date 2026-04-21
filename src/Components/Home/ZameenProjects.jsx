@@ -42,7 +42,7 @@ const ZameenProjects = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const { data: rawProjects = [], isLoading: loading } = useProjectsList({ city: activeCity });
+  const { data: rawProjects = [], isLoading: loading } = useProjectsList({ city: activeCity, limit: 12 });
   const projects = rawProjects.filter(p => p.isActive);
 
   useEffect(() => {
@@ -177,10 +177,12 @@ const ZameenProjects = () => {
                   <Link to={`/project-zameen/${project._id}`} className="text-decoration-none">
                     <div className="project-card-refined">
                       <div className="project-img-container">
-                        <img 
+                        <OptimizedImage 
                             src={imageSrc} 
                             alt={project.name || 'Project Image'} 
-                            fetchPriority="high"
+                            width={400}
+                            height={300}
+                            isPriority={index < 3} // Prioritize the first few visible projects
                             className="project-main-image-img"
                             style={{
                               width: '100%',
