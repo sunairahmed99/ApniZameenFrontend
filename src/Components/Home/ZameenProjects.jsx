@@ -162,7 +162,7 @@ const ZameenProjects = () => {
           )}
 
           <div className="row projects-row g-4">
-            {projectsToRender.map((project) => {
+            {projectsToRender.map((project, index) => {
               const priceDisplay = formatRange(project.priceRange?.min, project.priceRange?.max, '');
               const sizeDisplay = project.sizeRange?.min && project.sizeRange?.max
                 ? `${project.sizeRange.min} - ${project.sizeRange.max} ${project.sizeRange.unit || 'Marla'}`

@@ -17,6 +17,7 @@ const OptimizedImage = ({
     ...props
 }) => {
     const [isLoaded, setIsLoaded] = useState(false);
+    const imgRef = useRef(null);
     const optimizedSrc = optimizeImageUrl(src, { width, height, quality });
     
     // Generate srcset for better responsiveness if width/height are provided
