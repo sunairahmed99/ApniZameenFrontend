@@ -99,6 +99,7 @@ const Navbar = ({ currentCategory, setCurrentCategory, listingType, setListingTy
         { label: 'ADVERTISE', path: '/advertise', active: location.pathname === '/advertise' },
         { label: 'JOBS', path: '/jobs', active: location.pathname === '/jobs' },
         { label: 'SUPPORT', path: '/support', active: location.pathname === '/support' },
+        { label: 'HOW TO POST PROPERTY', path: '/how-to-post', active: location.pathname === '/how-to-post', bold: true },
         ...(user && user.role === 'admin' ? [{ label: 'ADMIN PANEL', path: '/admin', active: location.pathname.startsWith('/admin') }] : []),
         ...(user ? [{ label: 'SELLER PANEL', path: '/seller', active: location.pathname.startsWith('/seller') }] : [])
     ];
@@ -119,6 +120,7 @@ const Navbar = ({ currentCategory, setCurrentCategory, listingType, setListingTy
                         <div
                             key={index}
                             className={`sidebar-nav-item ${item.active ? 'active' : ''}`}
+                            style={item.bold ? { fontWeight: '800', color: '#1a4e32' } : {}}
                             onClick={() => {
                                 if (item.category || item.type) {
                                     handleNavigation(item.category, item.type);
@@ -193,6 +195,9 @@ const Navbar = ({ currentCategory, setCurrentCategory, listingType, setListingTy
                             <li className={`nav-item main-link divider-left ${location.pathname === '/support' ? 'active' : ''}`}>
                                 <Link className="nav-link" to="/support">SUPPORT</Link>
                             </li>
+                            <li className={`nav-item main-link divider-left ${location.pathname === '/how-to-post' ? 'active' : ''}`}>
+                                <Link className="nav-link" to="/how-to-post" style={{ fontWeight: '800', color: '#1a4e32' }}>HOW TO POST PROPERTY</Link>
+                            </li>
                         </ul>
                     </div>
 
@@ -202,11 +207,29 @@ const Navbar = ({ currentCategory, setCurrentCategory, listingType, setListingTy
                             <>
                                 {user.role === 'admin' && (
                                     <div className="nav-item main-link divider-left me-2">
-                                        <Link className="nav-link" to="/admin">ADMIN PANEL</Link>
+                                        <Link 
+                                            className="nav-link" 
+                                            to="/admin"
+                                            onMouseEnter={() => {
+                                                import('./Backend/Admin/AdminLayout');
+                                                import('../Pages/Backend/Admin/AdminDashboard');
+                                            }}
+                                        >
+                                            ADMIN PANEL
+                                        </Link>
                                     </div>
                                 )}
                                 <div className="nav-item main-link divider-left me-2">
-                                    <Link className="nav-link" to="/seller">SELLER PANEL</Link>
+                                    <Link 
+                                        className="nav-link" 
+                                        to="/seller"
+                                        onMouseEnter={() => {
+                                            import('./Backend/Seller/SellerLayout');
+                                            import('../Pages/Backend/Seller/SellerDashboard');
+                                        }}
+                                    >
+                                        SELLER PANEL
+                                    </Link>
                                 </div>
                             </>
                         )}

@@ -23,6 +23,7 @@ const Advertise = lazy(() => import('./Pages/Advertise'));
 const TermsOfUse = lazy(() => import('./Pages/TermsOfUse'));
 const HelpSupport = lazy(() => import('./Pages/HelpSupport'));
 const Jobs = lazy(() => import('./Pages/Jobs'));
+const Tutorial = lazy(() => import('./Pages/Tutorial'));
 
 // Admin Blog Pages
 const Blogs = lazy(() => import('./Pages/Backend/Admin/Blogs/Blogs'));
@@ -84,9 +85,22 @@ import NetworkStatus from './Components/NetworkStatus';
 import ScrollToTop from './Components/Common/ScrollToTop';
 
 const LoadingFallback = () => (
-  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-start', paddingTop: '140px', height: '100vh', fontSize: '1.2rem', color: '#3b82f6' }}>
-    <div className="spinner-border text-light" role="status">
+  <div style={{ 
+    display: 'flex', 
+    flexDirection: 'column',
+    justifyContent: 'center', 
+    alignItems: 'center', 
+    paddingTop: '140px', 
+    height: '100vh', 
+    background: '#f8fafc',
+    color: '#3b82f6',
+    zIndex: 9999
+  }}>
+    <div className="spinner-border text-primary" role="status" style={{ width: '3rem', height: '3rem' }}>
       <span className="visually-hidden">Loading...</span>
+    </div>
+    <div style={{ marginTop: '20px', fontWeight: '500', color: '#64748b' }}>
+      Loading Apni Zameen...
     </div>
   </div>
 );
@@ -124,6 +138,7 @@ export default function App() {
               <Route path="/terms-of-use" element={<TermsOfUse />} />
               <Route path="/support" element={<HelpSupport />} />
               <Route path="/jobs" element={<Jobs />} />
+              <Route path="/how-to-post" element={<Tutorial />} />
               <Route path="/:type/:city" element={<SearchResults />} />
 
 

@@ -46,6 +46,13 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
+.city-nav-btn svg {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    display: block;
+}
+
 .city-nav-btn:hover {
     background: #f8f8f8;
     color: #ff6b6b;
@@ -111,6 +118,13 @@
     cursor: pointer;
     z-index: 10;
     transition: transform 0.2s;
+}
+
+.nav-arrow svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    display: block;
 }
 
 .nav-arrow:hover {

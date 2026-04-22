@@ -35,19 +35,8 @@ const NewProjectBanner = () => {
         {/* <h1 className="banner-title">{title}</h1>
         <p className="banner-subtitle">{subtitle}</p> */}
 
-        {displayBanner && displayBanner.link && (
-          <div style={{ marginBottom: '20px' }}>
-            <a
-              href={displayBanner.link}
-              className="btn btn-primary"
-              style={{ padding: '10px 20px', fontWeight: 'bold' }}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {displayBanner.buttonText || 'Learn More'}
-            </a>
-          </div>
-        )}
+        {/* Button removed as per user request */}
+
 
       </div>
     </div >
