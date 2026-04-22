@@ -9,12 +9,27 @@ import './ChatWidget.css';
 
 
 const ChatWidget = () => {
-    const { user, socket, isOpen, setIsOpen, activeChat, setActiveChat, unreadCount, toggleWidget } = useSocket();
+    const { 
+        user, socket, isOpen, setIsOpen, activeChat, setActiveChat, unreadCount, toggleWidget,
+        isAuthRequired, setIsAuthRequired 
+    } = useSocket();
     const [message, setMessage] = useState('');
     const [messages, setMessages] = useState([]);
     const [view, setView] = useState('list'); // 'list' or 'chat'
     const messagesEndRef = useRef(null);
     const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+
+    // Trigger modal when global auth state requires it (from property cards/details)
+    useEffect(() => {
+        if (isAuthRequired) {
+            setIsAuthModalOpen(true);
+        }
+    }, [isAuthRequired]);
+
+    const handleCloseAuthModal = () => {
+        setIsAuthModalOpen(false);
+        setIsAuthRequired(false);
+    };
 
     const { data: chats = [], refetch: refetchChats } = useChats(user?._id || user?.id);
     const initiateChatMutation = useInitiateChat();
@@ -85,6 +100,15 @@ const ChatWidget = () => {
         if (socket) {
             const handleMsg = (msg) => {
                 if (activeChat && (msg.chatId === activeChat._id || msg.chatId === activeChat.chatId)) {
+                    // Check if message is from current user
+                    const currentId = user?._id || user?.id;
+                    const senderId = msg.senderId || msg.sender;
+                    
+                    // If it's our own message, don't add it again (already handled by handleSend's optimistic update)
+                    if (senderId && currentId && String(senderId) === String(currentId)) {
+                        return;
+                    }
+
                     setMessages((prev) => [...prev, msg]);
                     scrollToBottom();
                     socket.emit('mark_as_read', { chatId: msg.chatId, userId: user?._id || user?.id });
@@ -115,6 +139,10 @@ const ChatWidget = () => {
             return { _id: id };
         }
 
+        // Safety gate: openChatWith already prevents unauthorized calls, 
+        // but this check ensures no mutation is called if user is missing.
+        if (!user) return null;
+
         try {
             const chat = await initiateChatMutation.mutateAsync({
                 userId: user._id || user.id,
@@ -135,6 +163,7 @@ const ChatWidget = () => {
                 return mergedChat;
             }
         } catch (err) {
+            // Only alert for actual API failures, not authentication
             alert("Failed to start chat. Please try again.");
             return null;
         }
@@ -203,7 +232,7 @@ const ChatWidget = () => {
 
     const handleFabClick = () => {
         if (!user) {
-            setIsAuthModalOpen(true);
+            setIsAuthRequired(true);
         } else {
             toggleWidget();
         }
@@ -217,7 +246,7 @@ const ChatWidget = () => {
                 {unreadCount > 0 && <span className="chat-badge">{unreadCount}</span>}
             </div>
 
-            <AuthModal isOpen={isAuthModalOpen} onClose={() => setIsAuthModalOpen(false)} />
+            <AuthModal isOpen={isAuthModalOpen} onClose={handleCloseAuthModal} />
 
             {/* Chat Window */}
             {user && isOpen && (

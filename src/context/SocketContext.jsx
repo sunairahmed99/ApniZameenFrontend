@@ -11,6 +11,7 @@ export const SocketProvider = ({ children }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [activeChat, setActiveChat] = useState(null);
     const [unreadCount, setUnreadCount] = useState(0);
+    const [isAuthRequired, setIsAuthRequired] = useState(false);
 
     const { user } = useSelector((state) => state.auth);
 
@@ -54,13 +55,13 @@ export const SocketProvider = ({ children }) => {
     }, [user?._id]); // Only re-run when user id changes (login/logout)
 
     const openChatWith = async (params) => {
-        setActiveChat(params);
-        setIsOpen(true);
-
         if (!user) {
-            alert("Please login to chat.");
+            setIsAuthRequired(true);
             return;
         }
+
+        setActiveChat(params);
+        setIsOpen(true);
     };
 
     const toggleWidget = () => {
@@ -69,8 +70,9 @@ export const SocketProvider = ({ children }) => {
     };
 
     const value = React.useMemo(() => ({
-        socket, isOpen, setIsOpen, activeChat, setActiveChat, openChatWith, toggleWidget, unreadCount, user
-    }), [socket, isOpen, activeChat, unreadCount, user]);
+        socket, isOpen, setIsOpen, activeChat, setActiveChat, openChatWith, toggleWidget, unreadCount, user,
+        isAuthRequired, setIsAuthRequired
+    }), [socket, isOpen, activeChat, unreadCount, user, isAuthRequired]);
 
     return (
         <SocketContext.Provider value={value}>

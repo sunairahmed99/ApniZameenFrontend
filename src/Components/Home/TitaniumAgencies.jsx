@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { FaChevronLeft, FaChevronRight, FaMapMarkerAlt, FaPhoneAlt } from 'react-icons/fa';
 import { useFeaturedAgencies } from '../../hooks/useAgencies';
 import { useLocations } from '../../hooks/useLocations';
@@ -61,6 +61,14 @@ const TitaniumAgencies = () => {
   const showLeftArrow = startIndex > 0;
   const showRightArrow = startIndex + itemsPerPage < agencies.length;
 
+  // Mobile: ref-based horizontal scroll (like FeaturedProperties)
+  const agenciesScrollRef = useRef(null);
+  const scrollAgencies = (direction) => {
+    if (agenciesScrollRef.current) {
+      agenciesScrollRef.current.scrollBy({ left: direction === 'left' ? -280 : 280, behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className="titanium-section py-5">
       <div className="container">
@@ -107,19 +115,19 @@ const TitaniumAgencies = () => {
           </div>
         ) : agencies.length > 0 ? (
           <div className="position-relative agencies-scroll-wrapper">
-            {/* Left Arrow */}
-            {showLeftArrow && (
-              <button
-                className="agency-arrow left-arrow btn btn-white shadow-sm rounded-circle"
-                onClick={handlePrev}
-                aria-label="Slide agencies left"
-              >
-                <FaChevronLeft />
-              </button>
-            )}
+            {/* Desktop: pagination arrows | Mobile: ref-based scroll arrows */}
+            <button
+              className="agency-arrow left-arrow btn btn-white shadow-sm rounded-circle"
+              onClick={() => { handlePrev(); scrollAgencies('left'); }}
+              aria-label="Slide agencies left"
+              style={{ display: (showLeftArrow || true) ? undefined : 'none' }}
+            >
+              <FaChevronLeft />
+            </button>
 
-            <div className="agencies-grid">
-              {visibleAgencies.map((agency, index) => (
+            <div className="agencies-grid" ref={agenciesScrollRef}>
+              {/* Desktop: show paginated slice | Mobile: show all for swipe scroll */}
+              {(window.innerWidth < 768 ? agencies : visibleAgencies).map((agency, index) => (
                 <div key={agency._id || index} className="agency-item">
                   <div
                     className="agency-card bg-white p-3 rounded border h-100"
@@ -153,16 +161,13 @@ const TitaniumAgencies = () => {
               ))}
             </div>
 
-            {/* Right Arrow */}
-            {showRightArrow && (
-              <button
-                className="agency-arrow right-arrow btn btn-white shadow-sm rounded-circle"
-                onClick={handleNext}
-                aria-label="Slide agencies right"
-              >
-                <FaChevronRight />
-              </button>
-            )}
+            <button
+              className="agency-arrow right-arrow btn btn-white shadow-sm rounded-circle"
+              onClick={() => { handleNext(); scrollAgencies('right'); }}
+              aria-label="Slide agencies right"
+            >
+              <FaChevronRight />
+            </button>
           </div>
         ) : (
           <div className="text-center py-4 text-muted">

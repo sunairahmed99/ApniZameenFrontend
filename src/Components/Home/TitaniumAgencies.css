@@ -102,22 +102,27 @@
     right: 0;
 }
 
-/* Mobile Responsive - 2 items per row, 2 rows, horizontal scroll */
+/* Mobile Responsive - horizontal touch scroll like FeaturedProperties */
 @media (max-width: 768px) {
     .agencies-grid {
-        gap: 15px;
-        max-height: calc(2 * (120px + 15px));
-        /* 2 rows on mobile */
+        flex-wrap: nowrap;         /* single row — no wrapping */
+        overflow-x: auto;          /* enable horizontal scroll */
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        gap: 12px;
+        max-height: none;          /* remove 2-row cap on mobile */
+        padding-bottom: 8px;
     }
 
     .agency-item {
-        flex: 0 0 100%;
-        /* 1 item per row on mobile */
-        max-width: 100%;
+        flex: 0 0 260px;           /* fixed card width for scrolling */
+        min-width: 260px;
+        max-width: 260px;
+        scroll-snap-align: start;
     }
 
     .agencies-scroll-wrapper {
-        padding: 0 20px;
+        padding: 0 8px;            /* less padding on mobile */
     }
 
     .agency-arrow {
