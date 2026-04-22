@@ -81,6 +81,7 @@ const EditProperty = lazy(() => import('./Pages/Backend/Seller/EditProperty'));
 import ProtectedRoute from './Components/Auth/ProtectedRoute';
 import { trackSessionVisit } from './utils/analytics';
 import NetworkStatus from './Components/NetworkStatus';
+import ScrollToTop from './Components/Common/ScrollToTop';
 
 const LoadingFallback = () => (
   <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-start', paddingTop: '140px', height: '100vh', fontSize: '1.2rem', color: '#3b82f6' }}>
@@ -98,6 +99,7 @@ export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter future={{ v7_relativeSplatPath: true, v7_startTransition: false }}>
+        <ScrollToTop />
         <a href="#main-content" className="visually-hidden-focusable position-absolute p-3 bg-white text-primary" style={{ zIndex: 9999 }}>
           Skip to main content
         </a>

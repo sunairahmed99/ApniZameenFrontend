@@ -329,13 +329,13 @@ const FeaturedProperties = () => {
 
     // Use React Query for Rent Properties - Optimized for Homepage (12 items limit)
     const { data: rentProperties = [], isLoading: loadingRent } = useProperties(
-        { purpose: 'For Rent', city: rentCity, titanium: true, limit: 12 }, 
+        { purpose: 'For Rent', city: rentCity, titanium: true }, 
         { keepPreviousData: true, staleTime: 5 * 60 * 1000 }
     );
 
     // Use React Query for Sale Properties - Optimized for Homepage (12 items limit)
     const { data: saleProperties = [], isLoading: loadingSale } = useProperties(
-        { purpose: 'For Sale', city: saleCity, titanium: true, limit: 12 }, 
+        { purpose: 'For Sale', city: saleCity, titanium: true }, 
         { keepPreviousData: true, staleTime: 5 * 60 * 1000 }
     );
 

@@ -1,84 +1,23 @@
-// Data Preloader - Preload critical data when app loads using React Query
+// Data Preloader - Preload ONLY the most critical data at startup
+// Heavy data (properties, agencies, projects) is fetched on-demand by React Query
+// when components become visible via LazySection — no need to pre-fetch them all.
 import { queryClient } from '../app/queryClient';
-import { fetchProperties } from '../hooks/useProperties';
-import { fetchAgencies } from '../hooks/useAgencies';
-import { fetchProjects } from '../hooks/useProjects';
 import { fetchPublicBanners } from '../hooks/useBanners';
 
 /**
- * Preload critical data for the application
- * This runs when the app first loads to cache important data in React Query
+ * Preload ONLY the banner ads at startup (needed for LCP banner image).
+ * Everything else is lazily fetched by LazySection + React Query hooks.
  */
 export const preloadCriticalData = async () => {
-    // Only log in development
-    if (import.meta.env.DEV) {
-        
-    }
-
-    const preloadTasks = [];
-
-    // 1. Preload Featured Properties (Homepage)
-    preloadTasks.push(
-        queryClient.prefetchQuery({
-            queryKey: ['properties', { featured: 'true', limit: 6 }],
-            queryFn: () => fetchProperties({ featured: 'true', limit: 6 }),
-            staleTime: 10 * 60 * 1000,
-        })
-    );
-
-    // 2. Preload Titanium Agencies
-    preloadTasks.push(
-        queryClient.prefetchQuery({
-            queryKey: ['agencies_list', { tier: 'titanium', limit: 10 }],
-            queryFn: () => fetchAgencies({ tier: 'titanium', limit: 10 }),
-            staleTime: 15 * 60 * 1000,
-        })
-    );
-
-    // 3. Preload Featured Agencies
-    preloadTasks.push(
-        queryClient.prefetchQuery({
-            queryKey: ['agencies_list', { featured: 'true', limit: 10 }],
-            queryFn: () => fetchAgencies({ featured: 'true', limit: 10 }),
-            staleTime: 15 * 60 * 1000,
-        })
-    );
-
-    // 4. Preload New Projects
-    preloadTasks.push(
-        queryClient.prefetchQuery({
-            queryKey: ['projects_list', { status: 'active', limit: 12 }],
-            queryFn: () => fetchProjects({ status: 'active', limit: 12 }),
-            staleTime: 10 * 60 * 1000,
-        })
-    );
-
-    // 6. Preload Karachi Properties (most common search)
-    preloadTasks.push(
-        queryClient.prefetchQuery({
-            queryKey: ['properties', { city: 'Karachi', purpose: 'For Sale', limit: 10 }],
-            queryFn: () => fetchProperties({ city: 'Karachi', purpose: 'For Sale', limit: 10 }),
-            staleTime: 5 * 60 * 1000,
-        })
-    );
-
-    // 7. Preload Banner Ads
-    preloadTasks.push(
-        queryClient.prefetchQuery({
+    try {
+        // Only banners are truly critical at startup (they appear above the fold)
+        await queryClient.prefetchQuery({
             queryKey: ['public_banners'],
             queryFn: fetchPublicBanners,
             staleTime: 30 * 60 * 1000,
-        })
-    );
-
-    // Execute all preload tasks in parallel
-    try {
-        await Promise.allSettled(preloadTasks);
-        if (import.meta.env.DEV) {
-            
-        }
-    } catch (error) {
-        
+        });
+    } catch (_) {
+        // Non-fatal — page will still load from fresh fetch
     }
 };
 

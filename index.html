@@ -6,6 +6,12 @@
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  <!-- DNS prefetch for faster 3rd party connections on mobile -->
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+  <link rel="dns-prefetch" href="https://res.cloudinary.com">
+  <link rel="dns-prefetch" href="https://ui-avatars.com">
+
   <title>apnizameen.pk - APNI ZAMEEN, APNA BHAROSA</title>
   <meta name="description"
     content="Find properties for sale and rent in Pakistan. Browse houses, plots, commercial properties, and new projects across Karachi, Lahore, Islamabad, and other major cities." />
@@ -31,12 +37,17 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://res.cloudinary.com">
-  
-  <!-- Preload critical assets -->
-  
+
+  <!-- Load Google Fonts as non-render-blocking (print trick) -->
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap"
-    rel="stylesheet">
+    rel="stylesheet"
+    media="print"
+    onload="this.media='all'">
+  <!-- Fallback for JS-disabled browsers -->
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+  </noscript>
 </head>
 
 <body>

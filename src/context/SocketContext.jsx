@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useEffect, useState, useCallback } from 'react';
-import io from 'socket.io-client';
 import { useSelector } from 'react-redux';
 import { API_BASE_URL } from '../config';
 
@@ -10,66 +9,63 @@ export const useSocket = () => useContext(SocketContext);
 export const SocketProvider = ({ children }) => {
     const [socket, setSocket] = useState(null);
     const [isOpen, setIsOpen] = useState(false);
-    const [activeChat, setActiveChat] = useState(null); // { sellerId, propertyId, participantId }
+    const [activeChat, setActiveChat] = useState(null);
     const [unreadCount, setUnreadCount] = useState(0);
 
-    // Assuming user info is in Redux or local storage. 
-    // For now we'll try to get it from localStorage if Redux isn't easy to tap into without inspecting store structure.
-    // Or we pass it in if this component is inside Redux Provider.
-    // Let's assume we can get user token/id from localStorage 'user_data' or similar as is common.
-    const { user } = useSelector((state) => state.auth); // Sync with Redux
+    const { user } = useSelector((state) => state.auth);
 
+    // Only create socket when user is logged in — saves bandwidth for anonymous visitors
     useEffect(() => {
-        // Connect to centralized API base URL
-        const newSocket = io(API_BASE_URL, {
-            autoConnect: false,
-            transports: ['polling', 'websocket'], // Allow both for better compatibility
-            reconnectionAttempts: 3, // Limit noise if platform rejects
-            timeout: 5000, // Fail fast to let polling take over
-        });
+        if (!user) {
+            // If user logs out, close and remove socket
+            if (socket) {
+                socket.close();
+                setSocket(null);
+            }
+            return;
+        }
 
-        setSocket(newSocket);
-
-        return () => newSocket.close();
-    }, []);
-
-    useEffect(() => {
-        if (socket && user) {
-            socket.auth = { userId: user._id || user.id };
-            socket.connect();
-
-            socket.on('connect', () => {
-                // join own room
-                socket.emit('join_chat', user._id || user.id);
+        // Lazy import socket.io-client so the vendor-socket chunk is only loaded for logged-in users
+        import('socket.io-client').then(({ default: io }) => {
+            const newSocket = io(API_BASE_URL, {
+                autoConnect: false,
+                transports: ['polling', 'websocket'],
+                reconnectionAttempts: 3,
+                timeout: 5000,
             });
 
-            socket.on('receive_message', (msg) => {
-                // Increment unread if chat not open or not active
+            newSocket.auth = { userId: user._id || user.id };
+            newSocket.connect();
+
+            newSocket.on('connect', () => {
+                newSocket.emit('join_chat', user._id || user.id);
+            });
+
+            newSocket.on('receive_message', (msg) => {
                 if (!isOpen || (activeChat && activeChat.chatId !== msg.chatId)) {
                     setUnreadCount(prev => prev + 1);
                 }
             });
-        }
-    }, [socket, user, isOpen, activeChat]);
+
+            setSocket(newSocket);
+
+            return () => newSocket.close();
+        });
+    }, [user?._id]); // Only re-run when user id changes (login/logout)
 
     const openChatWith = async (params) => {
-        // params: { sellerId, propertyId, name, chatDetails }
         setActiveChat(params);
         setIsOpen(true);
 
-        // Check if user is actually present
         if (!user) {
             alert("Please login to chat.");
             return;
         }
-
-        // Optionally initiate via API if we need `chatId` before socket usage
-        // But we can also lazily do it in the widget
     };
 
     const toggleWidget = () => {
         setIsOpen(!isOpen);
-        if (isOpen) setActiveChat(null); // Clear active when closing? Or keep state?
+        if (isOpen) setActiveChat(null);
     };
 
     const value = React.useMemo(() => ({
@@ -82,4 +78,3 @@ export const SocketProvider = ({ children }) => {
         </SocketContext.Provider>
     );
 };
-
