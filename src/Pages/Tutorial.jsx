@@ -21,6 +21,69 @@ const Tutorial = () => {
 
                     <div className="row justify-content-center">
                         <div className="col-lg-8">
+                            
+                            <div className="row g-4 mb-4">
+                                <div className="col-md-4">
+                                    <div className="bg-white p-3 rounded shadow-sm">
+                                        <h6 className="fw-bold mb-3">Property Posting Guide</h6>
+                                        <div className="ratio ratio-16x9 rounded overflow-hidden bg-black">
+                                            <video 
+                                                controls 
+                                                style={{ width: '100%', height: '100%', cursor: 'pointer' }}
+                                                onClick={(e) => {
+                                                    if (e.target.requestFullscreen) e.target.requestFullscreen();
+                                                    else if (e.target.webkitRequestFullscreen) e.target.webkitRequestFullscreen();
+                                                    else if (e.target.msRequestFullscreen) e.target.msRequestFullscreen();
+                                                    e.target.play();
+                                                }}
+                                            >
+                                                <source src="https://res.cloudinary.com/dkgyjsdfx/video/upload/v1776934599/tutorial_videos/propertyguide.mp4" type="video/mp4" />
+                                                Your browser does not support the video tag.
+                                            </video>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-md-4">
+                                    <div className="bg-white p-3 rounded shadow-sm">
+                                        <h6 className="fw-bold mb-3">Agency Guide</h6>
+                                        <div className="ratio ratio-16x9 rounded overflow-hidden bg-black">
+                                            <video 
+                                                controls 
+                                                style={{ width: '100%', height: '100%', cursor: 'pointer' }}
+                                                onClick={(e) => {
+                                                    if (e.target.requestFullscreen) e.target.requestFullscreen();
+                                                    else if (e.target.webkitRequestFullscreen) e.target.webkitRequestFullscreen();
+                                                    else if (e.target.msRequestFullscreen) e.target.msRequestFullscreen();
+                                                    e.target.play();
+                                                }}
+                                            >
+                                                <source src="https://res.cloudinary.com/dkgyjsdfx/video/upload/v1776934597/tutorial_videos/AgencyVideo.mp4" type="video/mp4" />
+                                                Your browser does not support the video tag.
+                                            </video>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-md-4">
+                                    <div className="bg-white p-3 rounded shadow-sm">
+                                        <h6 className="fw-bold mb-3">Banner Placement Guide</h6>
+                                        <div className="ratio ratio-16x9 rounded overflow-hidden bg-black">
+                                            <video 
+                                                controls 
+                                                style={{ width: '100%', height: '100%', cursor: 'pointer' }}
+                                                onClick={(e) => {
+                                                    if (e.target.requestFullscreen) e.target.requestFullscreen();
+                                                    else if (e.target.webkitRequestFullscreen) e.target.webkitRequestFullscreen();
+                                                    else if (e.target.msRequestFullscreen) e.target.msRequestFullscreen();
+                                                    e.target.play();
+                                                }}
+                                            >
+                                                <source src="https://res.cloudinary.com/dkgyjsdfx/video/upload/v1776934596/tutorial_videos/BannerVideo.mp4" type="video/mp4" />
+                                                Your browser does not support the video tag.
+                                            </video>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
                             <div className="bg-white p-4 rounded shadow-sm">
                                 <h4 className="fw-bold mb-4">Quick Steps</h4>
