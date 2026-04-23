@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { FaMapMarkerAlt, FaCheck, FaPhoneAlt, FaEnvelope, FaBuilding, FaLayerGroup, FaRulerCombined, FaListUl, FaCalendarAlt, FaMap, FaImages, FaCube, FaVideo, FaMoneyBillWave } from 'react-icons/fa';
+import { FaMapMarkerAlt, FaCheck, FaPhoneAlt, FaEnvelope, FaBuilding, FaLayerGroup, FaRulerCombined, FaListUl, FaCalendarAlt, FaMap, FaImages, FaMoneyBillWave } from 'react-icons/fa';
 import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer/Footer';
 import { useProject } from '../hooks/useProjects';
@@ -182,42 +182,6 @@ const ProjectDetail = () => {
                             </div>
                         )}
 
-                        {/* Video / Walkthrough Sections */}
-                        {(project.threeDWalkthroughUrl || project.videoUrl) && (
-                            <div className="pd-section">
-                                <h3>Videos & Walkthroughs</h3>
-                                <div className="row g-4">
-                                    {project.threeDWalkthroughUrl && (
-                                        <div className="col-12">
-                                            <h6 className="mb-3 d-flex align-items-center">
-                                                <FaCube className="text-success me-2" /> 3D Walkthrough
-                                            </h6>
-                                            <div className="ratio ratio-16x9 border rounded overflow-hidden bg-black">
-                                                {project.threeDWalkthroughUrl.includes('youtube.com') || project.threeDWalkthroughUrl.includes('youtu.be') ? (
-                                                    <iframe src={project.threeDWalkthroughUrl.replace('watch?v=', 'embed/')} title="3D Walkthrough" allowFullScreen></iframe>
-                                                ) : (
-                                                    <video controls src={project.threeDWalkthroughUrl}></video>
-                                                )}
-                                            </div>
-                                        </div>
-                                    )}
-                                    {project.videoUrl && (
-                                        <div className="col-12">
-                                            <h6 className="mb-3 d-flex align-items-center">
-                                                <FaVideo className="text-success me-2" /> Project Video
-                                            </h6>
-                                            <div className="ratio ratio-16x9 border rounded overflow-hidden bg-black">
-                                                {project.videoUrl.includes('youtube.com') || project.videoUrl.includes('youtu.be') ? (
-                                                    <iframe src={project.videoUrl.replace('watch?v=', 'embed/')} title="Project Video" allowFullScreen></iframe>
-                                                ) : (
-                                                    <video controls src={project.videoUrl}></video>
-                                                )}
-                                            </div>
-                                        </div>
-                                    )}
-                                </div>
-                            </div>
-                        )}
 
                         {/* Location Section */}
                         <div className="pd-section">

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { FaPlus, FaTrash, FaCity, FaBuilding, FaList, FaCheckSquare, FaChartLine, FaMapMarkerAlt, FaVideo, FaImage, FaUserTie } from 'react-icons/fa';
+import { FaPlus, FaTrash, FaCity, FaBuilding, FaList, FaCheckSquare, FaChartLine, FaMapMarkerAlt, FaImage, FaUserTie } from 'react-icons/fa';
 import { pakistanCities } from '../../../../utils/cities';
 import { useProject, useUpdateProject } from '../../../../hooks/useProjects';
 import './ProjectForm.css';
@@ -30,7 +30,6 @@ const EditProject = () => {
     projectTypes: '',
     developer: { name: '', description: '' },
     marketedBy: { name: '' },
-    threeDWalkthroughUrl: '', videoUrl: '',
     location: { lat: '', lng: '' },
     isHot: false, isTrending: false, isActive: true
   });
@@ -51,8 +50,6 @@ const EditProject = () => {
   const [developerLogo, setDeveloperLogo] = useState(null);
   const [marketedByLogo, setMarketedByLogo] = useState(null);
   const [paymentPlans, setPaymentPlans] = useState([]);
-  const [threeDWalkthroughFile, setThreeDWalkthroughFile] = useState(null);
-  const [videoFile, setVideoFile] = useState(null);
 
   // For Previewing Existing
   const [previews, setPreviews] = useState({});
@@ -67,7 +64,6 @@ const EditProject = () => {
         projectTypes: project.projectTypes ? project.projectTypes.join(', ') : '',
         developer: project.developer || { name: '', description: '' },
         marketedBy: project.marketedBy || { name: '' },
-        threeDWalkthroughUrl: project.threeDWalkthroughUrl || '', videoUrl: project.videoUrl || '',
         location: { lat: project.location?.lat || '', lng: project.location?.lng || '' },
         isHot: project.isHot || false, isTrending: project.isTrending || false, isActive: project.isActive !== false
       });
@@ -182,8 +178,6 @@ const EditProject = () => {
     data.append('projectTypes', JSON.stringify(formData.projectTypes.split(',').map(t => t.trim())));
     data.append('developer', JSON.stringify(formData.developer));
     data.append('marketedBy', JSON.stringify(formData.marketedBy));
-    data.append('threeDWalkthroughUrl', formData.threeDWalkthroughUrl);
-    data.append('videoUrl', formData.videoUrl);
     data.append('location', JSON.stringify({ ...formData.location, markers: nearbyFacilities }));
     data.append('isHot', formData.isHot);
     data.append('isTrending', formData.isTrending);
@@ -206,9 +200,6 @@ const EditProject = () => {
         data.append('floorPlanImages', plan.imageFile);
       }
     });
-
-    if (threeDWalkthroughFile) data.append('threeDWalkthroughFile', threeDWalkthroughFile);
-    if (videoFile) data.append('videoFile', videoFile);
 
     try {
       await updateMutation.mutateAsync({ id, updates: data });
@@ -335,24 +326,6 @@ const EditProject = () => {
             <div className="form-group">
               <label>Add to Gallery</label>
               <input type="file" multiple onChange={(e) => setGallery(Array.from(e.target.files))} />
-            </div>
-          </div>
-          <div className="form-row">
-            <div className="form-group">
-              <label>3D Walkthrough (URL or Video File)</label>
-              <div style={{ display: 'flex', gap: '10px', flexDirection: 'column' }}>
-                <input type="text" name="threeDWalkthroughUrl" placeholder="Enter URL" value={formData.threeDWalkthroughUrl} onChange={handleChange} />
-                <span style={{ fontSize: '12px', color: '#666', textAlign: 'center' }}>OR</span>
-                <input type="file" onChange={(e) => setThreeDWalkthroughFile(e.target.files[0])} accept="video/*" />
-              </div>
-            </div>
-            <div className="form-group">
-              <label>Video (URL or Video File)</label>
-              <div style={{ display: 'flex', gap: '10px', flexDirection: 'column' }}>
-                <input type="text" name="videoUrl" placeholder="Enter URL" value={formData.videoUrl} onChange={handleChange} />
-                <span style={{ fontSize: '12px', color: '#666', textAlign: 'center' }}>OR</span>
-                <input type="file" onChange={(e) => setVideoFile(e.target.files[0])} accept="video/*" />
-              </div>
             </div>
           </div>
         </div>

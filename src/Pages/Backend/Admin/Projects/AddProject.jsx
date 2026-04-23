@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FaPlus, FaTrash, FaCity, FaBuilding, FaList, FaCheckSquare, FaChartLine, FaMapMarkerAlt, FaVideo, FaImage, FaUserTie } from 'react-icons/fa';
+import { FaPlus, FaTrash, FaCity, FaBuilding, FaList, FaCheckSquare, FaChartLine, FaMapMarkerAlt, FaImage, FaUserTie } from 'react-icons/fa';
 import { pakistanCities } from '../../../../utils/cities';
 import { useCreateProject } from '../../../../hooks/useProjects';
 import './ProjectForm.css';
@@ -35,8 +35,6 @@ const AddProject = () => {
     projectTypes: '',
     developer: { name: '', description: '' },
     marketedBy: { name: '' },
-    threeDWalkthroughUrl: '',
-    videoUrl: '',
     location: { lat: '', lng: '' },
     isHot: false,
     isTrending: false,
@@ -59,8 +57,6 @@ const AddProject = () => {
   const [developerLogo, setDeveloperLogo] = useState(null);
   const [marketedByLogo, setMarketedByLogo] = useState(null);
   const [paymentPlans, setPaymentPlans] = useState([]);
-  const [threeDWalkthroughFile, setThreeDWalkthroughFile] = useState(null);
-  const [videoFile, setVideoFile] = useState(null);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -152,8 +148,6 @@ const AddProject = () => {
     data.append('projectTypes', JSON.stringify(formData.projectTypes.split(',').map(t => t.trim())));
     data.append('developer', JSON.stringify(formData.developer));
     data.append('marketedBy', JSON.stringify(formData.marketedBy));
-    data.append('threeDWalkthroughUrl', formData.threeDWalkthroughUrl);
-    data.append('videoUrl', formData.videoUrl);
     data.append('location', JSON.stringify({ ...formData.location, markers: nearbyFacilities }));
     data.append('isHot', formData.isHot ? 'true' : 'false');
     data.append('isTrending', formData.isTrending ? 'true' : 'false');
@@ -178,15 +172,9 @@ const AddProject = () => {
     // Append Floor Plan Images (in order)
     floorPlans.forEach((plan, index) => {
       if (plan.imageFile) {
-        // We append with a specific naming convention that the backend might expect, 
-        // or just 'floorPlanImages' and handle mapping by index on backend.
-        // Assuming simple array append for now.
         data.append('floorPlanImages', plan.imageFile);
       }
     });
-
-    if (threeDWalkthroughFile) data.append('threeDWalkthroughFile', threeDWalkthroughFile);
-    if (videoFile) data.append('videoFile', videoFile);
 
     // Nested Files (Flattened logic matching controller)
     // Note: To perfectly match the controller, we'd need to append file arrays for floorPlans, updates, units
@@ -218,8 +206,6 @@ const AddProject = () => {
       projectTypes: 'Flats, Penthouse, Shops',
       developer: { name: 'Zameen Developments', description: 'Pakistan’s top real estate developer committed to quality.' },
       marketedBy: { name: 'Zameen.com' },
-      threeDWalkthroughUrl: 'https://www.youtube.com/watch?v=Get7rqXYrbQ',
-      videoUrl: 'https://www.youtube.com/watch?v=Get7rqXYrbQ',
       location: { lat: '31.4504', lng: '74.2937' }, // Raiwind Road approx
       isHot: true,
       isTrending: true,
@@ -403,24 +389,6 @@ const AddProject = () => {
           <div className="form-group">
             <label>Payment Plan Images (Multiple)</label>
             <input type="file" multiple onChange={(e) => setPaymentPlans(Array.from(e.target.files))} accept="image/*" />
-          </div>
-          <div className="form-row">
-            <div className="form-group">
-              <label>3D Walkthrough (URL or Video File)</label>
-              <div style={{ display: 'flex', gap: '10px', flexDirection: 'column' }}>
-                <input type="text" name="threeDWalkthroughUrl" placeholder="Enter URL" value={formData.threeDWalkthroughUrl} onChange={handleChange} />
-                <span style={{ fontSize: '12px', color: '#666', textAlign: 'center' }}>OR</span>
-                <input type="file" onChange={(e) => setThreeDWalkthroughFile(e.target.files[0])} accept="video/*" />
-              </div>
-            </div>
-            <div className="form-group">
-              <label>Video (URL or Video File)</label>
-              <div style={{ display: 'flex', gap: '10px', flexDirection: 'column' }}>
-                <input type="text" name="videoUrl" placeholder="Enter URL" value={formData.videoUrl} onChange={handleChange} />
-                <span style={{ fontSize: '12px', color: '#666', textAlign: 'center' }}>OR</span>
-                <input type="file" onChange={(e) => setVideoFile(e.target.files[0])} accept="video/*" />
-              </div>
-            </div>
           </div>
         </div>
 

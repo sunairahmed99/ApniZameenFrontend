@@ -7,6 +7,8 @@ import { useLocations, useCreateLocation } from '../../../hooks/useLocations';
 import { useMyAgencies } from '../../../hooks/useAgencies';
 import { useMySubscriptionRequests } from '../../../hooks/useSellerFeatures';
 import { useCreateProperty } from '../../../hooks/useProperties';
+import { uploadToCloudinary, uploadToCloudinaryChunked } from '../../../utils/cloudinaryUpload';
+import axios from 'axios';
 
 const AddProperty = () => {
     const { user } = useSelector((state) => state.auth);
@@ -63,7 +65,12 @@ const AddProperty = () => {
     });
 
     const [images, setImages] = useState([]);
-    const [video, setVideo] = useState(null);
+    const [signatureData, setSignatureData] = useState(null);
+    const [uploadProgress, setUploadProgress] = useState({
+        images: {},
+        isUploading: false,
+        currentFile: ''
+    });
 
     // Hierarchical selection state
     const [locationDetails, setLocationDetails] = useState({
@@ -102,6 +109,21 @@ const AddProperty = () => {
         }
     };
 
+    // Pre-fetch Upload Signature on Mount
+    useEffect(() => {
+        const fetchSignature = async () => {
+            try {
+                const { data } = await axios.get('/api/properties/upload-signature', {
+                    headers: { Authorization: `Bearer ${user.token}` }
+                });
+                setSignatureData(data);
+            } catch (err) {
+                console.error("Failed to pre-fetch signature:", err);
+            }
+        };
+        if (user?.token) fetchSignature();
+    }, [user?.token]);
+
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
@@ -134,24 +156,6 @@ const AddProperty = () => {
         setImages(images.filter((_, i) => i !== index));
     };
 
-    const handleVideoChange = (e) => {
-        const file = e.target.files[0];
-        if (file) {
-            if (!file.type.startsWith('video/')) {
-                alert("Please upload a valid video file.");
-                return;
-            }
-            // 50MB limit check
-            const maxSize = 50 * 1024 * 1024; // 50MB
-            if (file.size > maxSize) {
-                alert("Video file is too large. Maximum allowed size is 50MB.");
-                e.target.value = ''; // Reset input
-                return;
-            }
-            setVideo(file);
-        }
-    };
-
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState(null);
     const [debugInfo, setDebugInfo] = useState(null); // Added debugInfo state
@@ -165,28 +169,45 @@ const AddProperty = () => {
         }
 
         setError(null);
-
-        const data = new FormData();
-        Object.keys(formData).forEach(key => {
-            data.append(key, formData[key]);
-        });
-
-        if (user && user._id) {
-            data.append('sellerId', user._id);
-        } else {
-            alert("User session not found. Please log in.");
-            return;
-        }
-
-        data.append('area[value]', formData.areaValue);
-        data.append('area[unit]', formData.areaUnit);
-        data.append('subscriptionId', selectedSubscription);
-
-        images.forEach(img => data.append('images', img));
-        if (video) data.append('video', video);
+        setUploadProgress(prev => ({ ...prev, isUploading: true }));
 
         try {
-            await createPropertyMutation.mutateAsync(data);
+            // 1. Get Signature (if not pre-fetched)
+            let sig = signatureData;
+            if (!sig) {
+                const { data } = await axios.get('/api/properties/upload-signature', {
+                    headers: { Authorization: `Bearer ${user.token}` }
+                });
+                sig = data;
+                setSignatureData(sig);
+            }
+
+            // 2. Parallel Image Uploads
+            setUploadProgress(prev => ({ ...prev, currentFile: `Uploading ${images.length} Images...` }));
+            
+            const uploadPromises = images.map((img, index) => {
+                return uploadToCloudinary(img, sig, (p) => {
+                    setUploadProgress(prev => ({ 
+                        ...prev, 
+                        images: { ...prev.images, [index]: p } 
+                    }));
+                });
+            });
+
+            const imageUrls = await Promise.all(uploadPromises);
+
+            // 3. Submit to Backend
+            const finalData = {
+                ...formData,
+                sellerId: user._id,
+                subscriptionId: selectedSubscription,
+                images: imageUrls,
+                'area[value]': formData.areaValue,
+                'area[unit]': formData.areaUnit
+            };
+
+            // Note: We send as JSON now instead of FormData because files are already uploaded
+            await createPropertyMutation.mutateAsync(finalData);
             setSuccess(true);
         } catch (err) {
             console.error("Submission Error:", err);
@@ -195,10 +216,11 @@ const AddProperty = () => {
                 : (err.response?.data?.message || err.message || 'Failed to submit property.');
             
             setError(errorMessage);
-            // Optionally set debug info for complex errors
             if (err.response?.data?.error) {
                 setDebugInfo(err.response.data.error);
             }
+        } finally {
+            setUploadProgress(prev => ({ ...prev, isUploading: false }));
         }
     };
 
@@ -591,11 +613,11 @@ const AddProperty = () => {
                     </div>
 
                     <div className="mb-4">
-                        <label className="form-label fw-bold text-dark">Description</label>
+                        <label className="form-label text-dark fw-bold">Description</label>
                         <textarea name="description" className="form-control" rows="5" onChange={handleInputChange} required placeholder="Describe property features, nearby amenities, etc."></textarea>
                     </div>
 
-                    <div className="form-section-title mt-5">Media (Images & Video)</div>
+                    <div className="form-section-title mt-5">Property Images</div>
                     <div className="mb-4">
                         <div
                             className="border rounded p-5 text-center bg-light"
@@ -620,14 +642,6 @@ const AddProperty = () => {
                         )}
                     </div>
 
-                    <div className="mb-5">
-                        <label className="form-label fw-bold text-dark">Property Video (Max 10 Minutes)</label>
-                        <div className="input-group">
-                            <input type="file" className="form-control" onChange={handleVideoChange} accept="video/*" />
-                        </div>
-                        <small className="text-muted mt-1 d-block italic">Only 1 video file allowed. Recommended format: MP4.</small>
-                    </div>
-
                     {subscriptions.length === 0 && !user?.isUnlimited && (
                         <div className="alert alert-danger mb-4 shadow-sm border-0 d-flex align-items-center">
                             <div className="me-3">
@@ -640,14 +654,34 @@ const AddProperty = () => {
                         </div>
                     )}
 
+                    {uploadProgress.isUploading && (
+                        <div className="mb-4 p-3 bg-light rounded border border-primary animate-pulse">
+                            <div className="d-flex justify-content-between mb-2">
+                                <span className="fw-bold text-primary">{uploadProgress.currentFile}</span>
+                            </div>
+                            <div className="progress" style={{ height: '10px' }}>
+                                <div 
+                                    className="progress-bar progress-bar-striped progress-bar-animated" 
+                                    role="progressbar" 
+                                    style={{ width: `100%` }}
+                                ></div>
+                            </div>
+                            <small className="text-muted mt-2 d-block">
+                                Direct upload to Cloudinary for maximum speed. Please don't close the tab.
+                            </small>
+                        </div>
+                    )}
+
                     <button
                         type="submit"
                         className={`btn-premium-save w-100 py-3 mt-4 ${subscriptions.length === 0 && !user?.isUnlimited ? 'bg-secondary' : ''}`}
-                        disabled={loading || (subscriptions.length === 0 && !user?.isUnlimited)}
+                        disabled={loading || uploadProgress.isUploading || (subscriptions.length === 0 && !user?.isUnlimited)}
                         style={{ fontSize: '1.2rem' }}
                     >
-                        {loading ? (
-                            <><span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> Processing...</>
+                        {loading || uploadProgress.isUploading ? (
+                            <><span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> 
+                                 {uploadProgress.isUploading ? 'Finalizing Images...' : 'Processing...'}
+                            </>
                         ) : (subscriptions.length === 0 && !user?.isUnlimited ? 'Quota Exhausted' : 'Submit Property Listing')}
                     </button>
                 </form>

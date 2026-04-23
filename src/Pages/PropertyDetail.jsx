@@ -201,7 +201,6 @@ const PropertyDetail = () => {
                             <div className={`pd-nav-link ${activeTab === 'description' ? 'active' : ''}`} onClick={() => scrollToSection('description')}>Description</div>
                             <div className={`pd-nav-link ${activeTab === 'amenities' ? 'active' : ''}`} onClick={() => scrollToSection('amenities')}>Amenities</div>
                             <div className={`pd-nav-link ${activeTab === 'location' ? 'active' : ''}`} onClick={() => scrollToSection('location')}>Location & Nearby</div>
-                            {property.video && <div className={`pd-nav-link ${activeTab === 'video' ? 'active' : ''}`} onClick={() => scrollToSection('video')}>Video</div>}
                         </div>
 
                         {/* Overview */}
@@ -270,22 +269,6 @@ const PropertyDetail = () => {
                             </div>
                         </div>
 
-                        {/* Video */}
-                        {property.video && (
-                            <div id="video" className="pd-content-card standalone mt-4">
-                                <h3 className="pd-section-heading">Property Video</h3>
-                                <div className="pd-video-container border rounded overflow-hidden">
-                                    <video 
-                                        controls 
-                                        className="w-100"
-                                        style={{ maxHeight: '500px', backgroundColor: '#000' }}
-                                        src={property.video.startsWith('http') ? property.video : `${API_BASE_URL}/${property.video.replace(/\\/g, '/')}`}
-                                    >
-                                        Your browser does not support the video tag.
-                                    </video>
-                                </div>
-                            </div>
-                        )}
 
                         {/* Location */}
                         <div id="location" className="pd-content-card standalone">

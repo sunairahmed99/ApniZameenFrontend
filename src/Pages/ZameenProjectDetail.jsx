@@ -4,8 +4,8 @@ import {
     FaChevronDown, FaChevronUp, FaCheck, FaBuilding,
     FaLayerGroup, FaRulerCombined, FaUsers, FaHospital,
     FaGraduationCap, FaUtensils, FaDumbbell, FaShieldAlt,
-    FaArrowRight, FaCamera, FaVideo, FaCube, FaImages,
-    FaBed, FaBath, FaPlay, FaChevronLeft, FaChevronRight, FaShareAlt, FaHeart, FaTimes
+    FaArrowRight, FaCamera, FaImages,
+    FaBed, FaBath, FaChevronLeft, FaChevronRight, FaShareAlt, FaHeart, FaTimes
 } from 'react-icons/fa';
 import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer/Footer';
@@ -21,7 +21,7 @@ import { useMemo } from 'react';
 
 const TABS = [
     'Overview', 'Offered Properties', 'Features', 'Progress Updates',
-    'Location', 'Floor Plans', '3d Walkthrough', 'Payment Plan',
+    'Location', 'Floor Plans', 'Payment Plan',
     'Marketed By', 'Developer'
 ];
 
@@ -155,7 +155,6 @@ const ZameenProjectDetail = () => {
 
     // Helper map for tabs to IDs
     const getTabId = (tabName) => {
-        if (tabName === '3d Walkthrough') return '3d';
         return tabName.toLowerCase().replace(/ /g, '');
     };
 
@@ -259,7 +258,6 @@ const ZameenProjectDetail = () => {
                                 <div className="zp-gallery-overlay">
                                     <div className="d-flex gap-3">
                                         <div className="text-center"><FaCamera size={20} /> <div className="small">{allImages.length}</div></div>
-                                        <div className="text-center"><FaVideo size={20} /> <div className="small">{project.videoUrl ? 1 : 0}</div></div>
                                     </div>
                                 </div>
                             </div>
@@ -392,12 +390,6 @@ const ZameenProjectDetail = () => {
                                                                 <div className="d-flex align-items-center gap-2 text-muted small">
                                                                     <FaBath className="text-success" size={14} />
                                                                     <span>Bathrooms : <strong>{unit.baths || 0}</strong></span>
-                                                                </div>
-                                                            </div>
-                                                            <div className="col-6">
-                                                                <div className="d-flex align-items-center gap-2 text-muted small">
-                                                                    <FaPlay className="text-success" size={14} />
-                                                                    <span>Walkthrough</span>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -545,21 +537,6 @@ const ZameenProjectDetail = () => {
                             ) : <p className="text-muted">No floor plans available.</p>}
                         </section>
 
-                        {/* 3D Walkthrough */}
-                        <section className="zp-content-section" id="3d">
-                            <h2 className="zp-section-title">3d Walkthrough</h2>
-                            {project.threeDWalkthroughUrl ? (
-                                <div className="ratio ratio-16x9 rounded overflow-hidden shadow-sm position-relative">
-                                    <iframe
-                                        src={project.threeDWalkthroughUrl.replace('watch?v=', 'embed/')}
-                                        title="3D Walkthrough"
-                                        allowFullScreen
-                                    ></iframe>
-                                </div>
-                            ) : (
-                                <div className="alert alert-light">No 3D Walkthrough available for this project.</div>
-                            )}
-                        </section>
 
                         {/* Payment Plan */}
                         <section className="zp-content-section" id="paymentplan">

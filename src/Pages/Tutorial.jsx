@@ -21,15 +21,6 @@ const Tutorial = () => {
 
                     <div className="row justify-content-center">
                         <div className="col-lg-8">
-                            <div className="bg-white p-4 rounded shadow-sm mb-4">
-                                <h4 className="fw-bold mb-4">Tutorial Video</h4>
-                                <div className="ratio ratio-16x9 bg-light d-flex align-items-center justify-content-center border rounded">
-                                    <div className="text-center">
-                                        <i className="fas fa-play-circle fa-4x text-success mb-3"></i>
-                                        <p className="text-muted">Tutorial Video Coming Soon</p>
-                                    </div>
-                                </div>
-                            </div>
 
                             <div className="bg-white p-4 rounded shadow-sm">
                                 <h4 className="fw-bold mb-4">Quick Steps</h4>

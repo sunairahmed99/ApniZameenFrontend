@@ -33,7 +33,6 @@ const MobileFilterModal = ({ isOpen, onClose, listingType = 'BUY' }) => {
     const [bathrooms, setBathrooms] = useState([]);
     const [keyword, setKeyword] = useState('');
     const [showVerifiedAds, setShowVerifiedAds] = useState(false);
-    const [showVideosOnly, setShowVideosOnly] = useState(false);
     const [showImagesOnly, setShowImagesOnly] = useState(false);
 
     // Location Modal State
@@ -184,7 +183,6 @@ const MobileFilterModal = ({ isOpen, onClose, listingType = 'BUY' }) => {
         setBathrooms([]);
         setKeyword('');
         setShowVerifiedAds(false);
-        setShowVideosOnly(false);
         setShowImagesOnly(false);
     };
 
@@ -623,22 +621,6 @@ const MobileFilterModal = ({ isOpen, onClose, listingType = 'BUY' }) => {
 
                 <div className="divider"></div>
 
-                {/* Show Ads with Videos only */}
-                <div className="filter-section">
-                    <div className="checkbox-row-simple">
-                        <div className="filter-label-icon">
-                            <span className="filter-label">Show Ads with Videos only</span>
-                        </div>
-                        <label className="toggle-switch">
-                            <input
-                                type="checkbox"
-                                checked={showVideosOnly}
-                                onChange={(e) => setShowVideosOnly(e.target.checked)}
-                            />
-                            <span className="toggle-slider"></span>
-                        </label>
-                    </div>
-                </div>
 
                 <div className="divider"></div>
 

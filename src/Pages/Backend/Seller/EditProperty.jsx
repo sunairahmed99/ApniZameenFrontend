@@ -6,7 +6,9 @@ import './AddProperty.css';
 import { useLocations, useCreateLocation } from '../../../hooks/useLocations';
 import { useMyAgencies } from '../../../hooks/useAgencies';
 import { useProperty, useUpdatePropertyContent } from '../../../hooks/useProperties';
+import { uploadToCloudinary, uploadToCloudinaryChunked } from '../../../utils/cloudinaryUpload';
 import { API_BASE_URL } from '../../../config';
+import axios from 'axios';
 
 const EditProperty = () => {
     const { id } = useParams();
@@ -77,7 +79,12 @@ const EditProperty = () => {
     const [existingImages, setExistingImages] = useState([]);
     // Images to keep (subset of existing)
     const [keptImages, setKeptImages] = useState([]);
-    const [video, setVideo] = useState(null);
+    const [signatureData, setSignatureData] = useState(null);
+    const [uploadProgress, setUploadProgress] = useState({
+        images: {},
+        isUploading: false,
+        currentFile: ''
+    });
 
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState(null);
@@ -181,6 +188,21 @@ const EditProperty = () => {
             setAddingAreaLoading(false);
         }
     };
+    
+    // Pre-fetch signature on mount
+    useEffect(() => {
+        const fetchSignature = async () => {
+            try {
+                const { data } = await axios.get('/api/properties/upload-signature', {
+                    headers: { Authorization: `Bearer ${user.token}` }
+                });
+                setSignatureData(data);
+            } catch (err) {
+                console.error("Failed to pre-fetch signature:", err);
+            }
+        };
+        if (user?.token) fetchSignature();
+    }, [user?.token]);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -215,49 +237,53 @@ const EditProperty = () => {
         setNewImages(newImages.filter((_, i) => i !== index));
     };
 
-    const removeExistingImage = (imgPath) => {
-        setKeptImages(keptImages.filter(img => img !== imgPath));
-    };
-
-    const handleVideoChange = (e) => {
-        const file = e.target.files[0];
-        if (file) {
-            if (!file.type.startsWith('video/')) {
-                alert("Please upload a valid video file.");
-                return;
-            }
-            // 50MB limit check
-            const maxSize = 50 * 1024 * 1024; // 50MB
-            if (file.size > maxSize) {
-                alert("Video file is too large. Maximum allowed size is 50MB.");
-                e.target.value = ''; // Reset input
-                return;
-            }
-            setVideo(file);
-        }
+    const removeExistingImage = (imgUrl) => {
+        setKeptImages(keptImages.filter(img => img !== imgUrl));
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError(null);
-
-        const data = new FormData();
-        Object.keys(formData).forEach(key => {
-            data.append(key, formData[key]);
-        });
-
-        data.append('area[value]', formData.areaValue);
-        data.append('area[unit]', formData.areaUnit);
-
-        // Pass kept existing images as JSON array
-        data.append('keptImages', JSON.stringify(keptImages));
-
-        // Append new image files
-        newImages.forEach(img => data.append('images', img));
-        if (video) data.append('video', video);
+        setUploadProgress(prev => ({ ...prev, isUploading: true }));
 
         try {
-            await updateMutation.mutateAsync({ id, formData: data, token: user.token });
+            // 1. Get Signature (if not pre-fetched)
+            let sig = signatureData;
+            if (!sig) {
+                const { data } = await axios.get('/api/properties/upload-signature', {
+                    headers: { Authorization: `Bearer ${user.token}` }
+                });
+                sig = data;
+                setSignatureData(sig);
+            }
+
+            // 2. Parallel Image Uploads
+            setUploadProgress(prev => ({ ...prev, currentFile: `Uploading ${newImages.length} New Images...` }));
+            
+            const uploadPromises = newImages.map((img, index) => {
+                return uploadToCloudinary(img, sig, (p) => {
+                    setUploadProgress(prev => ({ 
+                        ...prev, 
+                        images: { ...prev.images, [index]: p } 
+                    }));
+                });
+            });
+
+            const newImageUrls = await Promise.all(uploadPromises);
+
+            // 3. Merge with kept images
+            const finalImages = [...keptImages, ...newImageUrls];
+
+            // 4. Submit to Backend
+            const finalData = {
+                ...formData,
+                images: finalImages,
+                'area[value]': formData.areaValue,
+                'area[unit]': formData.areaUnit,
+                keptImages: JSON.stringify(keptImages)
+            };
+
+            await updateMutation.mutateAsync({ id, formData: finalData, token: user.token });
             setSuccess(true);
         } catch (err) {
             console.error("Update Error:", err);
@@ -265,6 +291,8 @@ const EditProperty = () => {
                 ? `${err.response.data.message}: ${err.response.data.details}` 
                 : (err.response?.data?.message || err.message || 'Failed to update property.');
             setError(errorMessage);
+        } finally {
+            setUploadProgress(prev => ({ ...prev, isUploading: false }));
         }
     };
 
@@ -690,22 +718,18 @@ const EditProperty = () => {
                         )}
                     </div>
 
-                    <div className="mb-5">
-                        <label className="form-label fw-bold text-dark">Replace Video (Optional)</label>
-                        <div className="input-group">
-                            <input type="file" className="form-control" onChange={handleVideoChange} accept="video/*" />
-                        </div>
-                        <small className="text-muted mt-1 d-block">Leave empty to keep existing video. Only MP4 recommended.</small>
-                    </div>
+
 
                     <button
                         type="submit"
                         className="btn-premium-save w-100 py-3 mt-4"
-                        disabled={loading}
+                        disabled={loading || uploadProgress.isUploading}
                         style={{ fontSize: '1.2rem' }}
                     >
-                        {loading ? (
-                            <><span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Updating...</>
+                        {loading || uploadProgress.isUploading ? (
+                            <><span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> 
+                                 {uploadProgress.isUploading ? 'Finalizing Images...' : 'Updating...'}
+                            </>
                         ) : 'Update Property'}
                     </button>
                 </form>
